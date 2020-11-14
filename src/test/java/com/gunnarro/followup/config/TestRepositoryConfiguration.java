@@ -2,6 +2,8 @@ package com.gunnarro.followup.config;
 
 import javax.sql.DataSource;
 
+import com.gunnarro.followup.repository.UserAccountRepository;
+import com.gunnarro.followup.repository.impl.UserAccountRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +15,6 @@ import com.gunnarro.followup.repository.ActivityRepository;
 import com.gunnarro.followup.repository.LogEventRepository;
 import com.gunnarro.followup.repository.impl.ActivityRepositoryImpl;
 import com.gunnarro.followup.repository.impl.LogEventRepositoryImpl;
-import com.gunnarro.useraccount.repository.UserAccountRepository;
-import com.gunnarro.useraccount.repository.impl.UserAccountRepositoryImpl;
 
 /**
  * ref:

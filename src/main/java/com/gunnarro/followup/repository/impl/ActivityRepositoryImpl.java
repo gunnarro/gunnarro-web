@@ -2,6 +2,7 @@ package com.gunnarro.followup.repository.impl;
 
 import java.util.List;
 
+import com.gunnarro.followup.repository.mapper.ActivityRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

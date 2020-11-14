@@ -2,6 +2,7 @@ package com.gunnarro.followup.service;
 
 import static org.mockito.Mockito.when;
 
+import com.gunnarro.followup.domain.user.LocalUser;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,6 @@ import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.endpoint.AuthenticationFacade;
 import com.gunnarro.followup.service.impl.FileUploadServiceImpl;
 import com.gunnarro.followup.service.impl.LogEventServiceImpl;
-import com.gunnarro.useraccount.domain.user.LocalUser;
 
 @ContextConfiguration(classes = { TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class, LogEventServiceImpl.class, AuthenticationFacade.class, FileUploadServiceImpl.class })
 @Transactional(timeout = 10)

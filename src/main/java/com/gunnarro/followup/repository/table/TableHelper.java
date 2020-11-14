@@ -7,11 +7,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gunnarro.followup.service.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-
-import com.gunnarro.useraccount.service.exception.ApplicationException;
 
 public class TableHelper {
 
@@ -19,13 +18,13 @@ public class TableHelper {
 
     // Common database table columns
     public static enum ColumnsDefaultEnum {
-        id, createdDateTime, lastModifiedDateTime;
+        ID, CREATED_DATE_TIME, LAST_MODIFIED_DATE_TIME;
     }
 
     public static <T extends Enum<T>> String[] getColumnNames(T[] values) {
         List<String> list = new ArrayList<>();
-        list.add(ColumnsDefaultEnum.createdDateTime.name());
-        list.add(ColumnsDefaultEnum.lastModifiedDateTime.name());
+        list.add(ColumnsDefaultEnum.CREATED_DATE_TIME.name());
+        list.add(ColumnsDefaultEnum.LAST_MODIFIED_DATE_TIME.name());
         for (Enum<T> e : values) {
             list.add(e.name());
         }
@@ -97,7 +96,7 @@ public class TableHelper {
         return createUpdateQuery(COLUMN_ID, tableName, columnNames);
     }
 
-    private static String createUpdateQuery(String keyName, String tableName, String[] columnNames) {
+    public static String createUpdateQuery(String keyName, String tableName, String[] columnNames) {
         StringBuilder query = new StringBuilder();
         StringBuilder columnValuePairs = new StringBuilder();
         query.append("UPDATE ").append(tableName);

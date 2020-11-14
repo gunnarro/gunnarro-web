@@ -1,5 +1,7 @@
 package com.gunnarro.followup.service.impl;
 
+import com.gunnarro.followup.domain.user.LocalUser;
+import com.gunnarro.followup.repository.UserAccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gunnarro.useraccount.domain.user.LocalUser;
-import com.gunnarro.useraccount.repository.UserAccountRepository;
 
 /**
  * Custom implementation of spring security userDetailsService. Used by spring

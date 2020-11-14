@@ -1,5 +1,7 @@
 package com.gunnarro.followup.endpoint;
 
+import com.gunnarro.followup.domain.user.LocalUser;
+import com.gunnarro.followup.service.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -7,8 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.gunnarro.useraccount.domain.user.LocalUser;
-import com.gunnarro.useraccount.service.exception.ApplicationException;
 
 @Component
 public class AuthenticationFacade implements AuthenticationFacadeInterface {

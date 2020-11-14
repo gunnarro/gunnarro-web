@@ -1,4 +1,4 @@
-package com.gunnarro.followup.repository.impl;
+package com.gunnarro.followup.repository.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

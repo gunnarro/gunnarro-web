@@ -1,8 +1,7 @@
 package com.gunnarro.followup.endpoint;
 
+import com.gunnarro.followup.domain.user.LocalUser;
 import org.springframework.security.core.Authentication;
-
-import com.gunnarro.useraccount.domain.user.LocalUser;
 
 public interface AuthenticationFacadeInterface {
 

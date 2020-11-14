@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.gunnarro.followup.domain.user.LocalUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -32,7 +33,6 @@ import com.gunnarro.followup.domain.log.LogComment;
 import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.service.exception.ApplicationException;
 import com.gunnarro.followup.utility.Utility;
-import com.gunnarro.useraccount.domain.user.LocalUser;
 
 /**
  * 

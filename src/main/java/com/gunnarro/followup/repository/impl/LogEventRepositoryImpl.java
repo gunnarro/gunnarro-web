@@ -3,6 +3,7 @@ package com.gunnarro.followup.repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gunnarro.followup.service.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ import com.gunnarro.followup.repository.BaseJdbcRepository;
 import com.gunnarro.followup.repository.LogEventRepository;
 import com.gunnarro.followup.repository.table.log.EventLogTable;
 import com.gunnarro.followup.repository.table.log.LogCommentTable;
-import com.gunnarro.useraccount.service.exception.ApplicationException;
 
 @Repository
 public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEventRepository {

@@ -3,6 +3,7 @@ package com.gunnarro.followup.endpoint;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gunnarro.followup.domain.user.LocalUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.gunnarro.followup.service.exception.ApplicationException;
-import com.gunnarro.useraccount.domain.user.LocalUser;
 
 @Controller
 public class LoginController extends BaseController {

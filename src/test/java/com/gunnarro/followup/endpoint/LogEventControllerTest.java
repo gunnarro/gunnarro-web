@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gunnarro.followup.domain.user.LocalUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.service.LogEventService;
 import com.gunnarro.followup.service.exception.ApplicationException;
-import com.gunnarro.useraccount.domain.user.LocalUser;
 
 public class LogEventControllerTest extends SpringTestSetup {
 

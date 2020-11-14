@@ -1,6 +1,6 @@
 package com.gunnarro.followup.endpoint.handler;
 
-import com.gunnarro.useraccount.repository.table.user.RolesTable.RolesEnum;
+import com.gunnarro.followup.repository.table.user.RolesTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -64,14 +64,14 @@ public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     }
 
     private boolean isUser(List<String> roles) {
-        if (roles.contains(RolesEnum.ROLE_USER.name())) {
+        if (roles.contains(RolesTable.RolesEnum.ROLE_USER.name())) {
             return true;
         }
         return false;
     }
 
     private boolean isAdmin(List<String> roles) {
-        if (roles.contains(RolesEnum.ROLE_ADMIN.name())) {
+        if (roles.contains(RolesTable.RolesEnum.ROLE_ADMIN.name())) {
             return true;
         }
         return false;

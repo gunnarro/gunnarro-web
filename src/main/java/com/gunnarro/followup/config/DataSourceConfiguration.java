@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import com.gunnarro.followup.repository.UserAccountRepository;
+import com.gunnarro.followup.repository.impl.UserAccountRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,9 +16,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.gunnarro.useraccount.repository.UserAccountRepository;
-import com.gunnarro.useraccount.repository.impl.UserAccountRepositoryImpl;
 
 /**
  * ref:
