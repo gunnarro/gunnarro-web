@@ -15,18 +15,17 @@ import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 // https://itextpdf.com/en/demos/convert-html-css-to-pdf-free-online
-@Ignore
+@Disabled
 public class HtmlToPdfTest {
 
-    public static final String HTML = "src/main/resources/templates/gr-resume.html";
+    public static final String HTML = "src/main/resources/templates/gr-gr-cv-en.html";
     public static final String CSS = "src/main/resources/static/css/cv/bootstrap.min-4.5.2.css";
     public static final String CSS_DIR = "/home/gunnarro/code/github/microapp-master/diet-manager/src/main/resources/static/css/cv/";
     public static final String PDF = "src/test/resources/cv.pdf";
