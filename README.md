@@ -1,3 +1,5 @@
+![Java CI with Maven](https://github.com/gunnarro/gunnarro-web/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 # gunnarro-web
 gunnarro:as web application is hosted at Azure
 
@@ -12,6 +14,16 @@ This web application use the CI/CD pipline provided by [Azure DevOps](https://de
 ref: https://spring.io/guides/gs/spring-boot-for-azure/
 
 mvn azure-webapp:deploy
+
+## SonarQube
+
+[SonarQube](https://sonarqube.com)
+
+## GitHub
+[GitHub](https://github.com)
+
+## Snyk
+Not implemented
 
 # PDF
 ## Convert html to pdf online
