@@ -68,6 +68,21 @@ public class LogComment extends BaseDomain {
     }
 
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LogComment{");
+        sb.append("content='").append(content).append('\'');
+        sb.append(", contentHtml='").append(contentHtml).append('\'');
+        sb.append(", createdByUser='").append(createdByUser).append('\'');
+        sb.append(", lastModifiedByUser='").append(lastModifiedByUser).append('\'');
+        sb.append(", isPrivate=").append(isPrivate);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    /**
+     *
+     */
     public static final class LogCommentBuilder {
         protected String description;
         protected String name;

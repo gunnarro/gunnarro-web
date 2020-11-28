@@ -136,7 +136,26 @@ public class LogEntry extends BaseDomain {
         this.resources = resources;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LogEntry{");
+        sb.append("content='").append(content).append('\'');
+        sb.append(", contentHtml='").append(contentHtml).append('\'');
+        sb.append(", createdByUser='").append(createdByUser).append('\'');
+        sb.append(", lastModifiedByUser='").append(lastModifiedByUser).append('\'');
+        sb.append(", level='").append(level).append('\'');
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", isPrivate=").append(isPrivate);
+        sb.append(", logComments=").append(logComments);
+        sb.append(", numberOfComments=").append(numberOfComments);
+        sb.append(", resources=").append(resources);
+        sb.append('}');
+        return sb.toString();
+    }
 
+    /**
+     *
+     */
     public static final class LogEntryBuilder {
         protected String description;
         protected String name;

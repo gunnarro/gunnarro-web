@@ -63,6 +63,16 @@ public class ImageResource {
         this.createdTimeMs = createdTimeMs;
     }
 
-
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ImageResource{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", path='").append(path).append('\'');
+        sb.append(", type='").append(type).append('\'');
+        sb.append(", createdTimeMs=").append(createdTimeMs);
+        sb.append('}');
+        return sb.toString();
+    }
 }
