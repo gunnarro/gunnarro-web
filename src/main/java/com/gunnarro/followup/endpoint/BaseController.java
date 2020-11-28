@@ -23,7 +23,6 @@ import java.sql.SQLException;
 /**
  * URL security is applied in the spring security config.
  *
- * @author admin
  */
 public class BaseController {
 
@@ -98,20 +97,9 @@ public class BaseController {
 
     /**
      * Prevent user form binding the id-field dataBinder.setDisallowedFields("id");
-     *
-     * @param dataBinder
      */
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
-    }
-
-    /**
-     * for unit testing only
-     *
-     * @param authenticationFacade
-     */
-    public void setAuthenticationFacade(AuthenticationFacade authenticationFacade) {
-        this.authenticationFacade = authenticationFacade;
     }
 
     private ModelAndView handleException(String requestUrl, String backUrl, Exception e, String errorMsg) {
@@ -126,9 +114,16 @@ public class BaseController {
     }
 
     /**
+     * for unit testing only
+     */
+    public void setAuthenticationFacade(AuthenticationFacade authenticationFacade) {
+        this.authenticationFacade = authenticationFacade;
+    }
+
+    /**
      * For unit test only, inject mock
      *
-     * @param logEventService
+     * @param logEventService use mock
      */
     public void setLogEventService(LogEventService logEventService) {
         this.logEventService = logEventService;

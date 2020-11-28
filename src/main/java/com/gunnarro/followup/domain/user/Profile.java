@@ -80,4 +80,19 @@ public class Profile {
         this.dateOfBirth = dateOfBirth;
     }
 
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Profile{");
+        sb.append("id=").append(id);
+        sb.append(", userId=").append(userId);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", middleName='").append(middleName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", emailAddress='").append(emailAddress).append('\'');
+        sb.append(", gender=").append(gender);
+        sb.append(", dateOfBirth=").append(dateOfBirth);
+        sb.append('}');
+        return sb.toString();
+    }
 }

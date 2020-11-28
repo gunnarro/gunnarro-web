@@ -101,11 +101,21 @@ public class UserLog implements Serializable {
         this.isUserBlocked = isUserBlocked;
     }
 
+
     @Override
     public String toString() {
-        return "UserLog [id=" + id + ", userId=" + userId + ", createdDate=" + createdDate + ", lastModifiedDate=" + lastModifiedDate + ", loggedInDate=" + loggedInDate
-                + ", loggedInFromIpAddress=" + loggedInFromIpAddress + ", loggedInFromDevice=" + loggedInFromDevice + ", numberOfLoginAttemptSuccess="
-                + numberOfLoginAttemptSuccess + ", numberOfLoginAttemptFailures=" + numberOfLoginAttemptFailures + "]";
+        final StringBuilder sb = new StringBuilder("UserLog{");
+        sb.append("id=").append(id);
+        sb.append(", userId=").append(userId);
+        sb.append(", createdDate=").append(createdDate);
+        sb.append(", lastModifiedDate=").append(lastModifiedDate);
+        sb.append(", loggedInDate=").append(loggedInDate);
+        sb.append(", loggedInFromIpAddress='").append(loggedInFromIpAddress).append('\'');
+        sb.append(", loggedInFromDevice='").append(loggedInFromDevice).append('\'');
+        sb.append(", numberOfLoginAttemptSuccess=").append(numberOfLoginAttemptSuccess);
+        sb.append(", numberOfLoginAttemptFailures=").append(numberOfLoginAttemptFailures);
+        sb.append(", isUserBlocked=").append(isUserBlocked);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

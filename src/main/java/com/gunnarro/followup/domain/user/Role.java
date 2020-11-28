@@ -9,18 +9,12 @@ import java.util.List;
  * ROLE_USER
  * ROLE_GUEST
  * ROLE_ANONYMOUS
- * 
- *
  */
 public class Role {
     private Integer id;
     private String name;
     private List<Privilege> privileges;
 
-    /**
-     * @param id
-     * @param name
-     */
     public Role(Integer id, String name) {
         this.id = id;
         this.name = name;
@@ -52,7 +46,11 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role [id=" + id + ", name=" + name + ", privileges=" + privileges + "]";
+        final StringBuilder sb = new StringBuilder("Role{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", privileges=").append(privileges);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

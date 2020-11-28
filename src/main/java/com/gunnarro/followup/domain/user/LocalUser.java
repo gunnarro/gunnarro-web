@@ -1,11 +1,5 @@
 package com.gunnarro.followup.domain.user;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
 import com.gunnarro.followup.repository.table.user.RolesTable;
 import com.gunnarro.followup.service.exception.ApplicationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,12 +7,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
 
 /**
- * Holds user login details.
- * 
- * @see Role
- * @see Privilege
+ * Holds details for logged in user.
  */
 public class LocalUser implements UserDetails, Serializable {
 
@@ -46,15 +43,6 @@ public class LocalUser implements UserDetails, Serializable {
     public LocalUser() {
     }
 
-    /**
-     * for unit testing only
-     * 
-     * @param id
-     */
-    public LocalUser(Integer id) {
-        this.id = id;
-    }
-
     public LocalUser(String username, String password, String email) {
         this.username = username;
         this.password = password;
@@ -66,7 +54,7 @@ public class LocalUser implements UserDetails, Serializable {
             throw new ApplicationException("Password or password repeat not set!");
         }
         if (!password.equals(passwordRepeat)) {
-            throw new ApplicationException("Password missmatch!");
+            throw new ApplicationException("Password mismatch!");
         }
     }
 
@@ -81,10 +69,10 @@ public class LocalUser implements UserDetails, Serializable {
         }
         return authorities;
     }
-    
+
     private List<String> getPrivileges(Collection<Role> roles) {
-        List<String> privileges = new ArrayList<String>();
-        List<Privilege> collection = new ArrayList<Privilege>();
+        List<String> privileges = new ArrayList<>();
+        List<Privilege> collection = new ArrayList<>();
         for (Role role : roles) {
             collection.addAll(role.getPrivileges());
         }
@@ -144,7 +132,7 @@ public class LocalUser implements UserDetails, Serializable {
         return username;
     }
 
-    
+
     @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
@@ -178,7 +166,7 @@ public class LocalUser implements UserDetails, Serializable {
     }
 
     public boolean isNew() {
-        return id == null ? true : false;
+        return id == null;
     }
 
     public boolean isUser() {
@@ -255,18 +243,36 @@ public class LocalUser implements UserDetails, Serializable {
             return false;
         LocalUser other = (LocalUser) obj;
         if (username == null) {
-            if (other.username != null)
-                return false;
-        } else if (!username.equals(other.username))
-            return false;
-        return true;
-    }
-    
-    @Override
-    public String toString() {
-        return "LocalUser [createdDate=" + createdDate + ", email=" + email + ", id=" + id + ", lastModifiedDate=" + lastModifiedDate + ", password=" + password
-                + ", passwordRepeat=" + passwordRepeat + ", roles=" + roles + ", username=" + username + ", userId=" + userId + ", accountNonExpired=" + accountNonExpired
-                + ", accountNonLocked=" + accountNonLocked + ", activated=" + activated + ", credentialsNonExpired=" + credentialsNonExpired + ", enabled=" + enabled + "]";
+            return other.username == null;
+        } else return username.equals(other.username);
     }
 
+    /**
+     * for unit testing only
+     */
+    public LocalUser(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LocalUser{");
+        sb.append("id=").append(id);
+        sb.append(", createdDate=").append(createdDate);
+        sb.append(", lastModifiedDate=").append(lastModifiedDate);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", passwordRepeat='").append(passwordRepeat).append('\'');
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", userId='").append(userId).append('\'');
+        sb.append(", accountNonExpired=").append(accountNonExpired);
+        sb.append(", accountNonLocked=").append(accountNonLocked);
+        sb.append(", activated=").append(activated);
+        sb.append(", credentialsNonExpired=").append(credentialsNonExpired);
+        sb.append(", enabled=").append(enabled);
+        sb.append(", roles=").append(roles);
+        sb.append(", socialProvider='").append(socialProvider).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

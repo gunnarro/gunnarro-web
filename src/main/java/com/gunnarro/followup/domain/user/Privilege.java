@@ -8,17 +8,11 @@ package com.gunnarro.followup.domain.user;
  * WRITE_PRIVILEGE: write permission
  * ALL_PRIVILEGE  : both read and write permission
  * 
- * @see Role
- *
  */
 public class Privilege {
     private Integer id;
     private String name;
 
-    /**
-     * @param id
-     * @param name
-     */
     public Privilege(Integer id, String name) {
         this.id = id;
         this.name = name;
@@ -42,7 +36,10 @@ public class Privilege {
 
     @Override
     public String toString() {
-        return "Privilege [id=" + id + ", name=" + name + "]";
+        final StringBuilder sb = new StringBuilder("Privilege{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
-
 }
