@@ -40,7 +40,7 @@ public class LogEventServiceImpl implements LogEventService {
 		if (!hasPermission) {
 			throw new SecurityException("Access denied");
 		}
-		return hasPermission;
+		return true;
 	}
 
 	/**

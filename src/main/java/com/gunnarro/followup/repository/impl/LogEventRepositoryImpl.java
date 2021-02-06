@@ -2,6 +2,7 @@ package com.gunnarro.followup.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.gunnarro.followup.service.exception.ApplicationException;
 import org.slf4j.Logger;
@@ -63,7 +64,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
 		try {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			getJdbcTemplate().update(LogCommentTable.createInsertPreparedStatement(logComment), keyHolder);
-			return keyHolder.getKey().intValue();
+			return Objects.requireNonNull(keyHolder.getKey()).intValue();
 		} catch (Exception e) {
 			LOG.error(null, e);
 			throw new ApplicationException(e.getMessage());
@@ -76,7 +77,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
 	@Override
 	public int deleteLogComment(Integer userId, Integer id) {
 		int rows = getJdbcTemplate().update("DELETE FROM event_log_comment WHERE id = ? AND fk_user_id = ?",
-				new Object[] { id, userId });
+				id, userId);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("deleted log comment with id=" + id + ", deleted rows=" + rows);
 		}
@@ -89,7 +90,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
 	@Override
 	public int deleteLogEvent(Integer userId, Integer id) {
 		int rows = getJdbcTemplate().update("DELETE FROM event_log WHERE id = ? AND fk_user_id = ?",
-				new Object[] { id, userId });
+				id, userId);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("deleted log event with id=" + id + ", deleted rows=" + rows);
 		}
@@ -339,6 +340,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
 		try {
 			String name = getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[] { logEventId },
 					String.class);
+			assert name != null;
 			return name.equals(username);
 		} catch (org.springframework.dao.EmptyResultDataAccessException erae) {
 			if (LOG.isDebugEnabled()) {

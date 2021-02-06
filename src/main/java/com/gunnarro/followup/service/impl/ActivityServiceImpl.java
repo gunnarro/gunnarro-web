@@ -33,7 +33,7 @@ public class ActivityServiceImpl implements ActivityService {
         if (!hasPermission) {
             throw new SecurityException("Access denied");
         }
-        return hasPermission;
+        return true;
     }
 
     /**

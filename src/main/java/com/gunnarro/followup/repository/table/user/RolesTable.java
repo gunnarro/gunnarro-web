@@ -18,11 +18,11 @@ public class RolesTable {
     public static final String TABLE_NAME = "roles";
     
     private enum ColumnsEnum {
-        username, role;
+        username, role
     }
 
-    public static enum RolesEnum {
-        ROLE_USER, ROLE_ADMIN, ROLE_GUEST, ROLE_ANONYMOUS;
+    public enum RolesEnum {
+        ROLE_USER, ROLE_ADMIN, ROLE_GUEST, ROLE_ANONYMOUS
     }
 
     public static String createInsertQuery() {

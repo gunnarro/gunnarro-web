@@ -9,114 +9,98 @@ import java.util.List;
 public interface UserAccountRepository {
 
     /**
-     * 
      * @param userName
      * @return
      */
-    public LocalUser getUser(String userName);
+    LocalUser getUser(String userName);
 
     /**
-     * 
      * @param userId
      * @return
      */
-    public LocalUser getUser(Integer userId);
+    LocalUser getUser(Integer userId);
 
     /**
-     * 
      * @param user
      * @return
      */
-    public int createUser(LocalUser user);
+    int createUser(LocalUser user);
 
     /**
-     * 
      * @param user
      * @return
      */
-    public int updateUser(LocalUser user);
+    int updateUser(LocalUser user);
 
     /**
-     * 
      * @param id
      * @return
      */
-    public int deleteUser(Integer id);
+    int deleteUser(Integer id);
 
     /**
-     * 
      * @return
      */
-    public List<String> getUserRoles();
+    List<String> getUserRoles();
 
     /**
-     * 
      * @return
      */
-    public List<LocalUser> getUsers();
+    List<LocalUser> getUsers();
 
     /**
-     * 
      * @param userId
      * @param password
      * @return
      */
-    public int changeUserPwd(Integer userId, String password);
+    int changeUserPwd(Integer userId, String password);
 
     /**
-     * 
      * @return
      */
-    public List<UserLog> getUserLogs();
+    List<UserLog> getUserLogs();
 
     /**
-     * 
      * @param userId
      * @return
      */
-    public UserLog getUserLastLogin(Integer userId);
+    UserLog getUserLastLogin(Integer userId);
 
     /**
-     * 
      * @param userLog
      * @return
      */
-    public int createUserLog(UserLog userLog);
+    int createUserLog(UserLog userLog);
 
     /**
-     * 
      * @param userId
      * @return
      */
-    public void checkIfUserIsBlocked(Integer userId) throws SecurityException;
+    void checkIfUserIsBlocked(Integer userId) throws SecurityException;
 
     /**
-     * 
      * @param userId
      * @param numberOfAttemptFailures
      * @return
      */
-    public int updateUserLoginAttemptFailures(Integer userId, Integer numberOfAttemptFailures);
+    int updateUserLoginAttemptFailures(Integer userId, Integer numberOfAttemptFailures);
 
     /**
-     * 
      * @param userId
      * @param numberOfAttemptSuccess
      * @return
      */
-    public int updateUserLoginAttemptSuccess(Integer userId, Integer numberOfAttemptSuccess);
+    int updateUserLoginAttemptSuccess(Integer userId, Integer numberOfAttemptSuccess);
 
     /**
-     * 
      * @param userLog
      * @return
      */
-    public int updateUserLog(UserLog userLog);
+    int updateUserLog(UserLog userLog);
 
     /**
-     * 
      * @param userId
      * @return
      */
-    public Profile getProfile(Integer userId);
+    Profile getProfile(Integer userId);
 }

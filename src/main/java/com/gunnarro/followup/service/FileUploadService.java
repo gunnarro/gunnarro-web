@@ -11,15 +11,15 @@ import com.gunnarro.followup.domain.log.ImageResource;
 
 public interface FileUploadService {
 
-    public Stream<Path> loadAll(String id);
+    Stream<Path> loadAll(String id);
 
-    public Resource loadAsResource(String id, String filename);
+    Resource loadAsResource(String id, String filename);
 
-    public void deleteAll(String id);
+    void deleteAll(String id);
 
-    public void store(MultipartFile file, String id, String description);
+    void store(MultipartFile file, String id, String description);
 
-    public List<ImageResource> getImages(String id);
+    List<ImageResource> getImages(String id);
 
-	public void deleteImage(String id, String path);
+	void deleteImage(String id, String path);
 }

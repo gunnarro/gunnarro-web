@@ -1,21 +1,21 @@
 package com.gunnarro.followup.repository;
 
-import java.util.List;
-
 import com.gunnarro.followup.domain.activity.ActivityLog;
+
+import java.util.List;
 
 public interface ActivityRepository {
 
-    public int updateActivityLog(ActivityLog activityLog);
+    int updateActivityLog(ActivityLog activityLog);
 
-    public int createActivityLog(ActivityLog activityLog);
+    int createActivityLog(ActivityLog activityLog);
 
-    public ActivityLog getActivityLog(Integer userId, Integer activityLogId);
+    ActivityLog getActivityLog(Integer userId, Integer activityLogId);
 
-    public List<ActivityLog> getActivityLogs(Integer userId);
+    List<ActivityLog> getActivityLogs(Integer userId);
 
-    public int deleteActivityLog(Integer userId, Integer ActivityLogId);
+    int deleteActivityLog(Integer userId, Integer ActivityLogId);
 
-    public boolean hasPermission(Integer activityLogId, String username);
+    boolean hasPermission(Integer activityLogId, String username);
 
 }

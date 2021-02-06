@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,7 +59,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 			if (file.isEmpty()) {
 				throw new UploadFileException("Failed to store empty file!");
 			}
-			if (file.getOriginalFilename().contains("..")) {
+			if (Objects.requireNonNull(file.getOriginalFilename()).contains("..")) {
 				// This is a security check
 				throw new UploadFileException(
 						"Cannot store file with relative path outside current directory " + file.getOriginalFilename());
@@ -76,7 +77,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 	@Override
 	public List<ImageResource> getImages(String id) {
 		Path userDir = Paths.get(rootLocation.toString() + "/" + id);
-		if (!Files.exists(userDir, new LinkOption[] {})) {
+		if (!Files.exists(userDir)) {
 			return null;
 		}
 		try {
@@ -107,7 +108,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 		try {
 			Path userImageDir = getUserImageDir(id);
 			return Files.walk(userImageDir, 1).filter(path -> !path.equals(userImageDir))
-					.map(path -> userImageDir.relativize(path));
+					.map(userImageDir::relativize);
 		} catch (Exception e) {
 			LOG.error("root path: {}", this.rootLocation.toAbsolutePath());
 			throw new UploadFileException("Failed to read stored files", e);
@@ -122,7 +123,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 	 */
 	private Path getUserImageDir(String id) throws IOException {
 		Path userDir = Paths.get(rootLocation.toString() + "/" + id);
-		if (!Files.exists(userDir, new LinkOption[] {})) {
+		if (!Files.exists(userDir)) {
 			Files.createDirectories(userDir);
 			LOG.debug("created images dir: {}", userDir.toString());
 		}

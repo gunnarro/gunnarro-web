@@ -22,11 +22,6 @@ jobs:
     - name: Maven Package
       run: mvn -B clean package -DskipTests
     - name: Maven Verify
-      run: mvn -B clean verifyi
-    - name: Publish Unit Test Results
-      uses: scacap/action-surefire-report@v1
-      with:
-      	github_token: ${{ secrets.GITHUB_TOKEN }}
-      	files: target/surefire-reports/*.xml
+      run: mvn -B clean verify
       
         

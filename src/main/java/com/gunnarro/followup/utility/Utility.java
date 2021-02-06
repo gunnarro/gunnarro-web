@@ -66,7 +66,7 @@ public class Utility {
         }
         StringBuilder sb = new StringBuilder();
         for (String w : s.toLowerCase().split(" ")) {
-            sb.append(w.substring(0, 1).toUpperCase()).append(w.substring(1, w.length())).append(" ");
+            sb.append(w.substring(0, 1).toUpperCase()).append(w.substring(1)).append(" ");
         }
         return sb.toString().trim();
     }

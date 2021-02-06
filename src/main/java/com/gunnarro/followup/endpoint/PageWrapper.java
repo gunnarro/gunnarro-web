@@ -8,9 +8,9 @@ import org.springframework.data.domain.Page;
 public class PageWrapper<T> {
 
 	public static final int MAX_PAGE_ITEM_DISPLAY = 5;
-	private Page<T> page;
-	private List<PageItem> items;
-	private int currentNumber;
+	private final Page<T> page;
+	private final List<PageItem> items;
+	private final int currentNumber;
 	private String url;
 
 	public String getUrl() {
@@ -95,8 +95,8 @@ public class PageWrapper<T> {
 	}
 
 	public class PageItem {
-		private int number;
-		private boolean current;
+		private final int number;
+		private final boolean current;
 
 		public PageItem(int number, boolean current) {
 			this.number = number;

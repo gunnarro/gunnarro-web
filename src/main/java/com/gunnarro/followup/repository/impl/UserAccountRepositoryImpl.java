@@ -2,6 +2,7 @@ package com.gunnarro.followup.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.gunnarro.followup.domain.user.*;
 import com.gunnarro.followup.repository.UserAccountRepository;
@@ -143,7 +144,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
      */
     @Override
     public int deleteUser(Integer id) {
-        return getJdbcTemplate().update("DELETE FROM users WHERE id = ?", new Object[] { id });
+        return getJdbcTemplate().update("DELETE FROM users WHERE id = ?", id);
     }
 
     /**
@@ -161,7 +162,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error: " + erae.toString());
             }
-            return new ArrayList<LocalUser>();
+            return new ArrayList<>();
         }
     }
 
@@ -176,7 +177,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error: " + erae.toString());
             }
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 
@@ -195,7 +196,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public int createUser(LocalUser user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         getJdbcTemplate().update(UsersTable.createInsertPreparedStatement(user), keyHolder);
-        Integer id = keyHolder.getKey().intValue();
+        Integer id = Objects.requireNonNull(keyHolder.getKey()).intValue();
         for (Role role : user.getRoles()) {
             createUserRoleLnk(id, role.getId());
         }
@@ -239,8 +240,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public List<UserLog> getUserLogs() {
         try {
-            List<UserLog> logs = getJdbcTemplate().query("SELECT * FROM user_details_log ORDER BY last_logged_in_date_time DESC", new Object[] {}, UsersLogTable.mapToUserLogRM());
-            return logs;
+            return getJdbcTemplate().query("SELECT * FROM user_details_log ORDER BY last_logged_in_date_time DESC", new Object[] {}, UsersLogTable.mapToUserLogRM());
         } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error: " + erae.toString());

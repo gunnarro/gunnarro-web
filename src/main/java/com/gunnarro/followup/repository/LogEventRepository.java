@@ -1,46 +1,45 @@
 package com.gunnarro.followup.repository;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-
 import com.gunnarro.followup.domain.log.LogComment;
 import com.gunnarro.followup.domain.log.LogEntry;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public interface LogEventRepository {
 
-    public LogEntry getRecentLogEvent(Integer userId, String type, Integer forLastDays);
+    LogEntry getRecentLogEvent(Integer userId, String type, Integer forLastDays);
 
-    public int updateLogEvent(LogEntry logEntry);
+    int updateLogEvent(LogEntry logEntry);
 
-    public LogEntry getMyLastStatusReport(Integer userId);
+    LogEntry getMyLastStatusReport(Integer userId);
 
-    public LogEntry getLogEvent(Integer userId, Integer logEntryId);
+    LogEntry getLogEvent(Integer userId, Integer logEntryId);
 
-    public List<LogEntry> getLogEvents(Integer userId);
+    List<LogEntry> getLogEvents(Integer userId);
 
-    public Page<LogEntry> getAllLogEvents(Integer userId, int pageNumber, int pageSize);
+    Page<LogEntry> getAllLogEvents(Integer userId, int pageNumber, int pageSize);
 
-    public int createLogEvent(LogEntry logEntry);
+    int createLogEvent(LogEntry logEntry);
 
-    public List<LogEntry> getLogEventsFilteredByType(Integer userId, String level);
+    List<LogEntry> getLogEventsFilteredByType(Integer userId, String level);
 
-    public List<LogEntry> getLogEventsFilteredByTitle(Integer userId, String title);
+    List<LogEntry> getLogEventsFilteredByTitle(Integer userId, String title);
 
-    public List<LogEntry> searchLogEventsContent(Integer userId, String text);
+    List<LogEntry> searchLogEventsContent(Integer userId, String text);
 
-    public int deleteLogEvent(Integer userId, Integer id);
+    int deleteLogEvent(Integer userId, Integer id);
 
-    public int createLogComment(LogComment logComment);
+    int createLogComment(LogComment logComment);
 
-    public int deleteLogComment(Integer userId, Integer id);
+    int deleteLogComment(Integer userId, Integer id);
 
-    public List<LogComment> getLogComments(Integer logEntryId);
+    List<LogComment> getLogComments(Integer logEntryId);
 
-    public boolean hasPermission(Integer logEventId, String username);
+    boolean hasPermission(Integer logEventId, String username);
 
-    public int updateLogEventLastModifiedDate(Integer logEntryId);
+    int updateLogEventLastModifiedDate(Integer logEntryId);
 
-    public int count(String query);
+    int count(String query);
 
 }

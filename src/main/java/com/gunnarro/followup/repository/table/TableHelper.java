@@ -17,8 +17,8 @@ public class TableHelper {
     private static final Logger LOG = LoggerFactory.getLogger(TableHelper.class);
 
     // Common database table columns
-    public static enum ColumnsDefaultEnum {
-        ID, CREATED_DATE_TIME, LAST_MODIFIED_DATE_TIME;
+    public enum ColumnsDefaultEnum {
+        ID, CREATED_DATE_TIME, LAST_MODIFIED_DATE_TIME
     }
 
     public static <T extends Enum<T>> String[] getColumnNames(T[] values) {
@@ -28,7 +28,7 @@ public class TableHelper {
         for (Enum<T> e : values) {
             list.add(e.name());
         }
-        return list.toArray(new String[list.size()]);
+        return list.toArray(new String[0]);
     }
 
     // deprecated

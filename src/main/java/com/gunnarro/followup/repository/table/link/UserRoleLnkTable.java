@@ -14,8 +14,8 @@ public class UserRoleLnkTable {
 	public static final String TABLE_NAME = "user_role_lnk";
 
 	private enum ColumnsEnum {
-		fk_user_id, fk_role_id;
-	}
+		fk_user_id, fk_role_id
+    }
 
 	/**
 	 * In order to hide public constructor

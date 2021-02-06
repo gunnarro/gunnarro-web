@@ -51,7 +51,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
 	@Override
 	public int deleteActivityLog(Integer userId, Integer id) {
 		int rows = getJdbcTemplate().update("DELETE FROM activity_log WHERE id = ? AND fk_user_id = ?",
-				new Object[] { id, userId });
+				id, userId);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("deleted activity log with id=" + id + ", deleted rows = {}", rows);
 		}
@@ -123,6 +123,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
 		try {
 			String name = getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[] { logEventId },
 					String.class);
+			assert name != null;
 			return name.equals(username);
 		} catch (org.springframework.dao.EmptyResultDataAccessException erae) {
 			if (LOG.isDebugEnabled()) {
