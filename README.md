@@ -1,4 +1,5 @@
-![Java CI with Maven](https://github.com/gunnarro/gunnarro-web/workflows/Java%20CI%20with%20Maven/badge.svg)
+![build](https://github.com/gunnarro/gunnarro-web/workflows/Java%20CI%20with%20Maven/badge.svg)
+![test](https://github.com/gunnarro/gunnarro-web/workflows/tests/badge.svg)
 
 # gunnarro-web
 gunnarro:as web application is hosted at Azure
