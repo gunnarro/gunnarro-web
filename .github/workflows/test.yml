@@ -23,4 +23,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Test with Maven
+<<<<<<< HEAD
         run: mvn -B test --file pom.xml
+=======
+        run: mvn -B test --file pom.xml
+>>>>>>> fcd62bbb34d6a73ff21f1f7a0258d086a42fca6a
