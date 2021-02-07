@@ -1,4 +1,4 @@
-![build](https://github.com/gunnarro/gunnarro-web/workflows/Java%20CI%20with%20Maven/badge.svg)
+![build](https://github.com/gunnarro/gunnarro-web/workflows/build/badge.svg)
 ![test](https://github.com/gunnarro/gunnarro-web/workflows/tests/badge.svg)
 
 # gunnarro-web
