@@ -1,70 +1,54 @@
 package com.gunnarro.followup.repository.mapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
-
-import org.springframework.jdbc.core.RowMapper;
-
 import com.gunnarro.followup.domain.activity.Activity;
 import com.gunnarro.followup.domain.activity.ActivityLog;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * This call contain RowMapper which is required for converting ResultSet into
  * java domain class
- * 
  */
 public class ActivityRowMapper {
 
-	/**
-	 * In order to hide public constructor
-	 */
-	private ActivityRowMapper() {
-	}
+    /**
+     * In order to hide public constructor
+     */
+    private ActivityRowMapper() {
+    }
 
-	public static RowMapper<Integer> mapCountRM() {
-		return new RowMapper<Integer>() {
-			@Override
-			public Integer mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-				return resultSet.getInt("count");
-			}
-		};
-	}
+    public static RowMapper<Integer> mapCountRM() {
+        return (resultSet, rowNum) -> resultSet.getInt("count");
+    }
 
-	public static RowMapper<ActivityLog> mapToActivityLogRM() {
-		return new RowMapper<ActivityLog>() {
-			@Override
-			public ActivityLog mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-				ActivityLog log = new ActivityLog();
-				Activity activity = new Activity();
-				activity.setId(resultSet.getInt("fk_activity_id"));
-				activity.setName(resultSet.getString("activity_name"));
-				log.setActivity(activity);
-				log.setId(resultSet.getInt("id"));
-				log.setFkUserId(resultSet.getInt("fk_user_id"));
-				log.setCreatedDate(new Date(resultSet.getTimestamp("created_date_time").getTime()));
-				log.setLastModifiedTime(resultSet.getTimestamp("last_modified_date_time").getTime());
-				log.setIntensitivity(resultSet.getInt("rating_intensivity"));
-				log.setEmotions(resultSet.getInt("rating_emotions"));
-				log.setFromTime(resultSet.getTime("from_hour").toLocalTime());
-				log.setToTime(resultSet.getTime("to_hour").toLocalTime());
-				return log;
-			}
-		};
-	}
+    public static RowMapper<ActivityLog> mapToActivityLogRM() {
+        return (resultSet, rowNum) -> {
 
-	public static RowMapper<Activity> mapToActivityRM() {
-		return new RowMapper<Activity>() {
-			@Override
-			public Activity mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-				Activity activity = new Activity();
-				activity.setId(resultSet.getInt("id"));
-				activity.setId(resultSet.getInt("name"));
-				activity.setId(resultSet.getInt("category"));
-				activity.setId(resultSet.getInt("description"));
-				return activity;
-			}
-		};
-	}
+            Activity activity = Activity.builder()
+                    .id(resultSet.getInt("fk_activity_id"))
+                    .name(resultSet.getString("activity_name"))
+                    .build();
+
+            return ActivityLog.builder()
+                    .activity(activity)
+                    .id(resultSet.getInt("id"))
+                    .fkUserId(resultSet.getInt("fk_user_id"))
+                    .createdTime(resultSet.getTimestamp("created_date_time").getTime())
+                    .lastModifiedTime(resultSet.getTimestamp("last_modified_date_time").getTime())
+                    .intensitivity(resultSet.getInt("rating_intensivity"))
+                    .emotions(resultSet.getInt("rating_emotions"))
+                    .fromTime(resultSet.getTime("from_hour").toLocalTime())
+                    .toTime(resultSet.getTime("to_hour").toLocalTime())
+                    .build();
+        };
+    }
+
+    public static RowMapper<Activity> mapToActivityRM() {
+        return (resultSet, rowNum) -> Activity.builder()
+                .id(resultSet.getInt("id"))
+                .name(resultSet.getString("name"))
+                .category(resultSet.getString("category"))
+                .description(resultSet.getString("description"))
+                .build();
+    }
 
 }

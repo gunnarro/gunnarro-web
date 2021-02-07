@@ -1,27 +1,22 @@
 package com.gunnarro.followup.repository;
 
 
-import java.util.Calendar;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.gunnarro.followup.config.DefaultTestConfig;
 import com.gunnarro.followup.config.TestMariDBDataSourceConfiguration;
 import com.gunnarro.followup.config.TestRepositoryConfiguration;
 import com.gunnarro.followup.domain.log.LogComment;
 import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.utility.Utility;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
-@ContextConfiguration(classes = { TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class })
+import java.util.Calendar;
+
+@ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class})
 @Transactional
 @Rollback
 public class logEventRepositoryTest extends DefaultTestConfig {
@@ -40,25 +35,26 @@ public class logEventRepositoryTest extends DefaultTestConfig {
 
     @Test
     public void hasPermission_access_ok() {
-    	Assertions.assertTrue(logEventRepository.hasPermission(3, "pepilie"));
+        Assertions.assertTrue(logEventRepository.hasPermission(3, "pepilie"));
     }
 
     @Test
     public void CRUDEventLog() {
         int userId = 5;
-        LogEntry newLog = new LogEntry();
-        newLog.setFkUserId(userId);
-        newLog.setTitle("title...");
-        newLog.setContent("content");
-        newLog.setLevel("INFO");
+        LogEntry newLog = LogEntry.builder()
+                .fkUserId(userId)
+                .title("title...")
+                .content("content")
+                .level("INFO")
+                .build();
         // Create
         Integer id = logEventRepository.createLogEvent(newLog);
         Assertions.assertTrue(id > 0);
         LogEntry logEvent = logEventRepository.getLogEvent(userId, id);
         Assertions.assertEquals(id, logEvent.getId());
-        Assertions.assertNotNull(newLog.getCreatedDate());
-        Assertions.assertNotNull(newLog.getLastModifiedDate());
-        Assertions.assertTrue(newLog.getCreatedDate().equals(newLog.getLastModifiedDate()));
+        Assertions.assertNotNull(newLog.getCreatedTime());
+        Assertions.assertNotNull(newLog.getLastModifiedTime());
+        Assertions.assertTrue(newLog.getCreatedTime() == newLog.getLastModifiedTime());
         Assertions.assertEquals("INFO", logEvent.getLevel());
         Assertions.assertEquals("title...", logEvent.getTitle());
         Assertions.assertEquals("content", logEvent.getContent());
@@ -85,7 +81,7 @@ public class logEventRepositoryTest extends DefaultTestConfig {
 
     @Test
     public void getLogComments() {
-    	Assertions.assertEquals(2, logEventRepository.getLogComments(4).size());
+        Assertions.assertEquals(2, logEventRepository.getLogComments(4).size());
         // for ( LogComment comment: logEventRepository.getLogComments(4)) {
         // System.out.println(comment);
         // }
@@ -94,65 +90,77 @@ public class logEventRepositoryTest extends DefaultTestConfig {
     @Test
     public void createLogComment() {
         int userId = 5;
-        LogEntry newLog = new LogEntry();
-        newLog.setFkUserId(userId);
-        newLog.setTitle("title...");
-        newLog.setContent("content...");
-        newLog.setLevel("INFO");
+        LogEntry newLog = LogEntry.builder()
+                .fkUserId(userId)
+                .title("title...")
+                .content("content")
+                .level("INFO")
+                .createdTime(System.currentTimeMillis())
+                .lastModifiedTime(System.currentTimeMillis())
+                .build();
         // Create log event
         Integer id = logEventRepository.createLogEvent(newLog);
-        LogComment comment = LogComment.LogCommentBuilder.aLogComment().withFkLogId(id).withContent("comment 1").withFkUserId(3).build();
+
+        LogComment comment = LogComment.builder()
+                .fkLogId(id)
+                .content("comment 1")
+                .fkUserId(3)
+                .build();
+
         // create log comment
         logEventRepository.createLogComment(comment);
         // read log event with comment
         LogEntry logEntry = logEventRepository.getLogEvent(userId, id);
         Assertions.assertEquals(id, logEntry.getId());
-        Assertions.assertEquals(1, logEntry.getNumberOfComments());
+        Assertions.assertEquals(1, logEntry.getLogComments().size());
         Assertions.assertEquals("guest", logEntry.getLogComments().get(0).getCreatedByUser());
-        Assertions.assertNotNull(logEntry.getLogComments().get(0).getCreatedDate());
-        Assertions.assertEquals("comment 1", logEntry.getLogComments().get(0).getContent());
         Assertions.assertEquals(3, logEntry.getLogComments().get(0).getFkUserId().intValue());
+        Assertions.assertTrue(logEntry.getLogComments().get(0).getCreatedTime() > 0);
+        Assertions.assertEquals("comment 1", logEntry.getLogComments().get(0).getContent());
     }
 
     @Test
     public void eventLogLogDateNotToday() {
         int userId = 5;
-        LogEntry newLog = new LogEntry();
-        newLog.setFkUserId(userId);
-        newLog.setTitle("title1...");
-        newLog.setContent("content1...");
-        newLog.setLevel("INFO");
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2016);
         cal.set(Calendar.MONTH, 1);
         cal.set(Calendar.DAY_OF_MONTH, 1);
-        newLog.setCreatedDate(cal.getTime());
+
+        LogEntry newLog = LogEntry.builder()
+                .fkUserId(userId)
+                .title("title...")
+                .content("content")
+                .level("INFO")
+                .createdTime(cal.getTimeInMillis())
+                .build();
 
         Integer id = logEventRepository.createLogEvent(newLog);
         Assertions.assertTrue(id > 0);
         LogEntry logEvent = logEventRepository.getLogEvent(userId, id);
         Assertions.assertEquals(id, logEvent.getId());
-        Assertions.assertNotNull(newLog.getCreatedDate());
-        Assertions.assertNotNull(newLog.getLastModifiedDate());
-        Assertions.assertFalse(newLog.getCreatedDate().equals(newLog.getLastModifiedDate()));
+        Assertions.assertNotNull(newLog.getCreatedTime());
+        Assertions.assertNotNull(newLog.getLastModifiedTime());
+        Assertions.assertFalse(newLog.getCreatedTime() == newLog.getLastModifiedTime());
         Assertions.assertEquals("01.02.2016", Utility.formatTime(newLog.getCreatedTime(), "dd.MM.yyyy"));
     }
 
     @Test
     public void count() {
-    	Assertions.assertEquals(5, logEventRepository.count("SELECT count(*) FROM event_log"));
+        Assertions.assertEquals(5, logEventRepository.count("SELECT count(*) FROM event_log"));
     }
 
     @Disabled
     @Test
     public void getMyLastStatusReport() {
-        LogEntry log = new LogEntry();
-        log.setFkUserId(4);
-        log.setTitle("report week 47");
-        log.setContent("report content");
-        log.setLevel("REPORT");
-        logEventRepository.createLogEvent(log);
+        LogEntry newLog = LogEntry.builder()
+                .fkUserId(1)
+                .title("title...")
+                .content("content")
+                .level("INFO")
+                .build();
+        logEventRepository.createLogEvent(newLog);
         LogEntry myLastStatusReport = logEventRepository.getMyLastStatusReport(1);
         Assertions.assertEquals("report week 47", myLastStatusReport.getTitle());
     }

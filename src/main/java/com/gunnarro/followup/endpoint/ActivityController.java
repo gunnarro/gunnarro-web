@@ -1,13 +1,10 @@
 package com.gunnarro.followup.endpoint;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.Valid;
-
+import com.gunnarro.followup.domain.activity.ActivityLog;
+import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.domain.user.LocalUser;
+import com.gunnarro.followup.service.exception.ApplicationException;
+import com.gunnarro.followup.utility.Utility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,29 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gunnarro.followup.domain.activity.ActivityLog;
-import com.gunnarro.followup.domain.log.LogEntry;
-import com.gunnarro.followup.service.exception.ApplicationException;
-import com.gunnarro.followup.utility.Utility;
+import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 
  * http://microbuilder.io/blog/2016/01/10/plotting-json-data-with-chart-js.html
  * https://github.com/chartjs/Chart.js/tree/master/dist
- * 
- * @author admin
  *
+ * @author admin
  */
 @Controller
 @Scope("session")
@@ -64,8 +53,8 @@ public class ActivityController extends BaseController {
         ModelAndView modelView = new ModelAndView("activity/view-activity-logs");
         modelView.getModel().put("logs", logs);
         modelView.getModel().put("numberOfLogs", logs.size());
-        modelView.getModel().put("logsFromDate", !logs.isEmpty() ? logs.get(logs.size() - 1).getCreatedDate() : new Date());
-        modelView.getModel().put("logsToDate", !logs.isEmpty() ? logs.get(0).getCreatedDate() : new Date());
+        //   modelView.getModel().put("logsFromDate", !logs.isEmpty() ? logs.get(logs.size() - 1).getCreatedDate() : new Date());
+        //   modelView.getModel().put("logsToDate", !logs.isEmpty() ? logs.get(0).getCreatedDate() : new Date());
         return modelView;
     }
 
@@ -94,18 +83,18 @@ public class ActivityController extends BaseController {
         if (loggedInUser == null) {
             throw new ApplicationException("Not logged in!");
         }
-        LogEntry log = new LogEntry();
-        log.setLevel("INFO");
-        log.setCreatedDate(new Date());
-        log.setLastModifiedTime(System.currentTimeMillis());
-        log.setCreatedByUser(loggedInUser.getUsername());
+        LogEntry log = LogEntry.builder()
+                .level("INFO")
+                .createdTime(System.currentTimeMillis())
+                .lastModifiedTime(System.currentTimeMillis())
+                .createdByUser(loggedInUser.getUsername())
+                .build();
         model.put("log", log);
         return "activity/edit-activity-log";
     }
 
     /**
      * User POST for new
-     * 
      */
     @PostMapping("/activity/log/new")
     public String processNewActivityLogForm(@Valid @ModelAttribute("log") ActivityLog log, BindingResult result, SessionStatus status) {
@@ -143,7 +132,6 @@ public class ActivityController extends BaseController {
 
     /**
      * Use PUT for updates
-     * 
      */
     @PostMapping("/activity/log/edit")
     public String processUpdateActivityLogForm(@Valid @ModelAttribute("log") ActivityLog log, BindingResult result, SessionStatus status) {
@@ -164,7 +152,6 @@ public class ActivityController extends BaseController {
 
     /**
      * Use PUT for updates
-     * 
      */
     @PostMapping("/activity/log/edit/{activityId}")
     public String processUpdateActivityLogIdForm(@Valid @ModelAttribute("log") ActivityLog log, BindingResult result, SessionStatus status) {
@@ -184,7 +171,7 @@ public class ActivityController extends BaseController {
     }
 
     /**
-     * 
+     *
      */
     @RequestMapping(value = "/activity/log/delete/{activityId}", method = RequestMethod.GET)
     public String deleteActivityLog(@PathVariable("activityId") int activityId) {

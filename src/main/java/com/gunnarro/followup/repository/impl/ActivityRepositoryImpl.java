@@ -70,9 +70,8 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
 			query.append(" WHERE l.id = ?");
 			// query.append(" AND l.fk_user_id = ?");
 			query.append(" AND l.fk_user_id = u.id");
-			ActivityLog log = getJdbcTemplate().queryForObject(query.toString(), new Object[] { activityLogId },
+			return getJdbcTemplate().queryForObject(query.toString(), new Object[] { activityLogId },
 					ActivityRowMapper.mapToActivityLogRM());
-			return log;
 		} catch (org.springframework.dao.EmptyResultDataAccessException erae) {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Error: " + erae.toString());

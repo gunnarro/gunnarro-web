@@ -1,21 +1,18 @@
 package com.gunnarro.followup.service.impl;
 
-import java.util.List;
-
+import com.gunnarro.followup.domain.activity.ActivityLog;
+import com.gunnarro.followup.endpoint.AuthenticationFacade;
+import com.gunnarro.followup.repository.ActivityRepository;
+import com.gunnarro.followup.service.ActivityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gunnarro.followup.domain.activity.ActivityLog;
-import com.gunnarro.followup.endpoint.AuthenticationFacade;
-import com.gunnarro.followup.repository.ActivityRepository;
-import com.gunnarro.followup.service.ActivityService;
+import java.util.List;
 
 /**
- * 
  * @author mentos
- *
  */
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -81,7 +78,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     /**
      * For unit testing only, inject mock
-     * 
+     *
      * @param activityRepository
      */
     public void setActivityRepository(ActivityRepository activityRepository) {
@@ -90,7 +87,6 @@ public class ActivityServiceImpl implements ActivityService {
 
     /**
      * For unit testing only, inject mock
-     * 
      */
     public void setAuthenticationFacade(AuthenticationFacade authenticationFacade) {
         this.authenticationFacade = authenticationFacade;

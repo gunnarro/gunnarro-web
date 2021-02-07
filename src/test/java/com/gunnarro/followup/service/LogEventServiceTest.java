@@ -1,8 +1,13 @@
 package com.gunnarro.followup.service;
 
-import static org.mockito.Mockito.when;
-
+import com.gunnarro.followup.config.DefaultTestConfig;
+import com.gunnarro.followup.config.TestMariDBDataSourceConfiguration;
+import com.gunnarro.followup.config.TestRepositoryConfiguration;
+import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.domain.user.LocalUser;
+import com.gunnarro.followup.endpoint.AuthenticationFacade;
+import com.gunnarro.followup.service.impl.FileUploadServiceImpl;
+import com.gunnarro.followup.service.impl.LogEventServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,15 +20,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gunnarro.followup.config.DefaultTestConfig;
-import com.gunnarro.followup.config.TestMariDBDataSourceConfiguration;
-import com.gunnarro.followup.config.TestRepositoryConfiguration;
-import com.gunnarro.followup.domain.log.LogEntry;
-import com.gunnarro.followup.endpoint.AuthenticationFacade;
-import com.gunnarro.followup.service.impl.FileUploadServiceImpl;
-import com.gunnarro.followup.service.impl.LogEventServiceImpl;
+import static org.mockito.Mockito.when;
 
-@ContextConfiguration(classes = { TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class, LogEventServiceImpl.class, AuthenticationFacade.class, FileUploadServiceImpl.class })
+@ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class, LogEventServiceImpl.class, AuthenticationFacade.class, FileUploadServiceImpl.class})
 @Transactional(timeout = 10)
 public class LogEventServiceTest extends DefaultTestConfig {
 
@@ -78,7 +77,7 @@ public class LogEventServiceTest extends DefaultTestConfig {
         Assertions.assertEquals("log event created by pappa", logEvent.getContent());
         Assertions.assertEquals(2, logEvent.getLogComments().size());
         Assertions.assertEquals(2, logEvent.getLogComments().get(0).getId().intValue());
-        Assertions.assertNotNull(logEvent.getLogComments().get(0).getCreatedDate());
+        Assertions.assertTrue(logEvent.getLogComments().get(0).getCreatedTime() > 0);
         Assertions.assertEquals("added comment 1", logEvent.getLogComments().get(0).getContent());
     }
 
