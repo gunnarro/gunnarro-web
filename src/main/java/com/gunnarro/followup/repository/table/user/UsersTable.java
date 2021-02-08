@@ -14,18 +14,6 @@ public abstract class UsersTable {
     // Database table
     public static final String TABLE_NAME = "users";
 
-    private enum ColumnsEnum {
-        username, password, email, enabled;
-
-        public static String[] updateValues() {
-            String[] s = new String[3];
-            s[0] = TableHelper.ColumnsDefaultEnum.LAST_MODIFIED_DATE_TIME.name();
-            s[1] = email.name();
-            s[2] = enabled.name();
-            return s;
-        }
-    }
-
     public static PreparedStatementCreator createInsertPreparedStatement(final LocalUser user) {
         return connection -> {
             PreparedStatement ps = connection.prepareStatement(createInsertQuery(), new String[]{"id"});
@@ -71,5 +59,17 @@ public abstract class UsersTable {
             user.setActivated(resultSet.getInt(ColumnsEnum.enabled.name()) == 1);
             return user;
         };
+    }
+
+    private enum ColumnsEnum {
+        username, password, email, enabled;
+
+        public static String[] updateValues() {
+            String[] s = new String[3];
+            s[0] = TableHelper.ColumnsDefaultEnum.LAST_MODIFIED_DATE_TIME.name();
+            s[1] = email.name();
+            s[2] = enabled.name();
+            return s;
+        }
     }
 }

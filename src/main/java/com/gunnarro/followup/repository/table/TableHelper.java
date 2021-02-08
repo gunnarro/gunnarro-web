@@ -1,25 +1,23 @@
 package com.gunnarro.followup.repository.table;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gunnarro.followup.service.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
+import java.sql.PreparedStatement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableHelper {
 
+    public static final String COLUMN_CREATED_DATETIME = "created_date_time";
+    public static final String COLUMN_LAST_MODIFIED_DATETIME = "last_modified_date_time";
     private static final Logger LOG = LoggerFactory.getLogger(TableHelper.class);
-
+    // deprecated
     // Common database table columns
-    public enum ColumnsDefaultEnum {
-        ID, CREATED_DATE_TIME, LAST_MODIFIED_DATE_TIME
-    }
+    private static final String COLUMN_ID = "id";
 
     public static <T extends Enum<T>> String[] getColumnNames(T[] values) {
         List<String> list = new ArrayList<>();
@@ -30,12 +28,6 @@ public class TableHelper {
         }
         return list.toArray(new String[0]);
     }
-
-    // deprecated
-    // Common database table columns
-    private static final String COLUMN_ID = "id";
-    public static final String COLUMN_CREATED_DATETIME = "created_date_time";
-    public static final String COLUMN_LAST_MODIFIED_DATETIME = "last_modified_date_time";
 
     public static void checkInputs(Object[] colNames, Object[] values) {
         checkArray(colNames);
@@ -60,16 +52,13 @@ public class TableHelper {
     }
 
     public static PreparedStatementCreator createInsertPreparedStatement(final String query, final Object[] values) {
-        return new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(query, new String[] { "id" });
-                ps.setTimestamp(1, new Timestamp(TableHelper.getToDay()));
-                for (int i = 0; i < values.length; i++) {
-                    ps.setObject(i + 1, values[i]);
-                }
-                return ps;
+        return connection -> {
+            PreparedStatement ps = connection.prepareStatement(query, new String[]{"id"});
+            ps.setTimestamp(1, new Timestamp(TableHelper.getToDay()));
+            for (int i = 0; i < values.length; i++) {
+                ps.setObject(i + 1, values[i]);
             }
+            return ps;
         };
     }
 
@@ -118,6 +107,11 @@ public class TableHelper {
 
     public static long getToDay() {
         return System.currentTimeMillis();
+    }
+
+    // Common database table columns
+    public enum ColumnsDefaultEnum {
+        ID, CREATED_DATE_TIME, LAST_MODIFIED_DATE_TIME
     }
 
 }

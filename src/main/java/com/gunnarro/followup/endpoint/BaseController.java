@@ -22,7 +22,6 @@ import java.sql.SQLException;
 
 /**
  * URL security is applied in the spring security config.
- *
  */
 public class BaseController {
 
@@ -42,6 +41,13 @@ public class BaseController {
 
     public AuthenticationFacade getAuthenticationFacade() {
         return authenticationFacade;
+    }
+
+    /**
+     * for unit testing only
+     */
+    public void setAuthenticationFacade(AuthenticationFacade authenticationFacade) {
+        this.authenticationFacade = authenticationFacade;
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -111,13 +117,6 @@ public class BaseController {
         modelAndView.addObject("backUrl", backUrl);
         modelAndView.setViewName("error");
         return modelAndView;
-    }
-
-    /**
-     * for unit testing only
-     */
-    public void setAuthenticationFacade(AuthenticationFacade authenticationFacade) {
-        this.authenticationFacade = authenticationFacade;
     }
 
     /**

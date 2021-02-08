@@ -3,36 +3,36 @@
 <head th:replace="fragments/header :: header-css"></head>
 
 <body>
-	<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
-	<div class="container-fluid">
-		<div class="panel panel-default">
+<div class="container-fluid">
+    <div class="panel panel-default">
 
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<span>Application Error x</span>
-				</h3>
-			</div>
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span>Application Error x</span>
+            </h3>
+        </div>
 
-			<div class="panel-body">
-				<div class="alert alert-danger" role="alert">
-					<p>
-						<span th:text="${requestUrl}"></span>
-						<span th:if="${param.requesturi}" th:text="${param.requesturi[0]}"></span>
-					</p>
-					<p th:text="${exception}"></p>
-				</div>
-			</div>
+        <div class="panel-body">
+            <div class="alert alert-danger" role="alert">
+                <p>
+                    <span th:text="${requestUrl}"></span>
+                    <span th:if="${param.requesturi}" th:text="${param.requesturi[0]}"></span>
+                </p>
+                <p th:text="${exception}"></p>
+            </div>
+        </div>
 
-			<div class="panel-footer clearfix">
-				<div class="pull-right">
-					<a href="javascript:history.back()" class="btn btn-primary btn-sm">Ok</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- container -->
-	<div th:replace="fragments/footer :: footer"></div>
+        <div class="panel-footer clearfix">
+            <div class="pull-right">
+                <a class="btn btn-primary btn-sm" href="javascript:history.back()">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- container -->
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

@@ -4,6 +4,8 @@ package com.gunnarro.followup.domain.user;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * Privilege represents a low-level, granular privilege/authority in the system.
  * Example:
@@ -13,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class Privilege {
+public class Privilege implements Serializable {
     private Integer id;
     private String name;
 }

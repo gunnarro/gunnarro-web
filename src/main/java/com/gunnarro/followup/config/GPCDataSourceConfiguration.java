@@ -7,16 +7,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 /**
  * ref:
  * https://egkatzioura.com/2016/04/29/spring-boot-and-database-initialization/
- * 
- * @author admin
  *
+ * @author admin
  */
 //@Configuration
 //@EnableTransactionManagement
 public class GPCDataSourceConfiguration {
 
 
-	// read system variables
+    // read system variables
     @Value("${jdbc.url}")
     private String jdbcUrl;
 
@@ -27,14 +26,14 @@ public class GPCDataSourceConfiguration {
     private String jdbcPwd;
 
     @Value("${jdbc.driverClassName}")
-	private String jdbcDriverClassName;
-    
+    private String jdbcDriverClassName;
+
     /**
-	 * The gcp datasource is auto configured and autowired as jdbc template
-	 */
+     * The gcp datasource is auto configured and autowired as jdbc template
+     */
     @Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+    private JdbcTemplate jdbcTemplate;
+
 
 //    @Bean
 //    public UserAccountRepository userAccountRepository() {

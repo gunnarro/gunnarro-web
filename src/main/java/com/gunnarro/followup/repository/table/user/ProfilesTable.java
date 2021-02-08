@@ -17,34 +17,20 @@ public abstract class ProfilesTable {
     // Database table
     public static final String TABLE_NAME = "users";
 
-    private enum ColumnsEnum {
-        username, password, email, enabled;
-
-        public static ColumnsEnum[] updateValues() {
-            ColumnsEnum[] c = new ColumnsEnum[2];
-            c[0] = email;
-            c[1] = enabled;
-            return c;
-        }
-    }
-
     public static PreparedStatementCreator createInsertPreparedStatement(final Profile profile) {
-        return new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(createInsertQuery(), new String[]{"id"});
-                ps.setTimestamp(1, new Timestamp(TableHelper.getToDay()));
-                ps.setTimestamp(2, new Timestamp(TableHelper.getToDay()));
-                // ps.setObject(2, profile.getUserId());
-                // ps.setString(3, profile.getFirstName());
-                // ps.setString(4, profile.getMiddleName());
-                // ps.setString(4, profile.getLastName());
-                // ps.setString(4, profile.getEmailAddress());
-                // ps.setDate(4, profile.getDateOfBirth());
-                // ps.setString(4, profile.getGender());
-                // ps.setInt(5, profile.isActivated() ? 1 : 0);
-                return ps;
-            }
+        return connection -> {
+            PreparedStatement ps = connection.prepareStatement(createInsertQuery(), new String[]{"id"});
+            ps.setTimestamp(1, new Timestamp(TableHelper.getToDay()));
+            ps.setTimestamp(2, new Timestamp(TableHelper.getToDay()));
+            // ps.setObject(2, profile.getUserId());
+            // ps.setString(3, profile.getFirstName());
+            // ps.setString(4, profile.getMiddleName());
+            // ps.setString(4, profile.getLastName());
+            // ps.setString(4, profile.getEmailAddress());
+            // ps.setDate(4, profile.getDateOfBirth());
+            // ps.setString(4, profile.getGender());
+            // ps.setInt(5, profile.isActivated() ? 1 : 0);
+            return ps;
         };
     }
 
@@ -73,5 +59,16 @@ public abstract class ProfilesTable {
                 .gender(resultSet.getString("gender").charAt(0))
                 .dateOfBirth(new Date(resultSet.getDate("date_of_birth").getTime()))
                 .build();
+    }
+
+    private enum ColumnsEnum {
+        username, password, email, enabled;
+
+        public static ColumnsEnum[] updateValues() {
+            ColumnsEnum[] c = new ColumnsEnum[2];
+            c[0] = email;
+            c[1] = enabled;
+            return c;
+        }
     }
 }

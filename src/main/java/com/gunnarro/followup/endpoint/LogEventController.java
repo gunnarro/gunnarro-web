@@ -57,8 +57,8 @@ public class LogEventController extends BaseController {
         PageWrapper<LogEntry> page = new PageWrapper<>(logsPage, URI_LOG_EVENTS);
         ModelAndView modelView = new ModelAndView("log/view-event-logs");
         modelView.getModel().put("page", page);
-      //  modelView.getModel().put("logsFromDate", !page.getContent().isEmpty() ? page.getContent().get(page.getContent().size() - 1).getCreateTime() : new Date());
-      //  modelView.getModel().put("logsToDate", !page.getContent().isEmpty() ? page.getContent().get(0).getCreatedTime() : new Date());
+        //  modelView.getModel().put("logsFromDate", !page.getContent().isEmpty() ? page.getContent().get(page.getContent().size() - 1).getCreateTime() : new Date());
+        //  modelView.getModel().put("logsToDate", !page.getContent().isEmpty() ? page.getContent().get(0).getCreatedTime() : new Date());
         return modelView;
     }
 

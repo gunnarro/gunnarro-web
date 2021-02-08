@@ -52,8 +52,8 @@ public class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertTrue(id > 0);
         LogEntry logEvent = logEventRepository.getLogEvent(userId, id);
         Assertions.assertEquals(id, logEvent.getId());
-        Assertions.assertNotNull(newLog.getCreatedTime());
-        Assertions.assertNotNull(newLog.getLastModifiedTime());
+        Assertions.assertTrue(newLog.getCreatedTime() >= 0);
+        Assertions.assertTrue(newLog.getLastModifiedTime() >= 0);
         Assertions.assertTrue(newLog.getCreatedTime() == newLog.getLastModifiedTime());
         Assertions.assertEquals("INFO", logEvent.getLevel());
         Assertions.assertEquals("title...", logEvent.getTitle());
@@ -140,8 +140,8 @@ public class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertTrue(id > 0);
         LogEntry logEvent = logEventRepository.getLogEvent(userId, id);
         Assertions.assertEquals(id, logEvent.getId());
-        Assertions.assertNotNull(newLog.getCreatedTime());
-        Assertions.assertNotNull(newLog.getLastModifiedTime());
+        Assertions.assertTrue(newLog.getCreatedTime() >= 0);
+        Assertions.assertTrue(newLog.getLastModifiedTime() >= 0);
         Assertions.assertFalse(newLog.getCreatedTime() == newLog.getLastModifiedTime());
         Assertions.assertEquals("01.02.2016", Utility.formatTime(newLog.getCreatedTime(), "dd.MM.yyyy"));
     }

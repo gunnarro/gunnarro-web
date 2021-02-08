@@ -16,28 +16,17 @@ public class RolesTable {
     // Database table
     public static final String TABLE_NAME = "roles";
 
-    private enum ColumnsEnum {
-        username, role
-    }
-
-    public enum RolesEnum {
-        ROLE_USER, ROLE_ADMIN, ROLE_GUEST, ROLE_ANONYMOUS
-    }
-
     public static String createInsertQuery() {
         return TableHelper.createInsertQuery(TABLE_NAME, TableHelper.getColumnNames(ColumnsEnum.values()));
     }
 
     public static PreparedStatementCreator createInsertPreparedStatement(final String userName, final String role) {
-        return new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(createInsertQuery(), new String[]{"id"});
-                ps.setTimestamp(1, new Timestamp(TableHelper.getToDay()));
-                ps.setObject(2, userName);
-                ps.setString(3, role);
-                return ps;
-            }
+        return connection -> {
+            PreparedStatement ps = connection.prepareStatement(createInsertQuery(), new String[]{"id"});
+            ps.setTimestamp(1, new Timestamp(TableHelper.getToDay()));
+            ps.setObject(2, userName);
+            ps.setString(3, role);
+            return ps;
         };
     }
 
@@ -47,5 +36,13 @@ public class RolesTable {
 
     public static RowMapper<String> mapToRoleNameRM() {
         return (resultSet, rowNum) -> resultSet.getString(ColumnsEnum.role.name());
+    }
+
+    private enum ColumnsEnum {
+        username, role
+    }
+
+    public enum RolesEnum {
+        ROLE_USER, ROLE_ADMIN, ROLE_GUEST, ROLE_ANONYMOUS
     }
 }

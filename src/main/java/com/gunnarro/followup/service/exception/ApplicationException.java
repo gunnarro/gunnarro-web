@@ -1,9 +1,7 @@
 package com.gunnarro.followup.service.exception;
 
 /**
- * 
  * @author mentos
- *
  */
 public class ApplicationException extends RuntimeException {
 

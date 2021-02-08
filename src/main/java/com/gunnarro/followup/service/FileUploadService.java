@@ -1,13 +1,12 @@
 package com.gunnarro.followup.service;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Stream;
-
+import com.gunnarro.followup.domain.log.ImageResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.gunnarro.followup.domain.log.ImageResource;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
 
 public interface FileUploadService {
 
@@ -21,5 +20,5 @@ public interface FileUploadService {
 
     List<ImageResource> getImages(String id);
 
-	void deleteImage(String id, String path);
+    void deleteImage(String id, String path);
 }

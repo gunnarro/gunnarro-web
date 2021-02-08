@@ -3,6 +3,7 @@ package com.gunnarro.followup.domain.user;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Data
 @Builder
-public class Role {
+public class Role implements Serializable {
     private Integer id;
     private String name;
     private List<Privilege> privileges;

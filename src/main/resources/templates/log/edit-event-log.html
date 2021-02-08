@@ -1,118 +1,122 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/head-include :: head-include"></head>
 
 <body>
-	<div th:replace="fragments/header-topmenu :: header-topmenu"></div>
-	<div class="container-fluid">
+<div th:replace="fragments/header-topmenu :: header-topmenu"></div>
+<div class="container-fluid">
 
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a th:href="@{/diet/log/events}" th:text="#{topmenu.log}"></a></li>
-				<li class="breadcrumb-item active" aria-current="page" th:text="#{lbl.event}"></li>
-			</ol>
-		</nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/diet/log/events}" th:text="#{topmenu.log}"></a></li>
+            <li aria-current="page" class="breadcrumb-item active" th:text="#{lbl.event}"></li>
+        </ol>
+    </nav>
 
-		<div class="card">
-			<div class="card-header clearfix">
-				<div th:if="${log.id} != null" class="float-right">
+    <div class="card">
+        <div class="card-header clearfix">
+            <div class="float-right" th:if="${log.id} != null">
 					<span th:if="${#authentication?.name == log.createdByUser}"> 
-						<a th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}" class="btn btn-outline-secondary btn-sm"><i class="oi oi-data-transfer-upload"></i></a> 
-						<a th:href="@{/diet/log/event/delete/__${log.id}__}"  class="btn btn-outline-secondary btn-sm"><i class="oi oi-trash"></i></a>
-					</span> 
-				</div>
-				<h3 th:if="${log.id} == null" class="card-title" th:text="#{editeventlog.title}"></h3>
-				<h3 th:if="${log.id} != null" class="card-title" th:text="#{editeventlog.title_update}"></h3>
-			</div>
-			<!-- end card header -->
-			<div class="card-body">
-				<form action="#" th:object="${log}"
-					th:action="@{${log.id == null ? &apos;/diet/log/event/new&apos; : &apos;/diet/log/event/edit&apos;}}"
-					th:attr="method=${log.id == null ? &apos;POST&apos; : &apos;POST&apos;}">
-					<input th:if="${log.id} != null" type="hidden" th:field="*{id}">
+						<a class="btn btn-outline-secondary btn-sm"
+                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><i class="oi oi-data-transfer-upload"></i></a>
+						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/delete/__${log.id}__}"><i
+                                class="oi oi-trash"></i></a>
+					</span>
+            </div>
+            <h3 class="card-title" th:if="${log.id} == null" th:text="#{editeventlog.title}"></h3>
+            <h3 class="card-title" th:if="${log.id} != null" th:text="#{editeventlog.title_update}"></h3>
+        </div>
+        <!-- end card header -->
+        <div class="card-body">
+            <form action="#" th:action="@{${log.id == null ? &apos;/diet/log/event/new&apos; : &apos;/diet/log/event/edit&apos;}}"
+                  th:attr="method=${log.id == null ? &apos;POST&apos; : &apos;POST&apos;}"
+                  th:object="${log}">
+                <input th:field="*{id}" th:if="${log.id} != null" type="hidden">
 
-					<div th:if="${log.id} == null" th:class="form-group">
-						<label th:text="#{lbl.log_date}" class="col-form-label"></label>
-						<div class="controls">
-							<div class="input-group">
-								<input id="createdDate" name="createdDate" type="text"
-									class="date-picker form-control" th:field="*{createdDate}"
-									placeholder="dd.MM.yyyy"> <label for="createdDate"
-									class="input-group-addon btn"> <span
-									class="oi oi-calendar"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-					
-					<div th:if="${log.id} != null" class="form-group">
-						<dl class="row small">
-						  <dt class="col-sm-3" th:text="#{lbl.created_date}"></dt>
-						  <dd class="col-sm-9" th:text="${#dates.format(log.createdDate, &apos;dd MMM yyyy HH:mm:ss&apos;)}"></dd>
-						  <dt class="col-sm-3" th:text="#{lbl.last_modified_date}"></dt>
-						  <dd class="col-sm-9" th:text="${#dates.format(log.lastModifiedDate, &apos;dd MMM yyyy HH:mm:ss&apos;)}"></dd>
-						  <dt class="col-sm-3" th:text="#{lbl.created_by}"></dt>
-						  <dd class="col-sm-9" th:text="${log.createdByUser}"></dd>
-						</dl>
-					</div>
-					
-					<div class="form-group">
-						<label th:text="#{lbl.type}"></label> <select
-							class="custom-select mr-sm-2" th:field="*{level}" name="level"
-							id="level">
-							<option th:value="INFO" th:text="Informasjon"></option>
-							<option th:value="CONFLICT" th:text="Konflikt"></option>
-							<option th:value="ACTIVITY" th:text="Aktivitet"></option>
-							<option th:value="MEETING" th:text="Møte"></option>
-							<option th:value="REPORT" th:text="Rapport"></option>
-							<option th:value="GAMING" th:text="Spilling"></option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label th:text="#{lbl.title}"></label> <input
-							th:required="required" class="form-control" type="text"
-							th:field="*{title}"> <label
-							th:each="err : ${#fields.errors(&apos;title&apos;)}"
-							th:text="${err}" class="form-text"></label>
-					</div>
-					<div class="form-group">
-						<label th:text="#{lbl.message}"></label>
-						<textarea th:required="required" class="form-control"
-							th:field="*{content}"></textarea>
-						<label th:each="err : ${#fields.errors(&apos;content&apos;)}"
-							th:text="${err}" class="form-text"></label>
-					</div>
+                <div th:class="form-group" th:if="${log.id} == null">
+                    <label class="col-form-label" th:text="#{lbl.log_date}"></label>
+                    <div class="controls">
+                        <div class="input-group">
+                            <input class="date-picker form-control" id="createdDate" name="createdDate"
+                                   placeholder="dd.MM.yyyy" th:field="*{createdDate}"
+                                   type="text"> <label class="input-group-addon btn"
+                                                                    for="createdDate"> <span
+                                class="oi oi-calendar"></span>
+                        </label>
+                        </div>
+                    </div>
+                </div>
 
-					<div class="form-group float-right">
-						<button type="submit" class="btn btn-primary btn-sm"
-							th:if="${log.id} == null" th:text="#{btn.new}"></button>
-						<button type="submit" class="btn btn-primary btn-sm"
-							th:if="${log.id} != null" th:text="#{btn.update}"></button>
-						<a th:href="@{/diet/log/events}"
-							class="btn btn-outline-secondary btn-sm"><span
-							th:text="#{btn.cancel}"></span></a>
-					</div>
-				</form>
-			</div>
-			<!-- end card body -->
-			<div class="card-footer clearfix">
-				<div class="float-right">
-					<a th:href="@{/diet/log/events}" class="btn btn-primary btn-sm"><span
-						th:text="#{btn.back}"></span></a>
-				</div>
-			</div>
-			<!-- end card footer -->
-		</div>
-		<!-- end card -->
-	</div>
-	<!-- end container -->
-	<div th:replace="fragments/footer :: footer"></div>
+                <div class="form-group" th:if="${log.id} != null">
+                    <dl class="row small">
+                        <dt class="col-sm-3" th:text="#{lbl.created_date}"></dt>
+                        <dd class="col-sm-9"
+                            th:text="${#dates.format(log.createdDate, &apos;dd MMM yyyy HH:mm:ss&apos;)}"></dd>
+                        <dt class="col-sm-3" th:text="#{lbl.last_modified_date}"></dt>
+                        <dd class="col-sm-9"
+                            th:text="${#dates.format(log.lastModifiedDate, &apos;dd MMM yyyy HH:mm:ss&apos;)}"></dd>
+                        <dt class="col-sm-3" th:text="#{lbl.created_by}"></dt>
+                        <dd class="col-sm-9" th:text="${log.createdByUser}"></dd>
+                    </dl>
+                </div>
 
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <div class="form-group">
+                    <label th:text="#{lbl.type}"></label> <select
+                        class="custom-select mr-sm-2" id="level" name="level"
+                        th:field="*{level}">
+                    <option th:text="Informasjon" th:value="INFO"></option>
+                    <option th:text="Konflikt" th:value="CONFLICT"></option>
+                    <option th:text="Aktivitet" th:value="ACTIVITY"></option>
+                    <option th:text="Møte" th:value="MEETING"></option>
+                    <option th:text="Rapport" th:value="REPORT"></option>
+                    <option th:text="Spilling" th:value="GAMING"></option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{lbl.title}"></label> <input
+                        class="form-control" th:field="*{title}" th:required="required"
+                        type="text"> <label
+                        class="form-text"
+                        th:each="err : ${#fields.errors(&apos;title&apos;)}" th:text="${err}"></label>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{lbl.message}"></label>
+                    <textarea class="form-control" th:field="*{content}"
+                              th:required="required"></textarea>
+                    <label class="form-text"
+                           th:each="err : ${#fields.errors(&apos;content&apos;)}" th:text="${err}"></label>
+                </div>
 
-	<script type="text/javascript">
+                <div class="form-group float-right">
+                    <button class="btn btn-primary btn-sm" th:if="${log.id} == null"
+                            th:text="#{btn.new}" type="submit"></button>
+                    <button class="btn btn-primary btn-sm" th:if="${log.id} != null"
+                            th:text="#{btn.update}" type="submit"></button>
+                    <a class="btn btn-outline-secondary btn-sm"
+                       th:href="@{/diet/log/events}"><span
+                            th:text="#{btn.cancel}"></span></a>
+                </div>
+            </form>
+        </div>
+        <!-- end card body -->
+        <div class="card-footer clearfix">
+            <div class="float-right">
+                <a class="btn btn-primary btn-sm" th:href="@{/diet/log/events}"><span
+                        th:text="#{btn.back}"></span></a>
+            </div>
+        </div>
+        <!-- end card footer -->
+    </div>
+    <!-- end card -->
+</div>
+<!-- end container -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
 		function calendarDateSelection() {
 			var date_input = $('input[name="createdDate"]');
 			var container = $('.bootstrap-iso form').length > 0 ? $(
@@ -129,7 +133,8 @@
 		$(document).ready(function() {
 			calendarDateSelection();
 		})
-	</script>
+
+</script>
 </body>
 
 </html>

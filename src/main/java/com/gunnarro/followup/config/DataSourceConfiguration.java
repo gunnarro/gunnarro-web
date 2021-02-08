@@ -1,9 +1,5 @@
 package com.gunnarro.followup.config;
 
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import com.gunnarro.followup.repository.UserAccountRepository;
 import com.gunnarro.followup.repository.impl.UserAccountRepositoryImpl;
 import org.slf4j.Logger;
@@ -17,60 +13,62 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.util.Properties;
+
 /**
  * ref:
  * https://egkatzioura.com/2016/04/29/spring-boot-and-database-initialization/
- * 
- * @author admin
  *
+ * @author admin
  */
 @Configuration
 @EnableTransactionManagement
 public class DataSourceConfiguration {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfiguration.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfiguration.class);
 
-	// If the same property is defined as a system property and in the properties
-	// file, then the system property would be applied.
-	@Value("${jdbc.url}")
-	private String jdbcUrl;
+    // If the same property is defined as a system property and in the properties
+    // file, then the system property would be applied.
+    @Value("${jdbc.url}")
+    private String jdbcUrl;
 
-	@Value("${jdbc.user}")
-	private String jdbcUser;
+    @Value("${jdbc.user}")
+    private String jdbcUser;
 
-	@Value("${jdbc.pwd}")
-	private String jdbcPwd;
+    @Value("${jdbc.pwd}")
+    private String jdbcPwd;
 
-	@Value("${jdbc.driverClassName}")
-	private String jdbcDriverClassName;
+    @Value("${jdbc.driverClassName}")
+    private String jdbcDriverClassName;
 
-	// bean is singleton as default
-	@Primary
-	@Bean
-	public DataSource dietManagerDataSource() {
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setDriverClassName(jdbcDriverClassName);
-		ds.setUrl(jdbcUrl);
-		ds.setUsername(jdbcUser);
-		ds.setPassword(jdbcPwd);
-		Properties p = new Properties();
-		p.put("useSSL", "false");
-		ds.setConnectionProperties(p);
-		LOG.info("jdbc url : {}", jdbcUrl);
-		LOG.info("jdbc user: {}", jdbcUser);
-		LOG.info("jdbc pwd: {}", jdbcPwd);
-		LOG.info(System.getProperty("spring.config.location"));
-		// runUpdateDBScript(ds);
-		return ds;
-	}
+    // bean is singleton as default
+    @Primary
+    @Bean
+    public DataSource dietManagerDataSource() {
+        DriverManagerDataSource ds = new DriverManagerDataSource();
+        ds.setDriverClassName(jdbcDriverClassName);
+        ds.setUrl(jdbcUrl);
+        ds.setUsername(jdbcUser);
+        ds.setPassword(jdbcPwd);
+        Properties p = new Properties();
+        p.put("useSSL", "false");
+        ds.setConnectionProperties(p);
+        LOG.info("jdbc url : {}", jdbcUrl);
+        LOG.info("jdbc user: {}", jdbcUser);
+        LOG.info("jdbc pwd: {}", jdbcPwd);
+        LOG.info(System.getProperty("spring.config.location"));
+        // runUpdateDBScript(ds);
+        return ds;
+    }
 
-	@Bean
-	public DataSourceTransactionManager transactionManager(DataSource datasource) {
-		return new DataSourceTransactionManager(datasource);
-	}
+    @Bean
+    public DataSourceTransactionManager transactionManager(DataSource datasource) {
+        return new DataSourceTransactionManager(datasource);
+    }
 
-	@Bean
-	public UserAccountRepository userAccountRepository() {
-		return new UserAccountRepositoryImpl(new JdbcTemplate(dietManagerDataSource()));
-	}
+    @Bean
+    public UserAccountRepository userAccountRepository() {
+        return new UserAccountRepositoryImpl(new JdbcTemplate(dietManagerDataSource()));
+    }
 }

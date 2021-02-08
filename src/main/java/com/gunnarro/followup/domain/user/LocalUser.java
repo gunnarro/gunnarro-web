@@ -20,7 +20,11 @@ import java.util.List;
 public class LocalUser implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -3112437958212912495L;
-
+    boolean accountNonExpired = true;
+    boolean accountNonLocked = true;
+    boolean activated = true;
+    boolean credentialsNonExpired = true;
+    boolean enabled = true;
     private Integer id;
     private Date createdDate;
     private Date lastModifiedDate;
@@ -29,11 +33,6 @@ public class LocalUser implements UserDetails, Serializable {
     private String passwordRepeat;
     private String username;
     private String userId;
-    boolean accountNonExpired = true;
-    boolean accountNonLocked = true;
-    boolean activated = true;
-    boolean credentialsNonExpired = true;
-    boolean enabled = true;
     private List<Role> roles;
     private String socialProvider;
 
@@ -47,6 +46,13 @@ public class LocalUser implements UserDetails, Serializable {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    /**
+     * for unit testing only
+     */
+    public LocalUser(Integer id) {
+        this.id = id;
     }
 
     public void checkPasword() {
@@ -94,16 +100,32 @@ public class LocalUser implements UserDetails, Serializable {
         return createdDate;
     }
 
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public String getSocialProvider() {
@@ -119,12 +141,24 @@ public class LocalUser implements UserDetails, Serializable {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPasswordRepeat() {
         return passwordRepeat;
     }
 
+    public void setPasswordRepeat(String passwordRepeat) {
+        this.passwordRepeat = passwordRepeat;
+    }
+
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -132,10 +166,17 @@ public class LocalUser implements UserDetails, Serializable {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
     }
 
     @Override
@@ -143,8 +184,16 @@ public class LocalUser implements UserDetails, Serializable {
         return accountNonLocked;
     }
 
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
     public boolean isActivated() {
         return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public boolean isAdmin() {
@@ -156,9 +205,17 @@ public class LocalUser implements UserDetails, Serializable {
         return credentialsNonExpired;
     }
 
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public boolean isGuest() {
@@ -171,58 +228,6 @@ public class LocalUser implements UserDetails, Serializable {
 
     public boolean isUser() {
         return roles != null && roles.size() == 1 && RolesTable.RolesEnum.ROLE_USER.name().equals(roles.get(0).getName());
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPasswordRepeat(String passwordRepeat) {
-        this.passwordRepeat = passwordRepeat;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override
@@ -245,13 +250,6 @@ public class LocalUser implements UserDetails, Serializable {
         if (username == null) {
             return other.username == null;
         } else return username.equals(other.username);
-    }
-
-    /**
-     * for unit testing only
-     */
-    public LocalUser(Integer id) {
-        this.id = id;
     }
 
     @Override

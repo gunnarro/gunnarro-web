@@ -75,15 +75,15 @@ public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
      * {@inheritDoc}
      */
     @Override
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
+    protected RedirectStrategy getRedirectStrategy() {
+        return redirectStrategy;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected RedirectStrategy getRedirectStrategy() {
-        return redirectStrategy;
+    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+        this.redirectStrategy = redirectStrategy;
     }
 }

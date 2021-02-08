@@ -1,9 +1,7 @@
 package com.gunnarro.followup.endpoint;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.gunnarro.followup.domain.user.LocalUser;
+import com.gunnarro.followup.service.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -11,12 +9,13 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.gunnarro.followup.service.exception.ApplicationException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController extends BaseController {
 
-	public static final String PUBLIC_DOMAIN = "";
+    public static final String PUBLIC_DOMAIN = "";
     public static final String HOME_PAGE = "/diet/log/events";
     public static final String ADMIN_PAGE = "/admin";
     public static final String LOGIN_PAGE = "/login";
@@ -71,7 +70,7 @@ public class LoginController extends BaseController {
     public String profile() {
         return "profile";
     }
-    
+
     /**
      * @return the login page
      */
@@ -92,7 +91,7 @@ public class LoginController extends BaseController {
 
     /**
      * Log out user and redirects to the login page
-     * 
+     *
      * Note! If using Spring Security's CSRF protection, you must POST to log
      * out.
      *
@@ -131,7 +130,7 @@ public class LoginController extends BaseController {
      * to it. Removes the Authentication from the SecurityContext to prevent
      * issues with concurrent requests. Explicitly clears the context value from
      * the current thread.
-     * 
+     *
      * @param request
      * @param response
      * @return

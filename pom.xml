@@ -15,8 +15,7 @@
             -Dsonar.organization=Gunnar Ronneberg -Dsonar.login=00e21528e5f07da596b49cd283f8ea61125eb2aa -->
     <!-- mvn clean verify sonar:sonar -->
     <!-- https://sonarqube.com/projects/favorite -->
-    <!-- mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.login=2a992b24f92b4f573993300e78bb5daa07ea50d2 -->
+    <!-- mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=2a992b24f92b4f573993300e78bb5daa07ea50d2 -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gunnarro.web</groupId>
     <artifactId>gunnarro-web</artifactId>

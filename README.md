@@ -18,7 +18,7 @@ mvn azure-webapp:deploy
 
 ## SonarQube
 
-[SonarQube](https://sonarqube.com)
+[SonarQube](https://sonarcloud.io/dashboard?id=gunnarro_gunnarro-web)
 
 ## GitHub
 [GitHub](https://github.com)

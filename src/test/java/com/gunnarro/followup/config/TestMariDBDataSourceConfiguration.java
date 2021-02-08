@@ -1,10 +1,8 @@
 package com.gunnarro.followup.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import ch.vorburger.exec.ManagedProcessException;
+import ch.vorburger.mariadb4j.DBConfigurationBuilder;
+import ch.vorburger.mariadb4j.springframework.MariaDB4jSpringService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -21,16 +19,15 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import ch.vorburger.exec.ManagedProcessException;
-import ch.vorburger.mariadb4j.DBConfigurationBuilder;
-import ch.vorburger.mariadb4j.springframework.MariaDB4jSpringService;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ref:
  * https://egkatzioura.com/2016/04/29/spring-boot-and-database-initialization/
- * 
- * @author admin
  *
+ * @author admin
  */
 @Configuration
 @EnableTransactionManagement
@@ -46,14 +43,14 @@ public class TestMariDBDataSourceConfiguration {
     private String jdbcPwd;
 
     @Bean
-	@Qualifier(value = "pwdEncoder")
-	public PasswordEncoder passwordEncoder() {
-		String idForEncode = "bcrypt";
-		Map<String, PasswordEncoder> encoders = new HashMap<>();
-		encoders.put(idForEncode, new BCryptPasswordEncoder(13));
-		PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(idForEncode, encoders);
-		return passwordEncoder;
-	}
+    @Qualifier(value = "pwdEncoder")
+    public PasswordEncoder passwordEncoder() {
+        String idForEncode = "bcrypt";
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put(idForEncode, new BCryptPasswordEncoder(13));
+        PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(idForEncode, encoders);
+        return passwordEncoder;
+    }
 
     @Bean
     public MariaDB4jSpringService mariaDB4jSpringService() {
@@ -62,9 +59,9 @@ public class TestMariDBDataSourceConfiguration {
 
     @Bean
     public JdbcTemplate dietManagerJdbcTemplate(DataSource dataSource) {
-    	return new JdbcTemplate(dataSource);
+        return new JdbcTemplate(dataSource);
     }
-    
+
     @Bean
 //    @Qualifier(value = "dietManagerDataSource")
     @Primary

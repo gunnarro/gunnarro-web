@@ -7,16 +7,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * 
  * @author mentos
- *
  */
 @SpringBootApplication
 @ComponentScan("com.gunnarro.followup.*")
 public class Application {
 
-	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
-	public static void main(String[] args) {
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+
+    public static void main(String[] args) {
         LOG.info("Start followup manager ....");
         LOG.info(System.getProperty("spring.config.location"));
         LOG.info(System.getProperty("spring.profiles.active"));

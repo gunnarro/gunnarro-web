@@ -77,8 +77,16 @@ public class FileUploadServiceImpl implements FileUploadService {
         if (!Files.exists(userDir)) {
             return null;
         }
-        try {
 
+        /**
+         List<Path> result;
+         try (Stream<Path> walk = Files.walk(path)) {
+         result = walk.filter(Files::isRegularFile)
+         .collect(Collectors.toList());
+         }
+         return result;
+         */
+        try {
             return Files
                     .walk(userDir, 1).filter(path -> !path.equals(userDir)).map(path -> ImageResource.builder().id(id).name(path.toFile().getName()).path(this.rootLocation.relativize(path).toString()).build())
                     .collect(Collectors.toList());
@@ -113,20 +121,6 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
-    /**
-     * @param id
-     * @return
-     * @throws IOException
-     */
-    private Path getUserImageDir(String id) throws IOException {
-        Path userDir = Paths.get(rootLocation.toString() + "/" + id);
-        if (!Files.exists(userDir)) {
-            Files.createDirectories(userDir);
-            LOG.debug("created images dir: {}", userDir.toString());
-        }
-        return userDir;
-    }
-
     @Override
     public Resource loadAsResource(String id, String filename) {
         try {
@@ -152,4 +146,12 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
+    private Path getUserImageDir(String id) throws IOException {
+        Path userDir = Paths.get(rootLocation.toString() + "/" + id);
+        if (!Files.exists(userDir)) {
+            Files.createDirectories(userDir);
+            LOG.debug("created images dir: {}", userDir.toString());
+        }
+        return userDir;
+    }
 }

@@ -1,8 +1,7 @@
 package com.gunnarro.followup.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.gunnarro.followup.endpoint.handler.CustomAccessDeniedHandler;
+import com.gunnarro.followup.service.impl.LocalUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,38 +12,38 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import com.gunnarro.followup.endpoint.handler.CustomAccessDeniedHandler;
-import com.gunnarro.followup.service.impl.LocalUserDetailsServiceImpl;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class BeanConfiguration {
 
-	@Bean
-	public SimpleUrlAuthenticationFailureHandler failureHandler() {
-		return new SimpleUrlAuthenticationFailureHandler("/access-denied");
-	}
+    @Bean
+    public SimpleUrlAuthenticationFailureHandler failureHandler() {
+        return new SimpleUrlAuthenticationFailureHandler("/access-denied");
+    }
 
-	@Bean
-	public HttpSessionEventPublisher httpSessionEventPublisher() {
-		return new HttpSessionEventPublisher();
-	}
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 
-	@Bean
-	@Qualifier(value = "pwdEncoder")
-	public PasswordEncoder passwordEncoder() {
-		String idForEncode = "bcrypt";
-		Map<String, PasswordEncoder> encoders = new HashMap<>();
-		encoders.put(idForEncode, new BCryptPasswordEncoder());
-		return new DelegatingPasswordEncoder(idForEncode, encoders);
-	}
+    @Bean
+    @Qualifier(value = "pwdEncoder")
+    public PasswordEncoder passwordEncoder() {
+        String idForEncode = "bcrypt";
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put(idForEncode, new BCryptPasswordEncoder());
+        return new DelegatingPasswordEncoder(idForEncode, encoders);
+    }
 
-	@Bean
-	public CustomAccessDeniedHandler accessDeniedHandler() {
-		return new CustomAccessDeniedHandler();
-	}
+    @Bean
+    public CustomAccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
+    }
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new LocalUserDetailsServiceImpl();
-	}
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new LocalUserDetailsServiceImpl();
+    }
 }

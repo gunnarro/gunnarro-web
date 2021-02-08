@@ -1,36 +1,26 @@
 package com.gunnarro.followup.utility;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Properties;
-import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.DateTimeZone;
-//import org.passay.CharacterRule;
-//import org.passay.EnglishCharacterData;
-//import org.passay.PasswordGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utility {
-
-    private static final Logger LOG = LoggerFactory.getLogger(Utility.class);
 
     public static final String DATE_EEE_PATTERN = "EEEE, dd. MMM yyyy";
     public static final String DATE_PATTERN = "dd.MM.yyyy";
@@ -38,19 +28,16 @@ public class Utility {
     public static final String DATE_DEFAULT_PATTERN = DATE_TIME_PATTERN;
     public static final String MYSQL_DATE_PATTERN = "yyyy-MM-dd";
     public static final String REGEXP_DATE = "";
-
     public static final String REGEXP_TIME_24 = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String REGEXP_DATE_TIME = REGEXP_DATE + " " + REGEXP_TIME_24;
-
     public static final String TIME_PATTERN = "HH:mm";
     public static final String TIME24HOURS_REGEXP_PATTERN = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String VALIDATOR_PATTERN_EMAIL = "[\\w-]+@([\\w-]+\\.)+[\\w-]+";
     public static final String VALIDATOR_PATTERN_STRING = "[\\wæøå\\WÆØÅ0-9-\\_ \\]*";
-
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(Extensions.ALL);
-
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer HTML_RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    private static final Logger LOG = LoggerFactory.getLogger(Utility.class);
 
     public static String convertMarkdownToHtml(String markdownTxt) {
         if (markdownTxt != null) {

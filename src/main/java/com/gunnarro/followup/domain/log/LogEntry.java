@@ -12,12 +12,7 @@ import java.util.List;
 @SuperBuilder
 public class LogEntry extends BaseDomain {
 
-    public enum logTypeEnum {
-        ACTIVITY, CONFLICT, INFO, REPORT
-    }
-
     private static final long serialVersionUID = 3799683509174086447L;
-
     private String content;
     private String contentHtml;
     private String createdByUser;
@@ -28,5 +23,8 @@ public class LogEntry extends BaseDomain {
     private List<LogComment> logComments;
     private int numberOfComments;
     private List<ImageResource> resources;
+    public enum logTypeEnum {
+        ACTIVITY, CONFLICT, INFO, REPORT
+    }
 
 }

@@ -31,7 +31,7 @@ public class RequestLoggingConfig {
 
     /**
      * Endpoint response/request logging with response time
-     * 
+     *
      * @return
      */
     @Bean

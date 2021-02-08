@@ -3,11 +3,12 @@ package com.gunnarro.followup.domain.user;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Builder
-public class Profile {
+public class Profile implements Serializable {
 
     private Integer id;
     private Integer userId;

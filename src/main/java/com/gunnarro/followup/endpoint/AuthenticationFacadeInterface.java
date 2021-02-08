@@ -6,14 +6,12 @@ import org.springframework.security.core.Authentication;
 public interface AuthenticationFacadeInterface {
 
     /**
-     * 
-     * @return
+     *
      */
     Authentication getAuthentication();
 
     /**
-     * 
-     * @return
+     *
      */
     LocalUser getLoggedInUser();
 }

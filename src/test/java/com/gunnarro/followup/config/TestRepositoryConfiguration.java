@@ -1,8 +1,10 @@
 package com.gunnarro.followup.config;
 
-import javax.sql.DataSource;
-
+import com.gunnarro.followup.repository.ActivityRepository;
+import com.gunnarro.followup.repository.LogEventRepository;
 import com.gunnarro.followup.repository.UserAccountRepository;
+import com.gunnarro.followup.repository.impl.ActivityRepositoryImpl;
+import com.gunnarro.followup.repository.impl.LogEventRepositoryImpl;
 import com.gunnarro.followup.repository.impl.UserAccountRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,17 +13,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.gunnarro.followup.repository.ActivityRepository;
-import com.gunnarro.followup.repository.LogEventRepository;
-import com.gunnarro.followup.repository.impl.ActivityRepositoryImpl;
-import com.gunnarro.followup.repository.impl.LogEventRepositoryImpl;
+import javax.sql.DataSource;
 
 /**
  * ref:
  * https://egkatzioura.com/2016/04/29/spring-boot-and-database-initialization/
- * 
- * @author admin
  *
+ * @author admin
  */
 @Configuration
 @EnableTransactionManagement
@@ -35,7 +33,7 @@ public class TestRepositoryConfiguration {
     public LogEventRepository logEventRepository() {
         return new LogEventRepositoryImpl(new JdbcTemplate(dataSource));
     }
-    
+
     @Bean
     public ActivityRepository activityRepository() {
         return new ActivityRepositoryImpl(new JdbcTemplate(dataSource));

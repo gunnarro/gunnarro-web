@@ -3,9 +3,11 @@ package com.gunnarro.followup.domain.log;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Builder
-public class ImageResource {
+public class ImageResource implements Serializable {
 
     private String id;
     private String name;

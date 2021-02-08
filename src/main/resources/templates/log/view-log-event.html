@@ -4,82 +4,97 @@
 <head th:include="fragments/head-include :: head-include"></head>
 
 <body>
-	<div th:replace="fragments/header-topmenu :: header-topmenu"></div>
-	<div class="container-fluid">
-	
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a th:href="@{/diet/log/events}" th:text="#{topmenu.log}"></a></li>
-				<li class="breadcrumb-item active" aria-current="page" th:text="#{lbl.event}"></li>
-			</ol>
-		</nav>
-	
-		<div class="card">
-			<div class="card-header clearfix">
-				<div th:if="${log.id} != null" class="float-right">
+<div th:replace="fragments/header-topmenu :: header-topmenu"></div>
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/diet/log/events}" th:text="#{topmenu.log}"></a></li>
+            <li aria-current="page" class="breadcrumb-item active" th:text="#{lbl.event}"></li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header clearfix">
+            <div class="float-right" th:if="${log.id} != null">
 					<span th:if="${#authentication?.name == log.createdByUser}"> 
-						<a th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}" class="btn btn-outline-secondary btn-sm"><i class="oi oi-data-transfer-upload"></i></a> 
-						<a th:href="@{/diet/log/event/edit/__${log.id}__}"  class="btn btn-outline-secondary btn-sm"><i class="oi oi-pencil"></i></a>
-						<a th:href="@{/diet/log/event/delete/__${log.id}__}"  class="btn btn-outline-secondary btn-sm"><i class="oi oi-trash"></i></a>
-					</span> 
-					<span th:if="${#authentication?.name != log.createdByUser}"> 
-						<a th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}" class="btn btn-outline-secondary btn-sm"><i class="oi oi-data-transfer-upload"></i></a> 
-						<a th:href="@{/diet/log/event/edit/__${log.id}__}" class="btn btn-outline-secondary btn-sm disabled"><i class="oi oi-pencil"></i></a> 
-						<a th:href="@{/diet/log/event/delete/__${log.id}__}" class="btn btn-outline-secondary btn-sm disabled"><i class="oi oi-trash"></i></a>
+						<a class="btn btn-outline-secondary btn-sm"
+                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><i class="oi oi-data-transfer-upload"></i></a>
+						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/edit/__${log.id}__}"><i
+                                class="oi oi-pencil"></i></a>
+						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/delete/__${log.id}__}"><i
+                                class="oi oi-trash"></i></a>
 					</span>
-				</div>
-				<h5 class="card-title">
-					<span th:text="${#dates.format(log.createdDate, &apos;EEEE dd.MM.yy&apos;) + &apos; &apos; + #dates.format(log.createdDate, &apos;HH:mm&apos;)}" class="badge badge-dark"></span> 
-					<span th:if="${log.level == &apos;INFO&apos;}" class="badge badge-info" th:text="${log.level}"></span> 
-					<span th:if="${log.level == &apos;ACTIVITY&apos;}" class="badge badge-success" th:text="${log.level}"></span> 
-					<span th:if="${log.level == &apos;REPORT&apos;}" class="badge badge-warning" th:text="${log.level}"></span> 
-					<span th:if="${log.level == &apos;CONFLICT&apos;}" class="badge badge-danger" th:text="${log.level}"></span>
-					<span th:if="${log.level == &apos;MEETING&apos;}" class="badge badge-primary" th:text="${log.level}"></span>
-					<span th:text="${log.title}"></span>
-				</h5>
-			</div>
-			<!-- end panel header -->
-			<div class="card-body">
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-success" style="margin: 0px 0px 10px 0px;">
-						<small class="text-muted float-right" th:inline="text">[[${#dates.format(log.createdDate, &apos;EEEE dd.MM.yyyy HH:mm:ss&apos;)}]] [[#{lbl.by}]] [[${log.createdByUser}]]</small>
-						<p class="text-left" th:text="${log.contentHtml}"></p>
-					</li>
-					<th:block th:if="${!log.logComments.isEmpty()}" th:each="comment : ${log.logComments}">
-						<li class="list-group-item list-group-item-info" style="margin: 0px 0px 10px 25px;">
-							<small class="text-muted float-right" th:inline="text">[[${#dates.format(comment.createdDate, &apos;EEEE dd.MM.yyyy HH:mm:ss&apos;)}]] [[#{lbl.by}]] [[${comment.createdByUser}]]</small>
-							<p class="text-left" th:text="${comment.content}"></p>
-						</li>
-					</th:block>
-				</ul>
-			</div>
-			
-			<!-- add comment -->
-			<form method="POST" th:action="@{/diet/log/event/comment/add}" >
-					<input type="hidden" name="logId" id="logId" th:value="${log.id}" />
-					<div class="form-group">
-						<label for="comment" th:text="#{lbl.comment}"></label>
-						<textarea th:required="required" class="form-control" id="logCommentMsgInputId" name="comment" th:value="*{comment}" ></textarea>
-					</div>
-					<div class="form-group float-right">
-						<button type="submit" class="btn btn-primary btn-sm" th:text="#{btn.add}"></button>
-						<a th:href="@{/diet/log/events}" class="btn btn-outline-secondary btn-sm"><span th:text="#{btn.cancel}"></span></a>
-					</div>
-			</form>
-			
-			<div th:replace="fragments/cards-gallery :: cards-gallery"></div>
-			
-		<!-- end panel body -->
-		<div class="card-footer clearfix">
-				<div class="float-right">
-					<a th:href="@{/diet/log/events}" class="btn btn-primary btn-sm"><span th:text="#{btn.back}"></span></a>
-				</div>
-			</div>
-			<!-- end panel footer -->
-		</div>
-		<!-- end panel -->
-	</div>
-	<!-- end container -->
-	<div th:replace="fragments/footer :: footer"></div>
+                <span th:if="${#authentication?.name != log.createdByUser}">
+						<a class="btn btn-outline-secondary btn-sm"
+                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><i class="oi oi-data-transfer-upload"></i></a>
+						<a class="btn btn-outline-secondary btn-sm disabled"
+                           th:href="@{/diet/log/event/edit/__${log.id}__}"><i class="oi oi-pencil"></i></a>
+						<a class="btn btn-outline-secondary btn-sm disabled"
+                           th:href="@{/diet/log/event/delete/__${log.id}__}"><i class="oi oi-trash"></i></a>
+					</span>
+            </div>
+            <h5 class="card-title">
+                <span class="badge badge-dark"
+                      th:text="${#dates.format(log.createdDate, &apos;EEEE dd.MM.yy&apos;) + &apos; &apos; + #dates.format(log.createdDate, &apos;HH:mm&apos;)}"></span>
+                <span class="badge badge-info" th:if="${log.level == &apos;INFO&apos;}" th:text="${log.level}"></span>
+                <span class="badge badge-success" th:if="${log.level == &apos;ACTIVITY&apos;}"
+                      th:text="${log.level}"></span>
+                <span class="badge badge-warning" th:if="${log.level == &apos;REPORT&apos;}"
+                      th:text="${log.level}"></span>
+                <span class="badge badge-danger" th:if="${log.level == &apos;CONFLICT&apos;}"
+                      th:text="${log.level}"></span>
+                <span class="badge badge-primary" th:if="${log.level == &apos;MEETING&apos;}"
+                      th:text="${log.level}"></span>
+                <span th:text="${log.title}"></span>
+            </h5>
+        </div>
+        <!-- end panel header -->
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success" style="margin: 0px 0px 10px 0px;">
+                    <small class="text-muted float-right" th:inline="text">[[${#dates.format(log.createdDate, &apos;EEEE
+                        dd.MM.yyyy HH:mm:ss&apos;)}]] [[#{lbl.by}]] [[${log.createdByUser}]]</small>
+                    <p class="text-left" th:text="${log.contentHtml}"></p>
+                </li>
+                <th:block th:each="comment : ${log.logComments}" th:if="${!log.logComments.isEmpty()}">
+                    <li class="list-group-item list-group-item-info" style="margin: 0px 0px 10px 25px;">
+                        <small class="text-muted float-right" th:inline="text">[[${#dates.format(comment.createdDate,
+                            &apos;EEEE dd.MM.yyyy HH:mm:ss&apos;)}]] [[#{lbl.by}]] [[${comment.createdByUser}]]</small>
+                        <p class="text-left" th:text="${comment.content}"></p>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+
+        <!-- add comment -->
+        <form method="POST" th:action="@{/diet/log/event/comment/add}">
+            <input id="logId" name="logId" th:value="${log.id}" type="hidden"/>
+            <div class="form-group">
+                <label for="comment" th:text="#{lbl.comment}"></label>
+                <textarea class="form-control" id="logCommentMsgInputId" name="comment" th:required="required"
+                          th:value="*{comment}"></textarea>
+            </div>
+            <div class="form-group float-right">
+                <button class="btn btn-primary btn-sm" th:text="#{btn.add}" type="submit"></button>
+                <a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/events}"><span
+                        th:text="#{btn.cancel}"></span></a>
+            </div>
+        </form>
+
+        <div th:replace="fragments/cards-gallery :: cards-gallery"></div>
+
+        <!-- end panel body -->
+        <div class="card-footer clearfix">
+            <div class="float-right">
+                <a class="btn btn-primary btn-sm" th:href="@{/diet/log/events}"><span th:text="#{btn.back}"></span></a>
+            </div>
+        </div>
+        <!-- end panel footer -->
+    </div>
+    <!-- end panel -->
+</div>
+<!-- end container -->
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
