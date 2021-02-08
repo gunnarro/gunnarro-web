@@ -26,11 +26,15 @@ import static org.mockito.Mockito.when;
 @Transactional(timeout = 10)
 public class LogEventServiceTest extends DefaultTestConfig {
 
+    @Mock
+    private static AuthenticationFacade authenticationFacadeMock;
     @Autowired
     protected LogEventServiceImpl logEventService;
 
-    @Mock
-    private static AuthenticationFacade authenticationFacadeMock;
+    @AfterAll
+    public static void terminate() {
+        SecurityContextHolder.clearContext();
+    }
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -48,11 +52,6 @@ public class LogEventServiceTest extends DefaultTestConfig {
         user.setId(1);
         user.setUsername("admin");
         when(authenticationFacadeMock.getLoggedInUser()).thenReturn(user);
-    }
-
-    @AfterAll
-    public static void terminate() {
-        SecurityContextHolder.clearContext();
     }
 
     // @Test(expected = SecurityException.class)
