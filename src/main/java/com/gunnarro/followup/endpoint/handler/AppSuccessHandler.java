@@ -32,7 +32,7 @@ public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
      */
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        LOG.debug("authentication: {}", authentication.toString());
+        LOG.debug("authentication: {}", authentication);
         String targetUrl = determineTargetUrl(authentication);
         LOG.debug("redirect to: {}", targetUrl);
         if (response.isCommitted()) {

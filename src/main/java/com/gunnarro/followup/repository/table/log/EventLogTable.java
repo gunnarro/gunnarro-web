@@ -4,9 +4,7 @@ import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.repository.table.TableHelper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**

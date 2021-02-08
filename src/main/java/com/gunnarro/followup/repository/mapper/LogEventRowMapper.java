@@ -1,4 +1,4 @@
-package com.gunnarro.followup.repository.impl;
+package com.gunnarro.followup.repository.mapper;
 
 import com.gunnarro.followup.domain.log.LogComment;
 import com.gunnarro.followup.domain.log.LogEntry;
@@ -44,7 +44,7 @@ public class LogEventRowMapper {
             } catch (SQLException sqle) {
                 // ignore, the column didn't exist
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Error: " + sqle.getMessage());
+                    LOG.debug("Error: {}", sqle.getMessage());
                 }
             }
             try {
@@ -52,7 +52,7 @@ public class LogEventRowMapper {
             } catch (SQLException sqle) {
                 // ignore, the column diden't exist
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Error: " + sqle.getMessage());
+                    LOG.debug("Error: {}", sqle.getMessage());
                 }
             }
             return log;
@@ -75,7 +75,7 @@ public class LogEventRowMapper {
             } catch (SQLException sqle) {
                 // ignore, the column diden't exist
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Error: " + sqle.getMessage());
+                    LOG.debug("Error: {}", sqle.getMessage());
                 }
             }
             return comment;
