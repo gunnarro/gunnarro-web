@@ -269,7 +269,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
             return getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{forLastDays, type},
                     LogEventRowMapper.mapToLogEntryRM());
         } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
-            LOG.debug("Error: {}", erae);
+            LOG.debug("Error: {}", erae.getMessage());
             // ignore this
             return null;
         }
@@ -311,7 +311,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
             assert name != null;
             return name.equals(username);
         } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
-            LOG.debug("Error: {}", erae);
+            LOG.debug("Error: {}", erae.getMessage());
             // ignore this
             return false;
         }
