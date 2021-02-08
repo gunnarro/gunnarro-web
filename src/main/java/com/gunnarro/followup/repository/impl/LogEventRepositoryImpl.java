@@ -36,7 +36,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
      */
     @Override
     public int createLogEvent(LogEntry logEntry) {
-        LOG.debug("%s", logEntry);
+        LOG.debug("{}", logEntry);
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             getJdbcTemplate().update(EventLogTable.createInsertPreparedStatement(logEntry), keyHolder);
@@ -52,7 +52,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
      */
     @Override
     public int createLogComment(LogComment logComment) {
-        LOG.debug("%s", logComment);
+        LOG.debug("{}", logComment);
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             getJdbcTemplate().update(LogCommentTable.createInsertPreparedStatement(logComment), keyHolder);
@@ -70,7 +70,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
     public int deleteLogComment(Integer userId, Integer id) {
         int rows = getJdbcTemplate().update("DELETE FROM event_log_comment WHERE id = ? AND fk_user_id = ?",
                 id, userId);
-        LOG.debug(String.format("deleted log comment with id=%s, deleted rows=%s", id, rows));
+        LOG.debug("deleted log comment with id={}, deleted rows={}", id, rows);
         return rows;
     }
 
@@ -81,7 +81,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
     public int deleteLogEvent(Integer userId, Integer id) {
         int rows = getJdbcTemplate().update("DELETE FROM event_log WHERE id = ? AND fk_user_id = ?",
                 id, userId);
-        LOG.debug(String.format("deleted log event with id=%s, deleted rows=%s", id, rows));
+        LOG.debug("deleted log event with id={}, deleted rows={}", id, rows);
         return rows;
     }
 
@@ -269,7 +269,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
             return getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{forLastDays, type},
                     LogEventRowMapper.mapToLogEntryRM());
         } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
-            LOG.debug("Error: {}" + erae);
+            LOG.debug("Error: {}", erae);
             // ignore this
             return null;
         }
@@ -311,7 +311,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
             assert name != null;
             return name.equals(username);
         } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
-            LOG.debug("Error: {}" + erae);
+            LOG.debug("Error: {}", erae);
             // ignore this
             return false;
         }

@@ -5,9 +5,7 @@ import com.gunnarro.followup.repository.table.TableHelper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 
@@ -37,7 +35,7 @@ public class RolesTable {
     public static RowMapper<String> mapToRoleNameRM() {
         return (resultSet, rowNum) -> resultSet.getString(ColumnsEnum.role.name());
     }
-
+    
     private enum ColumnsEnum {
         username, role
     }
