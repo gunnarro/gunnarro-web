@@ -111,9 +111,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(URI_LOG_EVENT + "/new")
     public String processNewLogEventForm(@Valid @ModelAttribute("log") LogEntry log, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", log.toString());
+        LOG.debug("{}", log);
         if (result.hasErrors()) {
-            LOG.debug("{}", result.toString());
+            LOG.debug("{}", result);
             return "log/edit-event-log";
         } else {
             // set created by user id
@@ -132,7 +132,7 @@ public class LogEventController extends BaseController {
             throw new ApplicationException(String.format("Object Not Found, logEventId=%s", logEventId));
         }
 
-        LOG.debug("{}", log.toString());
+        LOG.debug("{}", log);
         model.addAttribute("log", log);
         return "log/edit-event-log";
     }
@@ -142,9 +142,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(URI_LOG_EVENT + "/edit")
     public String processUpdateLogEventForm(@Valid @ModelAttribute("log") LogEntry log, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", log.toString());
+        LOG.debug("{}", log);
         if (result.hasErrors()) {
-            LOG.debug("{}", result.toString());
+            LOG.debug("{}", result);
             return "log/edit-event-log";
         } else {
             logEventService.saveLogEvent(log);
@@ -158,9 +158,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(URI_LOG_EVENT + "/edit/{logEventId}")
     public String processUpdateLogEventIdForm(@Valid @ModelAttribute("log") LogEntry log, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", log.toString());
+        LOG.debug("{}", log);
         if (result.hasErrors()) {
-            LOG.debug("{}", result.toString());
+            LOG.debug("{}", result);
             return "log/edit-event-log";
         } else {
             logEventService.saveLogEvent(log);
@@ -177,7 +177,7 @@ public class LogEventController extends BaseController {
         LocalUser loggedInUser = authenticationFacade.getLoggedInUser();
         LogEntry log = logEventService.getLogEvent(loggedInUser.getId(), logEntryId);
         if (log == null) {
-            throw new ApplicationException("Object Not Found, logEntryId=" + logEntryId);
+            throw new ApplicationException(String.format("Object Not Found, logEntryId=%s", logEntryId));
         }
         logEventService.deleteLogEvent(loggedInUser.getId(), logEntryId);
         return String.format("%s:%s", REDIRECT, URI_LOG_EVENTS);
@@ -194,13 +194,13 @@ public class LogEventController extends BaseController {
     public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("description") String description, @RequestParam("id") String id, RedirectAttributes redirectAttributes) {
         if (file == null) {
             // return error
-            return "redirect:/upload/" + id;
+            return String.format("redirect:/upload/%s", id);
         }
         fileUploadService.store(file, id, description);
         LOG.debug("Successfully uploaded: {}/{}", id, file.getName());
         // Add parameters to be viewed on the redirect page
-        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-        return "redirect:/upload/" + id;
+        redirectAttributes.addFlashAttribute("message", String.format("You successfully uploaded %s", file.getOriginalFilename()));
+        return String.format("redirect:/upload/%s", id);
     }
 
 
@@ -209,9 +209,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(URI_LOG_EVENT + "/img/delete")
     public String processDeleteLogImageForm(@Valid @ModelAttribute("resource") ImageResource resource, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", resource.toString());
+        LOG.debug("{}", resource);
         if (result.hasErrors()) {
-            LOG.debug("{}", result.toString());
+            LOG.debug("{}", result);
         } else {
             fileUploadService.deleteImage(resource.getId(), resource.getName());
             logEventService.deleteLogEventImage(Integer.parseInt(resource.getId()), resource.getName());
@@ -260,9 +260,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(value = URI_LOG_EVENT + "/comment/new")
     public String processNewCommentLogEventForm(@Valid @ModelAttribute("logComment") LogComment logComment, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", logComment.toString());
+        LOG.debug("{}", logComment);
         if (result.hasErrors()) {
-            LOG.debug("{}", result.toString());
+            LOG.debug("{}", result);
             return "log/edit-comment-event-log";
         } else {
             // set created by user id
