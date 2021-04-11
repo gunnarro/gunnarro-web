@@ -104,7 +104,7 @@
                 <!-- this plugin requires azure cli installed -->
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-webapp-maven-plugin</artifactId>
-                <version>1.12.0</version>
+                <version>1.13.0</version>
                 <configuration>
                     <schemaVersion>V2</schemaVersion>
                     <subscriptionId>28f91214-133c-4683-aa5b-aa0eedf5629b</subscriptionId>
