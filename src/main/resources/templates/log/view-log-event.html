@@ -19,19 +19,19 @@
             <div class="float-right" th:if="${log.id} != null">
 					<span th:if="${#authentication?.name == log.createdByUser}"> 
 						<a class="btn btn-outline-secondary btn-sm"
-                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><i class="oi oi-data-transfer-upload"></i></a>
-						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/edit/__${log.id}__}"><i
-                                class="oi oi-pencil"></i></a>
-						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/delete/__${log.id}__}"><i
-                                class="oi oi-trash"></i></a>
+                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><em class="oi oi-data-transfer-upload"></em></a>
+						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/edit/__${log.id}__}"><em
+                                class="oi oi-pencil"></em></a>
+						<a class="btn btn-outline-secondary btn-sm" th:href="@{/diet/log/event/delete/__${log.id}__}"><em
+                                class="oi oi-trash"></em></a>
 					</span>
                 <span th:if="${#authentication?.name != log.createdByUser}">
 						<a class="btn btn-outline-secondary btn-sm"
-                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><i class="oi oi-data-transfer-upload"></i></a>
+                           th:href="@{/upload/__${log.id}__(redirectUri='/diet/log/event/view/' + ${logId})}"><em class="oi oi-data-transfer-upload"></em></a>
 						<a class="btn btn-outline-secondary btn-sm disabled"
-                           th:href="@{/diet/log/event/edit/__${log.id}__}"><i class="oi oi-pencil"></i></a>
+                           th:href="@{/diet/log/event/edit/__${log.id}__}"><em class="oi oi-pencil"></em></a>
 						<a class="btn btn-outline-secondary btn-sm disabled"
-                           th:href="@{/diet/log/event/delete/__${log.id}__}"><i class="oi oi-trash"></i></a>
+                           th:href="@{/diet/log/event/delete/__${log.id}__}"><em class="oi oi-trash"></em></a>
 					</span>
             </div>
             <h5 class="card-title">

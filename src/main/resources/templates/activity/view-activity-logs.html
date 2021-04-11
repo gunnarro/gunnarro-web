@@ -29,9 +29,9 @@
         <tbody th:with="txtColor=text-muted, numberColor=text-primary, rowBgColor=none">
         <tr th:class="${iter.index mod 2 == 0}? 'none' : 'bg-color-row-even'" th:each="log,iter : ${logs}">
             <td class="text-left" style="border-top: none;">
-                <i class="oi oi-arrow-top color-satisfaction-5" th:if="${log.trendWeight} &gt; 0"></i>
-                <i class="oi oi-arrow-bottom color-satisfaction-1" th:if="${log.trendWeight} &lt; 0"></i>
-                <i class="oi oi-arrow-right color-muted" th:if="${log.trendWeight} == 0"></i>
+                <em class="oi oi-arrow-top color-satisfaction-5" th:if="${log.trendWeight} &gt; 0"></em>
+                <em class="oi oi-arrow-bottom color-satisfaction-1" th:if="${log.trendWeight} &lt; 0"></em>
+                <em class="oi oi-arrow-right color-muted" th:if="${log.trendWeight} == 0"></em>
             </td>
             <td class="text-left" style="border-top: none;">
                 <small><span class="${txtColor}"
@@ -55,7 +55,7 @@
                                                                          th:text="${log.comment}"></span></small></td>
             <td class="text-left" style="border-top: none;">
                 <a th:href="@{/diet/body/measurement/delete/__${log.id}__}">
-                    <i class="oi oi-trash"></i>
+                    <em class="oi oi-trash"></em>
                 </a>
             </td>
         </tr>
