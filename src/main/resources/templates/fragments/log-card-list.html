@@ -8,8 +8,8 @@
         <div class="card mb-2" id="panel-child">
             <div class="card-header">
                 <h5 class="card-title"
-                    th:with="logDate=${#dates.format(log.createdDate, &apos;EEEE dd.MM.yy&apos;)}, logTime=${#dates.format(log.createdDate, &apos;HH:mm&apos;)}">
-                    <th:block th:switch="${#dates.dayOfWeekName(log.createdDate)}">
+                    th:with="logDate=${#dates.format(log.createdTime, &apos;EEEE dd.MM.yy&apos;)}, logTime=${#dates.format(log.createdTime, &apos;HH:mm&apos;)}">
+                    <th:block th:switch="${#dates.dayOfWeekName(log.createdTime)}">
                         <span class="badge badge-dark" th:case="&apos;Mandag&apos;"
                               th:text="${logDate} + &apos; &apos; + ${logTime}"></span>
                         <span class="badge badge-primary" th:case="&apos;Tirsdag&apos;"

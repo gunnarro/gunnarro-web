@@ -78,7 +78,7 @@ public class BaseController {
     @ExceptionHandler(CommunicationsException.class)
     public ModelAndView handleCommunicationsException(HttpServletRequest request, Exception ex) {
         return handleException(request.getRequestURI(), request.getRequestURI(), ex,
-                "Database cummunication problems!");
+                "Database communication problems!");
     }
 
     @ExceptionHandler(ConnectException.class)
@@ -93,12 +93,17 @@ public class BaseController {
 
     @ExceptionHandler(SecurityException.class)
     public ModelAndView handleSecurityException(HttpServletRequest request, Exception ex) {
-        return handleException(request.getRequestURI(), "/dietmanager/home", ex, "Access Denied. " + ex.getMessage());
+        return handleException(request.getRequestURI(), "/home", ex, "Access Denied. " + ex.getMessage());
     }
 
     @ExceptionHandler(SQLException.class)
     public ModelAndView handleSQLException(HttpServletRequest request, Exception ex) {
         return handleException(request.getRequestURI(), request.getRequestURI(), ex, "Technical Database problems!");
+    }
+
+    @ExceptionHandler(org.thymeleaf.exceptions.TemplateInputException.class)
+    public ModelAndView handlePgeNotFound(HttpServletRequest request, Exception ex) {
+        return handleException(request.getRequestURI(), request.getRequestURI(), ex, "Page not found!");
     }
 
     /**
@@ -111,11 +116,10 @@ public class BaseController {
     private ModelAndView handleException(String requestUrl, String backUrl, Exception e, String errorMsg) {
         LOG.error("Requested URL=" + requestUrl);
         LOG.error("Exception Raised", e);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("exception", new Exception(errorMsg));
-        modelAndView.addObject("requestUrl", requestUrl);
-        modelAndView.addObject("backUrl", backUrl);
-        modelAndView.setViewName("error");
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.getModel().put("errorMsg", errorMsg);
+        modelAndView.getModel().put("requestUrl", requestUrl);
+        modelAndView.getModel().put("backUrl", backUrl);
         return modelAndView;
     }
 

@@ -16,6 +16,8 @@
     <!-- mvn clean verify sonar:sonar -->
     <!-- https://sonarqube.com/projects/favorite -->
     <!-- mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=2a992b24f92b4f573993300e78bb5daa07ea50d2 -->
+    <!-- jib -->
+    <!-- mvn compile com.google.cloud.tools:jib-maven-plugin:3.0.0:build -Dimage=gunnarro-web -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gunnarro.web</groupId>
     <artifactId>gunnarro-web</artifactId>
@@ -415,7 +417,7 @@
                         <version>${jib.version}</version>
                         <configuration>
                             <to>
-                                <image>${DockerHubUsername}/gunnarro-ci-cd-process</image>
+                                <image>docker-hub-user/gunnarro-ci-cd-process</image>
                                 <tags>
                                     <tag>${project.version}</tag>
                                     <tag>latest</tag>

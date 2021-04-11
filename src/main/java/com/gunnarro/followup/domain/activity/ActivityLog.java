@@ -21,9 +21,9 @@ public class ActivityLog extends BaseDomain {
     private LocalTime fromTime;
     // hh:mm
     private LocalTime toTime;
-    // HIGH, MEDION, LOW
-    private Integer intensitivity;
-    // how I feel 1 to 10, where 1 is BAD and 10 is GREATE
+    // activity intensity from 1 to 10, where 1 is lowest and 10 is highest.
+    private Integer intensity;
+    // how I feel 1 to 10, where 1 is bad and 10 is great.
     private Integer emotions;
 
 }

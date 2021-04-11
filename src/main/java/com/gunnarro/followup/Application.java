@@ -16,7 +16,7 @@ public class Application {
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        LOG.info("Start followup manager ....");
+        LOG.info("Start gunnarro:as web application ....");
         LOG.info(System.getProperty("spring.config.location"));
         LOG.info(System.getProperty("spring.profiles.active"));
         SpringApplication.run(Application.class, args);

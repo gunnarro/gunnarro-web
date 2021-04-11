@@ -34,7 +34,7 @@ public class ActivityRowMapper {
                     .fkUserId(resultSet.getInt("fk_user_id"))
                     .createdTime(resultSet.getTimestamp("created_date_time").getTime())
                     .lastModifiedTime(resultSet.getTimestamp("last_modified_date_time").getTime())
-                    .intensitivity(resultSet.getInt("rating_intensivity"))
+                    .intensity(resultSet.getInt("rating_intensivity"))
                     .emotions(resultSet.getInt("rating_emotions"))
                     .fromTime(resultSet.getTime("from_hour").toLocalTime())
                     .toTime(resultSet.getTime("to_hour").toLocalTime())

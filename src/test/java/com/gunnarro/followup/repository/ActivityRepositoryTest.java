@@ -43,7 +43,7 @@ public class ActivityRepositoryTest extends DefaultTestConfig {
         ActivityLog activityLog = ActivityLog.builder()
                 .fkUserId(1)
                 .emotions(2)
-                .intensitivity(4)
+                .intensity(4)
                 .fromTime(LocalTime.now())
                 .toTime(LocalTime.now().plusHours(1))
                 .activity(a)

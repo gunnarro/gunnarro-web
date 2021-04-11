@@ -10,7 +10,7 @@
 
         <div class="panel-heading">
             <h3 class="panel-title">
-                <span>Application Error</span>
+                <span>Error</span>
             </h3>
         </div>
 
@@ -20,7 +20,7 @@
                     <span th:text="${requestUrl}"></span>
                     <span th:if="${param.requesturi}" th:text="${param.requesturi[0]}"></span>
                 </p>
-                <p th:text="${exception}"></p>
+                <p th:text="${errorMsg}"></p>
             </div>
         </div>
 

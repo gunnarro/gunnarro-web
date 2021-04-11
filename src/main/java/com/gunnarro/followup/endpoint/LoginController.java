@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController extends BaseController {
 
     public static final String PUBLIC_DOMAIN = "";
-    public static final String HOME_PAGE = "/diet/log/events";
+    public static final String HOME_PAGE = "/log/events";
     public static final String ADMIN_PAGE = "/admin";
     public static final String LOGIN_PAGE = "/login";
 

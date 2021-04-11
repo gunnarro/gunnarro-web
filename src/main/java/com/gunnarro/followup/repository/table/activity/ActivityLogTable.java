@@ -49,7 +49,7 @@ public class ActivityLogTable {
             ps.setInt(4, activityLog.getActivity().getId());
             ps.setTime(5, java.sql.Time.valueOf(activityLog.getFromTime()));
             ps.setTime(6, java.sql.Time.valueOf(activityLog.getToTime()));
-            ps.setInt(7, activityLog.getIntensitivity());
+            ps.setInt(7, activityLog.getIntensity());
             ps.setInt(8, activityLog.getEmotions());
             ps.setString(9, activityLog.getDescription());
             return ps;
