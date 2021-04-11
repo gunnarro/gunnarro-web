@@ -58,7 +58,7 @@ public class LocalUserDetailsServiceImpl implements UserDetailsService {
             LOG.debug("User not found!, username: {}", userName);
             throw new UsernameNotFoundException("User not found!");
         }
-        LOG.debug("return user: {}", user.toString());
+        LOG.debug("return user: {}", user);
         return user;
     }
 

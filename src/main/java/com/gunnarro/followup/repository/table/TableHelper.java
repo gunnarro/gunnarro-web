@@ -77,7 +77,7 @@ public class TableHelper {
                 values.append(",");
             }
         }
-        query.append("(").append(columns.toString()).append(") VALUES (").append(values.toString()).append(")");
+        query.append("(").append(columns).append(") VALUES (").append(values).append(")");
         return query.toString();
     }
 
@@ -97,7 +97,7 @@ public class TableHelper {
                 columnValuePairs.append(",");
             }
         }
-        query.append(" SET ").append(columnValuePairs.toString());
+        query.append(" SET ").append(columnValuePairs);
         query.append(" WHERE ").append(keyName).append(" = ?");
         if (LOG.isDebugEnabled()) {
             LOG.debug(query.toString());

@@ -39,7 +39,7 @@ public class FileUploadController extends BaseController {
      */
     @GetMapping("/upload/{id}")
     @ResponseBody
-    public ModelAndView uploadedFileForm(@PathVariable String id, @RequestParam("redirectUri") String redirectUri) throws IOException {
+    public ModelAndView uploadedFileForm(@PathVariable String id, @RequestParam("redirectUri") String redirectUri)  {
         List<String> files = fileUploadService
                 .loadAll(id).map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "getImageAsResource", id, path.getFileName().toString()).build().toString())

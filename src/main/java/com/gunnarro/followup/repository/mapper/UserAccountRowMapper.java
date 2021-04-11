@@ -16,14 +16,8 @@ public class UserAccountRowMapper {
     private UserAccountRowMapper() {
     }
 
-
     public static RowMapper<Privilege> mapToPrivilegeRM() {
-        return new RowMapper<Privilege>() {
-            @Override
-            public Privilege mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                return Privilege.builder().id(resultSet.getInt("id")).name(resultSet.getString("name")).build();
-            }
-        };
+        return (resultSet, rowNum) -> Privilege.builder().id(resultSet.getInt("id")).name(resultSet.getString("name")).build();
     }
 
 

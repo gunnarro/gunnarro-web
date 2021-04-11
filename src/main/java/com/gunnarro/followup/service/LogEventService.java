@@ -17,7 +17,10 @@ import java.util.List;
 public interface LogEventService {
 
     /**
-     * @param logEntryId
+     *
+     * @param userId
+     * @param pageNumber
+     * @param pageSize
      * @return
      */
     @PreAuthorize("hasAuthority('BLOGG_READ_PRIVILEGE')")
@@ -38,7 +41,8 @@ public interface LogEventService {
     List<LogEntry> getLogEvents(Integer userId);
 
     /**
-     * @param log
+     *
+     * @param logEntry
      * @return
      */
     // @PreAuthorize("hasAuthority('BLOGG_WRITE_PRIVILEGE') and #log.fkUserId ==

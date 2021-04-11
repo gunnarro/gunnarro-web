@@ -12,15 +12,15 @@ public class UserLog implements Serializable {
 
     private static final long serialVersionUID = -3112437958212912495L;
 
-    private Integer id;
-    private Integer userId;
-    private Date createdDate;
-    private Date lastModifiedDate;
-    private Date loggedInDate;
-    private String loggedInFromIpAddress;
-    private String loggedInFromDevice;
-    private int numberOfLoginAttemptSuccess;
-    private int numberOfLoginAttemptFailures;
-    private boolean isUserBlocked;
+    Integer id;
+    Integer userId;
+    Date createdDate;
+    Date lastModifiedDate;
+    Date loggedInDate;
+    String loggedInFromIpAddress;
+    String loggedInFromDevice;
+    int numberOfLoginAttemptSuccess;
+    int numberOfLoginAttemptFailures;
+    boolean isUserBlocked;
 
 }

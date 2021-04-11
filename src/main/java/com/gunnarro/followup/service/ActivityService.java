@@ -11,28 +11,30 @@ import java.util.List;
 public interface ActivityService {
 
     /**
-     * @param logEntryId
+     * @param userId
      * @return
      */
     @PreAuthorize("hasAuthority('BLOGG_READ_PRIVILEGE')")
     List<ActivityLog> getActivityLogs(Integer userId);
 
     /**
-     * @param logEntryId
+     * @param userId
+     * @param activityId
      * @return
      */
     @PreAuthorize("hasAuthority('BLOGG_READ_PRIVILEGE')")
     ActivityLog getActivityLog(Integer userId, int activityId);
 
     /**
-     * @param log
+     * @param activityLog
      * @return
      */
     @PreAuthorize(value = "hasAuthority('BLOGG_WRITE_PRIVILEGE')")
     int saveActivityLog(ActivityLog activityLog);
 
     /**
-     * @param id
+     * @param userId
+     * @param activityId
      * @return
      */
     @PreAuthorize(value = "hasAuthority('BLOGG_WRITE_PRIVILEGE')")

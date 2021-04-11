@@ -91,7 +91,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
     @Override
     public Page<LogEntry> getAllLogEvents(Integer userId, int pageNumber, int pageSize) {
         Pageable pageSpecification = PageRequest.of(pageNumber, pageSize, Sort.by("id"));
-        LOG.debug("pageSpecification: {}, offset: {}", pageSpecification.toString(), pageSpecification.getOffset());
+        LOG.debug("pageSpecification: {}, offset: {}", pageSpecification, pageSpecification.getOffset());
         StringBuilder inQuery = new StringBuilder();
         inQuery.append("IN(?");
         List<Integer> grantedUserIdsForFollower = getGrantedUserIdsForFollower(userId);
@@ -106,7 +106,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(
                 ", (SELECT count(c.id) FROM event_log_comment c WHERE c.fk_event_log_id = l.id) AS number_of_comments");
         query.append(" FROM event_log l, users u");
-        query.append(" WHERE l.fk_user_id ").append(inQuery.toString());
+        query.append(" WHERE l.fk_user_id ").append(inQuery);
         query.append(" AND l.fk_user_id = u.id");
         // query.append(" AND l.id >= " + pageNumber*pageSize);
         // query.append(" AND l.last_modified_date_time >= (SELECT

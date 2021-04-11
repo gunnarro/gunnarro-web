@@ -51,17 +51,9 @@ public abstract class BaseJdbcRepository {
 
     /**
      * return all user id's this followers are allowed to read
-     *
-     * @param userIdFollower
-     * @return
      */
     public List<Integer> getGrantedUserIdsForFollower(Integer userIdFollowerId) {
-        RowMapper<Integer> rm = new RowMapper<Integer>() {
-            @Override
-            public Integer mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                return resultSet.getInt("fk_user_id");
-            }
-        };
+        RowMapper<Integer> rm = (resultSet, rowNum) -> resultSet.getInt("fk_user_id");
         return getJdbcTemplate().query(
                 "SELECT fk_user_id FROM user_follower_lnk WHERE fk_user_follower_id = ? ORDER BY fk_user_id ASC",
                 new Object[]{userIdFollowerId}, rm);

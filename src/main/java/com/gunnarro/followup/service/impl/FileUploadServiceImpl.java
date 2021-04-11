@@ -63,7 +63,7 @@ public class FileUploadServiceImpl implements FileUploadService {
             }
             Path userDir = getUserImageDir(id);
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
-            LOG.debug("Store file: {}", userDir.resolve(filename).toString());
+            LOG.debug("Store file: {}", userDir.resolve(filename));
             Files.copy(file.getInputStream(), userDir.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             LOG.error(null, e);
@@ -98,7 +98,7 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public void deleteImage(String id, String fileName) {
         try {
-            String path = String.format("%s/%s", getUserImageDir(id).toString(), fileName);
+            String path = String.format("%s/%s", getUserImageDir(id), fileName);
             if (new File(path).delete()) {
                 LOG.debug("deleted: {}", path);
             } else {
@@ -150,7 +150,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         Path userDir = Paths.get(rootLocation.toString() + "/" + id);
         if (!Files.exists(userDir)) {
             Files.createDirectories(userDir);
-            LOG.debug("created images dir: {}", userDir.toString());
+            LOG.debug("created images dir: {}", userDir);
         }
         return userDir;
     }
