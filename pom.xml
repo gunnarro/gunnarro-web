@@ -417,7 +417,7 @@
                         <version>${jib.version}</version>
                         <configuration>
                             <to>
-                                <image>docker-hub-user/gunnarro-ci-cd-process</image>
+                                <image>gunnarro/gunnarro-web</image>
                                 <tags>
                                     <tag>${project.version}</tag>
                                     <tag>latest</tag>
