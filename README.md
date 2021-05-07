@@ -24,7 +24,7 @@ mvn azure-webapp:deploy
 [GitHub](https://github.com)
 
 ## Snyk
-(snyk)[https://app.snyk.io]
+[snyk](https://app.snyk.io)
 
 # PDF
 ## Convert html to pdf online
