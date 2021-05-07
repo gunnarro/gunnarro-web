@@ -16,10 +16,10 @@ ref: https://spring.io/guides/gs/spring-boot-for-azure/
 
 mvn azure-webapp:deploy
 
-# Code
-## Code repository - [GitHub](https://github.com)
-## Code Review - [SonarQube](https://sonarcloud.io/dashboard?id=gunnarro_gunnarro-web)
-## Dependency Monitoring - [snyk](https://app.snyk.io) 
+## Code
+- Code repository - [GitHub](https://github.com)
+- Code Review - [SonarQube](https://sonarcloud.io/dashboard?id=gunnarro_gunnarro-web)
+- Dependency Monitoring - [snyk](https://app.snyk.io) 
 
 # CD/CI
 
