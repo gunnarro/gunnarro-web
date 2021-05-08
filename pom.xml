@@ -33,7 +33,7 @@
         <version.plugin.spring.boot>2.3.9.RELEASE</version.plugin.spring.boot>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <java.version>1.8</java.version>
-        <version.flexmark>0.50.46</version.flexmark>
+        <version.flexmark>0.62.2</version.flexmark>
         <version.jodatime>2.9.6</version.jodatime>
         <jib.version>3.0.0</jib.version>
         <!-- Web dependencies -->
