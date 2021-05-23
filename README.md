@@ -27,3 +27,8 @@ mvn azure-webapp:deploy
 ## Convert html to pdf online
 - zip html file: zip gr-cv.zip src/main/resources/templates/cv/gr-cv.html
 - upload zip to: https://itextpdf.com/en/demos/convert-html-css-to-pdf-free-online
+
+
+## Logger
+curl -X POST http://localhost:8081/actuator/loggers/om.gunnarro.followup -H 'content-type: application/json' -d '{"configuredLevel":"DEBUG"}'
+curl -X GET -i http://localhost:8081/actuator/loggers/om.gunnarro.followup

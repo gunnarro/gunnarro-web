@@ -44,16 +44,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(this.userDetailsService).passwordEncoder(this.bCryptPasswordEncoder);
     }
 
+    /**
+    public SecurityWebFilterChain securityWebFilterChain(
+            ServerHttpSecurity http) {
+        return http.authorizeExchange()
+                .pathMatchers("/actuator/**").permitAll()
+                .anyExchange().authenticated()
+                .and().build();
+    }
+     */
     // roles admin allow to access /admin/**
     // roles user allow to access /user/**
     // custom 403 access denied handler
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/", "/login*", "/about", "/index", "/site/**", "/cv", "/releasenotes", "/webjars/**", "/css/**", "/js/**", "/images/**", "/error/**").permitAll()
+                .authorizeRequests()
+                .antMatchers("/", "/login*", "/about", "/index", "/site/**", "/cv", "/releasenotes", "/webjars/**", "/css/**", "/js/**", "/images/**", "/error/**", "/actuator/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/rest/**").hasAnyRole("USER")
-                .antMatchers("/**").hasAnyRole("USER").anyRequest().authenticated()
+                .antMatchers("/**").hasAnyRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -66,5 +77,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .accessDeniedHandler(this.accessDeniedHandler);
     }
-
 }

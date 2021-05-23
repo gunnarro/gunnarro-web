@@ -29,12 +29,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.boot.version>2.3.9.RELEASE</spring.boot.version>
-        <version.plugin.spring.boot>2.3.9.RELEASE</version.plugin.spring.boot>
+        <spring.boot.version>2.4.6</spring.boot.version>
+        <version.plugin.spring.boot>2.4.6</version.plugin.spring.boot>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <java.version>1.8</java.version>
-        <version.flexmark>0.50.46</version.flexmark>
-        <version.jodatime>2.9.6</version.jodatime>
+        <version.flexmark>0.62.2</version.flexmark>
+        <version.jodatime>2.10.10</version.jodatime>
         <jib.version>3.0.0</jib.version>
         <!-- Web dependencies -->
         <webjars-bootstrap.version>4.4.1</webjars-bootstrap.version>
@@ -226,12 +226,16 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.4.2</version>
+            <version>3.4.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -310,6 +314,7 @@
             <artifactId>joda-time</artifactId>
             <version>${version.jodatime}</version>
         </dependency>
+        <!-- html parser -->
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-all</artifactId>

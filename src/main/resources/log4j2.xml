@@ -34,7 +34,15 @@
             <AppenderRef ref="debugFileAppender"/>
         </Logger>
 
-        <Logger name="com.gunnarro.followup.listener" level="WARN" additivity="false">
+        <Logger name="com.gunnarro.followup.endpoint" level="WARN" additivity="false">
+            <AppenderRef ref="debugFileAppender"/>
+        </Logger>
+
+        <Logger name="com.gunnarro.followup.service" level="WARN" additivity="false">
+            <AppenderRef ref="debugFileAppender"/>
+        </Logger>
+
+        <Logger name="com.gunnarro.followup.repository" level="WARN" additivity="false">
             <AppenderRef ref="debugFileAppender"/>
         </Logger>
 
