@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<header>
+    <title>FTV Apps Log Settings</title>
+    <meta charset="utf-8"/>
+    <link crossorigin="anonymous" href="../static/css/bootstrap-5.0.1.min.css" rel="stylesheet">
+    <script crossorigin="anonymous" src="../static/js/bootstrap.bundle-5.0.1.min.js"></script>
+    <script src="../static/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+</header>
+<body>
+<script language="JavaScript">
+  function updateLoggers(selectedLogger, host) {
+        var serviceUrl = host + "/actuator/loggers/" + selectedLogger.options[selectedLogger.selectedIndex].text;
+        console.log(serviceUrl)
+        $.ajax({
+          url: serviceUrl,
+          type: "GET",
+          dataType: "json",
+		  contentType : "application/json",
+          success: function(response) {
+            var dataStr = JSON.stringify(response);
+            var jsonObj = jQuery.parseJSON(dataStr);
+            $('#btn' + jsonObj.configuredLevel.toLowerCase()).prop('checked', true);
+            $('#logger-info').text(jsonObj.configuredLevel);
+          },
+          error: function(error) {
+            $('.log-level-id').append(error);
+                console.log(error)
+          }
+        });
+  }
+
+function changeLogLevel(selectedLoggerId, logLevel, hosts) {
+    var logger = $('#' + selectedLoggerId + ' option:selected').text();
+    hosts.split(",").forEach(function(host) {
+       postLogLevel(logger, logLevel, host)
+    });
+}
+
+ function postLogLevel(logger, logLevel, host) {
+	var serviceUrl = host + "/actuator/loggers/" + logger;
+	var payload = { "configuredLevel": logLevel }
+	console.log(serviceUrl + ", " + JSON.stringify(payload))
+	$.ajax({
+		url : serviceUrl,
+		type : "POST",
+		data : JSON.stringify(payload),
+		dataType: "json",
+		contentType : "application/json",
+		mimeType : "application/json",
+		cache : false,
+		 headers: {
+            "Authorization": "Basic er34356474ge434tfwetwt"
+        },
+		success : function(response) {
+			$('#logger-status').text("log level changed to " + logLevel);
+		},
+		error : function(jqXhr, textStatus, errorThrown) {
+			console.error("Error: " + jqXhr + ", status: " + textStatus + ", REST: " + serviceUrl + ", err: " + errorThrown);
+		}
+	});
+	return true;
+}
+
+
+</script>
+<div class="table-responsive">
+    <table class="table table-sm">
+        <caption class="caption-top">FTV Apps log level</caption>
+        <thead class="table-dark">
+        <th scope="col">FTV App</th>
+        <th scope="col">Logger</th>
+        <th scope="col">Log level</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>provision-service</td>
+            <td>
+                <select aria-label=".form-select-sm example" class="form-select form-select-sm" id="provision-service-selected-logger"
+                        onChange="updateLoggers(this, 'http://localhost:8081')">
+                    <option value="1">com.gunnarro.followup</option>
+                    <option value="2">com.gunnarro.followup.endpoint</option>
+                    <option value="3">com.gunnarro.followup.service</option>
+                    <option value="4">com.gunnarro.followup.repository</option>
+                </select>
+            </td>
+            <td>
+                <div aria-label="Basic radio toggle button group" class="btn-group btn-group-sm" role="group">
+
+                    <input autocomplete="off" class="btn-check" id="btntrace" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btntrace"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'TRACE', 'http://localhost:8081')">TRACE</label>
+
+                    <input autocomplete="off" class="btn-check" id="btninfo" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btninfo"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'INFO', 'http://localhost:8081')">INFO</label>
+
+                    <input autocomplete="off" class="btn-check" id="btndebug" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btndebug"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'DEBUG', 'http://localhost:8081')">DEBUG</label>
+
+                    <input autocomplete="off" class="btn-check" id="btnwarn" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btnwarn"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'WARN', 'http://localhost:8081')">WARN</label>
+
+                    <input autocomplete="off" class="btn-check" id="btnerror" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btnerror"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'ERROR', 'http://localhost:8081')">ERROR</label>
+
+                    <input autocomplete="off" class="btn-check" id="btnfatal" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btnfatal"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'FATAL', 'http://localhost:8081')">FATAL</label>
+
+                    <input autocomplete="off" class="btn-check" id="btnoff" name="btnradio" type="radio">
+                    <label class="btn btn-outline-primary" for="btnoff"
+                           onclick="changeLogLevel('provision-service-selected-logger', 'OFF', 'http://localhost:8081')">OFF</label>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td COLSPAN="4">last updated: 23:00.23</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<p class="status" id="logger-status">logger status</p>
+<p class="status" id="logger-info">logger info</p>
+
+</body>
+</html>
