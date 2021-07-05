@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head-include :: head-include"></head>
+<head th:replace="fragments/header :: header-css">
 
-<body>
+<body class="bg">
 <div th:replace="fragments/header :: header"></div>
+
 <div class="container">
     <div class="row" style="margin-top: 20px">
         <div class="col-12 col-md-8 col-lg-6 offset-sm-2 offset-md-3">
@@ -21,12 +22,14 @@
                     </div>
                     <div class="input-group input-group-margin">
                         <label class="sr-only" for="inputUserName" th:text="#{lbl.username}"></label>
-                        <input autofocus="autofocus" class="form-control form-control-lg" id="inputUserName" name="username"
+                        <input autofocus="autofocus" class="form-control form-control-lg" id="inputUserName"
+                               name="username"
                                required="required" th:placeholder="#{lbl.username}" type="text">
                     </div>
                     <div class="input-group input-group-margin">
                         <label class="sr-only" for="inputPassword" th:text="#{lbl.password}"></label>
-                        <input class="form-control form-control-lg" id="inputPassword" name="password" required="required"
+                        <input class="form-control form-control-lg" id="inputPassword" name="password"
+                               required="required"
                                th:placeholder="#{lbl.password}" type="password">
                     </div>
                     <div class="input-group input-group-margin">

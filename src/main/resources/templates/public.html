@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css">
+</head>
+
+<body class="bg">
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <!-- <div class="m-3 card card-image" style="background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);"> -->
+    <div class="m-3 card">
+        <h3 class="card-header">Company</h3>
+        <div class="card-body">
+            <p class="card-text">gunnarro:as is a standalone independent consulting company which was established 2021.
+                See my <a href="@{/cv}">cv</a> and <a href="@{/cv/projects}">projects</a> for information about my
+                competence and experience.
+            </p>
+            <div>
+                <h4 class="card-title">Services</h4>
+                <dl class="mb-3 row">
+                    <dt class="col-sm-3 dt-style">Architecture</dt>
+                    <dd class="col-sm-8 text-gradient">System Architecture, Application Architecture, System
+                        Integration
+                    </dd>
+
+                    <dt class="col-sm-3 dt-style">Software Development</dt>
+                    <dd class="col-sm-8 text-gradient">Microservices, Spring boot applications, Web applications,
+                        Maintenance
+                    </dd>
+
+                    <dt class="col-sm-3 dt-style">Software Testing</dt>
+                    <dd class="col-sm-8 text-gradient">Test automation, Manual testing, Load testing</dd>
+
+                    <dt class="col-sm-3 dt-style">DevOps</dt>
+                    <dd class="col-sm-8 text-gradient">CD/CI pipeline, Message broker, Centralized logging, Monitoring,
+                        Code Quality, Code Security
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

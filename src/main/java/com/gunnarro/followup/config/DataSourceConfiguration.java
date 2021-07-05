@@ -17,13 +17,14 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
+ * FIXME turned off for running on Azure
  * ref:
  * https://egkatzioura.com/2016/04/29/spring-boot-and-database-initialization/
  *
  * @author admin
  */
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class DataSourceConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfiguration.class);

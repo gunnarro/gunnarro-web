@@ -1,13 +1,12 @@
 package com.gunnarro.followup.endpoint;
 
 import com.gunnarro.followup.domain.user.LocalUser;
-import com.gunnarro.followup.service.exception.ApplicationException;
+import com.gunnarro.followup.service.exception.NotLoggedInException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 
 @Component
@@ -40,8 +39,8 @@ public class AuthenticationFacade implements AuthenticationFacadeInterface {
                 user = (LocalUser) getAuthentication().getPrincipal();
             }
         }
-        if (user == null || StringUtils.isEmpty(user.getUsername())) {
-            throw new ApplicationException(ApplicationException.NOT_LOGGED_IN);
+        if (user == null || user.getUsername() == null || user.getUsername().isEmpty()) {
+            throw new NotLoggedInException();
         }
         return user;
     }

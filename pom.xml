@@ -12,27 +12,26 @@
     <!-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -->
     <!-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -->
     <!-- mvn clean verify sonar:sonar -Dsonar.host.url=https://sonarqube.com
-            -Dsonar.organization=Gunnar Ronneberg -Dsonar.login=00e21528e5f07da596b49cd283f8ea61125eb2aa -->
+                -Dsonar.organization=Gunnar Ronneberg -Dsonar.login=00e21528e5f07da596b49cd283f8ea61125eb2aa -->
     <!-- mvn clean verify sonar:sonar -->
     <!-- https://sonarqube.com/projects/favorite -->
     <!-- mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=2a992b24f92b4f573993300e78bb5daa07ea50d2 -->
     <!-- jib -->
     <!-- mvn compile com.google.cloud.tools:jib-maven-plugin:3.0.0:build -Dimage=gunnarro-web -->
+    <!-- Deploy to Azure: -->
+    <!-- mvn package azure-webapp:deploy -DskipTests -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gunnarro.web</groupId>
     <artifactId>gunnarro-web</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>gunanrro-web</name>
+    <name>gunnarro:as</name>
     <packaging>jar</packaging>
     <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.boot.version>2.4.6</spring.boot.version>
-        <version.plugin.spring.boot>2.4.6</version.plugin.spring.boot>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
-        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- latest java LTS version -->
+        <java.version>11</java.version>
+        <spring.boot.version>2.5.2</spring.boot.version>
         <version.flexmark>0.62.2</version.flexmark>
         <version.jodatime>2.10.10</version.jodatime>
         <jib.version>3.0.0</jib.version>
@@ -57,6 +56,14 @@
         <finalName>${project.artifactId}</finalName>
         <!-- To use the plugin goals in your POM or parent POM -->
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -86,60 +93,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${version.plugin.spring.boot}</version>
+                <version>${spring.boot.version}</version>
                 <configuration>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
+                            <goal>build-info</goal>
                             <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <!-- The Maven Plugin for Azure App Service helps Java developers to deploy Maven projects to Azure App Service. -->
-                <!-- mvn package azure-webapp:deploy -->
-                <!-- this plugin requires azure cli installed -->
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-webapp-maven-plugin</artifactId>
-                <version>1.13.0</version>
-                <configuration>
-                    <schemaVersion>V2</schemaVersion>
-                    <subscriptionId>28f91214-133c-4683-aa5b-aa0eedf5629b</subscriptionId>
-                    <resourceGroup>gunnarro-web-resource-group</resourceGroup>
-                    <appName>gunnarro-web</appName>
-                    <pricingTier>P1v2</pricingTier>
-                    <region>westeurope</region>
-                    <runtime>
-                        <os>linux</os>
-                        <javaVersion>jre8</javaVersion>
-                        <webContainer>jre8</webContainer>
-                    </runtime>
-                    <!-- Begin of App Settings  -->
-                    <appSettings>
-                        <property>
-                            <name>JAVA_OPTS</name>
-                            <value>-Dserver.port=80</value>
-                        </property>
-                        <property>
-                            <name>JAVA_OPTS</name>
-                            <value>-Xmx512m -Xms512m</value>
-                        </property>
-                    </appSettings>
-                    <!-- End of App Settings  -->
-                    <deployment>
-                        <resources>
-                            <resource>
-                                <directory>${project.basedir}/target</directory>
-                                <includes>
-                                    <include>*.jar</include>
-                                </includes>
-                            </resource>
-                        </resources>
-                    </deployment>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -194,7 +159,6 @@
             </snapshots>
         </repository>
     </repositories>
-
     <dependencies>
         <!-- import from spring bom -->
         <dependency>
@@ -233,17 +197,29 @@
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>3.4.3</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
+        </dependency>
+        <!-- for Azure -->
+        <dependency>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>azure-spring-boot-starter-keyvault-certificates</artifactId>
+            <version>3.0.0-beta.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-layout-template-json</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+        <!-- -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.3</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -294,20 +270,20 @@
             <version>${webjars-jquery.version}</version>
         </dependency>
         <!-- <dependency> <groupId>org.webjars</groupId> <artifactId>popper.js</artifactId>
-                    <version>${webjars-popper.version}</version> </dependency> -->
+                            <version>${webjars-popper.version}</version> </dependency> -->
         <!-- For Cloud sql datasource usage -->
         <!-- <dependency> <groupId>com.google.oauth-client</groupId> <artifactId>google-oauth-client</artifactId>
-                    <version>1.25.0</version> </dependency> -->
+                            <version>1.25.0</version> </dependency> -->
         <!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId>
-                    <version>8.0.12</version> </dependency> <dependency> <groupId>com.google.cloud.sql</groupId>
-                    <artifactId>mysql-socket-factory-connector-j-8</artifactId> <version>1.0.10</version>
-                    </dependency> -->
+                            <version>8.0.12</version> </dependency> <dependency> <groupId>com.google.cloud.sql</groupId>
+                            <artifactId>mysql-socket-factory-connector-j-8</artifactId> <version>1.0.10</version>
+                            </dependency> -->
         <!-- <dependency> <groupId>com.google.cloud.sql</groupId> <artifactId>mysql-socket-factory</artifactId>
-                    <version>1.0.10</version> </dependency> -->
+                            <version>1.0.10</version> </dependency> -->
         <!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
-                    <version>1.0.0.RELEASE</version> <scope>compile</scope> </dependency> -->
+                            <version>1.0.0.RELEASE</version> <scope>compile</scope> </dependency> -->
         <!-- <dependency> <groupId>com.google.apis</groupId> <artifactId>google-api-services-oauth2</artifactId>
-                    <version>v1-rev145-1.25.0</version> <scope>runtime</scope> </dependency> -->
+                            <version>v1-rev145-1.25.0</version> <scope>runtime</scope> </dependency> -->
         <!-- markdown to html converter -->
         <dependency>
             <groupId>joda-time</groupId>
@@ -336,30 +312,45 @@
             <artifactId>xmlworker</artifactId>
             <version>5.5.13.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>9.2.1.jre11</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </dependency>
         <!--
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>4.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-scratchpad</artifactId>
-            <version>4.1.2</version>
-        </dependency>
-        -->
+                <dependency>
+                    <groupId>org.apache.poi</groupId>
+                    <artifactId>poi-ooxml</artifactId>
+                    <version>4.1.2</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.poi</groupId>
+                    <artifactId>poi-scratchpad</artifactId>
+                    <version>4.1.2</version>
+                </dependency>
+                -->
         <!-- ================= -->
         <!-- Test dependencies -->
         <!-- ================= -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>ch.vorburger.mariaDB4j</groupId>
+            <artifactId>mariaDB4j-springboot</artifactId>
+            <version>2.4.0</version>
         </dependency>
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ch.vorburger.mariaDB4j</groupId>
@@ -390,7 +381,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <reporting>
         <plugins>
             <plugin>
@@ -407,7 +397,6 @@
             </plugin>
         </plugins>
     </reporting>
-
     <profiles>
         <profile>
             <id>deploy-docker</id>

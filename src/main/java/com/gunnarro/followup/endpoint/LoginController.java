@@ -2,6 +2,7 @@ package com.gunnarro.followup.endpoint;
 
 import com.gunnarro.followup.domain.user.LocalUser;
 import com.gunnarro.followup.service.exception.ApplicationException;
+import com.gunnarro.followup.service.exception.NotLoggedInException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -16,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController extends BaseController {
 
     public static final String PUBLIC_DOMAIN = "";
-    public static final String HOME_PAGE = "/log/events";
+    public static final String PUBLIC_PAGE = "/public";
+    public static final String HOME_PAGE = "/home";
     public static final String ADMIN_PAGE = "/admin";
     public static final String LOGIN_PAGE = "/login";
 
@@ -48,6 +50,9 @@ public class LoginController extends BaseController {
             }
             LOG.debug("redirect user to: {}", redirectUrl);
             return "redirect:" + redirectUrl;
+        } catch (NotLoggedInException nla) {
+            LOG.debug("not legged in, redirect to public page: {}", PUBLIC_PAGE);
+            return "redirect:" + PUBLIC_PAGE;
         } catch (ApplicationException ae) {
             LOG.error("", ae);
             // Will direct user to the error page
@@ -167,15 +172,14 @@ public class LoginController extends BaseController {
     // return "redirect:/login?loggedout";
     // }
 
-    @GetMapping("/releasenotes")
-    public String releasenotes() {
-        return PUBLIC_DOMAIN + "/release-notes";
-    }
+    @GetMapping("/")
+    public String defaultPage() { return publicHome(); }
+
+    @GetMapping("/public")
+    public String publicHome() { return PUBLIC_DOMAIN + "/public"; }
 
     @GetMapping("/about")
-    public String about() {
-        return PUBLIC_DOMAIN + "/about";
-    }
+    public String about() { return PUBLIC_DOMAIN + "/about"; }
 
     @GetMapping("/index")
     public String indexPublic() {
@@ -184,17 +188,19 @@ public class LoginController extends BaseController {
 
     @GetMapping("/cv")
     public String cv() {
-        return PUBLIC_DOMAIN + "/cv";
+        return PUBLIC_DOMAIN + "/cv/gr-cv";
     }
 
-    @GetMapping("/resume")
-    public String resume() {
-        return PUBLIC_DOMAIN + "/gr-resume";
-    }
-
-    @GetMapping("/projects")
+    @GetMapping("/cv/projects")
     public String cvProjects() {
-        return PUBLIC_DOMAIN + "/gr-resume-project";
+        return PUBLIC_DOMAIN + "/cv/gr-cv-project";
     }
 
+    @GetMapping("/cv/pdf")
+    public String cvPdf() {
+        return PUBLIC_DOMAIN + "/cv/gr-cv-pdf";
+    }
+
+    @GetMapping("/releasenotes")
+    public String releasenotes() { return PUBLIC_DOMAIN + "/release-notes"; }
 }

@@ -1,46 +1,57 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header-css"></head>
+<head th:replace="fragments/header :: header-css">
+</head>
 
-<body>
+<body class="bg">
 <div th:replace="fragments/header :: header"></div>
+
 <div class="container">
-    <div>
-        <h2>About</h2>
+    <div class="m-3 card">
+        <h3 class="card-header">About</h3>
+        <div class="card-body">
+            <p class="card-text">This is only a demo application for gunnarro:as. Which is based on following
+                technologies.</p>
+
+            <div>
+                <h5 class="card-title">Open Source projects</h5>
+                <ul>
+                    <li><a href="https://spring.io/">Spring</a></li>
+                    <li><a href="http://www.thymeleaf.org/">Thymeleaf</a></li>
+                    <li><a href="https://www.mysql.com/">mysql</a></li>
+                    <li><a href="https://useiconic.com/open">OpenIconic</a>
+                </ul>
+                <h5 class="card-title">Platform</h5>
+                <ul>
+                    <li><a href="https://www.openshift.com/">openshift</a></li>
+                    <li><a href="https://cloud.google.com/sql/">Cloud sql</a></li>
+                    <li><a href="https://azure.microsoft.com/en-us/">Azure</a></li>
+                </ul>
+                <h5 class="card-title">Source</h5>
+                <ul>
+                    <li><a href="https://github.com/gunnarro/gunnarro-web">github</a></li>
+                    <li><a href="https://hub.docker.com/r/gunnarro/dietmanager/">Docker</a></li>
+                </ul>
+                <h5 class="card-title">Build and deploy</h5>
+                <ul>
+                    <li><a href="https://travis-ci.org/gunnarro">Travis</a></li>
+                </ul>
+                <h5 class="card-title">QA</h5>
+                <ul>
+                    <li><a href="https://sonarcloud.io/dashboard?id=com.gunnarro.web%3Agunnarro-web">SonarQube</a></li>
+                </ul>
+                <h5 class="card-title">Resources</h5>
+                <ul>
+                    <li><a href="https://sivalabs.in/2018/01/ci-cd-springboot-applications-using-travis-ci/">Travis
+                        Spring Boot
+                        Continuous Integration</a></li>
+                    <li><a href="http://rkh.github.io/travis-encrypt/public/index.html">Travis Encrypt Online</a></li>
+                    <li><a href="https://trianglify.io/">trianglify - generate background image</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <h3>Open Source projects</h3>
-    <ul>
-        <li><a href="https://spring.io/">Spring</a></li>
-        <li><a href="http://www.thymeleaf.org/">Thymeleaf</a></li>
-        <li><a href="https://www.mysql.com/">mysql</a></li>
-        <li><a href="https://useiconic.com/open">OpenIconic</a>
-    </ul>
-    <h3>Platform</h3>
-    <ul>
-        <li><a href="https://www.openshift.com/">openshift</a></li>
-        <li><a href="https://cloud.google.com/sql/">Cloud sql</a></li>
-    </ul>
-    <h3>Source</h3>
-    <ul>
-        <li><a href="https://github.com/gunnarro/gunnarro-web">github</a></li>
-        <li><a href="https://hub.docker.com/r/gunnarro/dietmanager/">Docker</a></li>
-    </ul>
-    <h3>Build and deploy</h3>
-    <ul>
-        <li><a href="https://travis-ci.org/gunnarro">Travis</a></li>
-    </ul>
-    <h3>QA</h3>
-    <ul>
-        <li><a href="https://sonarcloud.io/dashboard?id=com.gunnarro.web%3Agunnarro-web">SonarQube</a></li>
-    </ul>
-    <h3>Resources</h3>
-    <ul>
-        <li><a href="https://sivalabs.in/2018/01/ci-cd-springboot-applications-using-travis-ci/">Travis Spring Boot
-            Continuous Integration</a></li>
-        <li><a href="http://rkh.github.io/travis-encrypt/public/index.html">Travis Encrypt Online</a></li>
-    </ul>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
-
 </html>

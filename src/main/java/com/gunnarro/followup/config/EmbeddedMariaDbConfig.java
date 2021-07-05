@@ -1,8 +1,15 @@
 package com.gunnarro.followup.config;
 
+/*
 import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import ch.vorburger.mariadb4j.springframework.MariaDB4jSpringService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -17,40 +24,15 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * ref:
- * https://egkatzioura.com/2016/04/29/spring-boot-and-database-initialization/
- *
- * @author admin
- */
-@Configuration
-@EnableTransactionManagement
-public class TestMariDBDataSourceConfiguration {
-
-    @Value("${mariadb.jdbc.url}")
-    private String jdbcUrl;
-
-    @Value("${mariadb.jdbc.user}")
-    private String jdbcUser;
-
-    @Value("${mariadb.jdbc.pwd}")
-    private String jdbcPwd;
-
-    @Bean
-    @Qualifier(value = "pwdEncoder")
-    public PasswordEncoder passwordEncoder() {
-        String idForEncode = "bcrypt";
-        Map<String, PasswordEncoder> encoders = new HashMap<>();
-        encoders.put(idForEncode, new BCryptPasswordEncoder(13));
-        return new DelegatingPasswordEncoder(idForEncode, encoders);
-    }
-
+import java.util.Properties;
+*/
+//@Configuration
+public class EmbeddedMariaDbConfig {
+  /**
     @Bean
     public MariaDB4jSpringService mariaDB4jSpringService() {
         return new MariaDB4jSpringService();
@@ -62,7 +44,6 @@ public class TestMariDBDataSourceConfiguration {
     }
 
     @Bean
-//    @Qualifier(value = "dietManagerDataSource")
     @Primary
     public DataSource dietManagerDataSource(MariaDB4jSpringService mariaDB4jSpringService) throws ManagedProcessException {
         // Create our database with default root user and no password
@@ -91,9 +72,9 @@ public class TestMariDBDataSourceConfiguration {
     private ResourceDatabasePopulator createDatabasePopulator() {
         ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
         databasePopulator.setContinueOnError(true);
-        databasePopulator.addScript(new ClassPathResource("schema.sql"));
-        databasePopulator.addScript(new ClassPathResource("data.sql"));
+      //  databasePopulator.addScript(new ClassPathResource("schema.sql"));
+      //  databasePopulator.addScript(new ClassPathResource("data.sql"));
         return databasePopulator;
     }
-
+    */
 }
