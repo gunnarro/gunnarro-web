@@ -18,8 +18,6 @@
     <!-- mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=2a992b24f92b4f573993300e78bb5daa07ea50d2 -->
     <!-- jib -->
     <!-- mvn compile com.google.cloud.tools:jib-maven-plugin:3.0.0:build -Dimage=gunnarro-web -->
-    <!-- Deploy to Azure: -->
-    <!-- mvn package azure-webapp:deploy -DskipTests -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gunnarro.web</groupId>
     <artifactId>gunnarro-web</artifactId>
@@ -148,18 +146,6 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>AzureGunnarro</id>
-            <url>https://pkgs.dev.azure.com/OrganzationName/_packaging/MyOrgScopedFeed1/Maven/v1</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <dependencies>
         <!-- import from spring bom -->
         <dependency>
@@ -205,18 +191,11 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
         </dependency>
-        <!-- for Azure -->
-        <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>azure-spring-boot-starter-keyvault-certificates</artifactId>
-            <version>3.0.0-beta.7</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-layout-template-json</artifactId>
             <version>2.14.0</version>
         </dependency>
-        <!-- -->
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
