@@ -2,22 +2,24 @@
 ![test](https://github.com/gunnarro/gunnarro-web/workflows/tests/badge.svg)
 
 # gunnarro-web
-gunnarro:as web application is hosted at Azure
+[gunnarro:as](https://gunnarro-web.azurewebsites.net) web application is hosted at Azure
 
 ## Azure
 
 ### Azure DevOps
-This web application use the CI/CD pipline provided by [Azure DevOps](https://dev.azure.com)
+This web application use the CI/CD pipeline provided by [Azure DevOps](https://dev.azure.com)
 #### Azure pipelines
 
 ### Deploy to Azure
 
+ref: https://docs.microsoft.com/en-us/azure/developer/java/spring-framework/deploy-spring-boot-java-app-on-linux
 ref: https://spring.io/guides/gs/spring-boot-for-azure/
 
 mvn azure-webapp:deploy
 
 ## Code
 - [GitHub](https://github.com) Code repository
+- [Docker Registry](https://registry.hub.docker.com)
 - [SonarQube](https://sonarcloud.io/dashboard?id=gunnarro_gunnarro-web) Code Review 
 - [snyk](https://app.snyk.io) Dependency Monitoring
 

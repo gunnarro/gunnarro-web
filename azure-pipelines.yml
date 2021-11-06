@@ -19,4 +19,4 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: 'target/site/jacoco/index.html'
+    summaryFileLocation: 'target/site/jacoco/home.html'

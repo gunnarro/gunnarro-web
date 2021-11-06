@@ -32,7 +32,7 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 public class TestMariDBDataSourceConfiguration {
-
+/*
     @Value("${mariadb.jdbc.url}")
     private String jdbcUrl;
 
@@ -50,7 +50,7 @@ public class TestMariDBDataSourceConfiguration {
         encoders.put(idForEncode, new BCryptPasswordEncoder(13));
         return new DelegatingPasswordEncoder(idForEncode, encoders);
     }
-
+*/
     @Bean
     public MariaDB4jSpringService mariaDB4jSpringService() {
         return new MariaDB4jSpringService();

@@ -11,6 +11,12 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
 
+        <!-- for azure, maxStringLength - limit the length of the stack trace -->
+        <!--
+        <console name="consoleAppender" target="SYSTEM_OUT">
+            <JsonTemplateLayout eventTemplateUri="classpath:jsonTemplate.json" maxStringLength="14000" />
+        </console>
+        -->
         <RollingFile name="debugFileAppender" fileName="logs/gunnarro-web.log" filePattern="logs/gunnarro-web.log.%i">
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
@@ -23,36 +29,37 @@
     </Appenders>
 
     <Loggers>
+        <Logger name="com.azure.core" level="error" additivity="true">
+            <appender-ref ref="consoleAppender" />
+        </Logger>
+
         <Logger name="org.springframework.security" level="ERROR" additivity="false">
             <AppenderRef ref="consoleAppender"/>
-            <AppenderRef ref="debugFileAppender"/>
         </Logger>
 
         <!--  application specific logs will be asynchronous, other root logs is still synchronous -->
         <Logger name="com.gunnarro.followup" level="DEBUG" additivity="false">
             <AppenderRef ref="consoleAppender"/>
-            <AppenderRef ref="debugFileAppender"/>
         </Logger>
 
         <Logger name="com.gunnarro.followup.endpoint" level="WARN" additivity="false">
-            <AppenderRef ref="debugFileAppender"/>
+            <AppenderRef ref="consoleAppender"/>
         </Logger>
 
         <Logger name="com.gunnarro.followup.service" level="WARN" additivity="false">
-            <AppenderRef ref="debugFileAppender"/>
+            <AppenderRef ref="consoleAppender"/>
         </Logger>
 
         <Logger name="com.gunnarro.followup.repository" level="WARN" additivity="false">
-            <AppenderRef ref="debugFileAppender"/>
+            <AppenderRef ref="consoleAppender"/>
         </Logger>
 
         <Logger name="com.gunnarro.useraccount" level="DEBUG" additivity="false">
-            <AppenderRef ref="debugFileAppender"/>
+            <AppenderRef ref="consoleAppender"/>
         </Logger>
 
         <Root level="INFO">
             <AppenderRef ref="consoleAppender"/>
-            <AppenderRef ref="debugFileAppender"/>
         </Root>
     </Loggers>
 </Configuration>

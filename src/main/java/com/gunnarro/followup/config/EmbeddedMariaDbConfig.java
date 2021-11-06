@@ -32,7 +32,7 @@ import java.util.Properties;
 */
 //@Configuration
 public class EmbeddedMariaDbConfig {
-  /**
+/*
     @Bean
     public MariaDB4jSpringService mariaDB4jSpringService() {
         return new MariaDB4jSpringService();
@@ -76,5 +76,5 @@ public class EmbeddedMariaDbConfig {
       //  databasePopulator.addScript(new ClassPathResource("data.sql"));
         return databasePopulator;
     }
-    */
+*/
 }

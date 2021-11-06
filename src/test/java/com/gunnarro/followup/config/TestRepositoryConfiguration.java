@@ -25,6 +25,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class TestRepositoryConfiguration {
 
+
     @Autowired
     @Qualifier(value = "dietManagerDataSource")
     private DataSource dataSource;

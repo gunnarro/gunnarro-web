@@ -23,8 +23,8 @@ import java.util.Properties;
  *
  * @author admin
  */
-//@Configuration
-//@EnableTransactionManagement
+@Configuration
+@EnableTransactionManagement
 public class DataSourceConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfiguration.class);
@@ -55,9 +55,10 @@ public class DataSourceConfiguration {
         Properties p = new Properties();
         p.put("useSSL", "false");
         ds.setConnectionProperties(p);
-        LOG.info("jdbc url : {}", jdbcUrl);
-        LOG.info("jdbc user: {}", jdbcUser);
-        LOG.info("jdbc pwd: {}", jdbcPwd);
+        LOG.info("jdbc url   : {}", jdbcUrl);
+        LOG.info("jdbc user  : {}", jdbcUser);
+        LOG.info("jdbc pwd   : {}", jdbcPwd);
+        LOG.info("jdbc driver: {}", jdbcDriverClassName);
         LOG.info(System.getProperty("spring.config.location"));
         // runUpdateDBScript(ds);
         return ds;
