@@ -59,7 +59,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
                 user.setRoles(getUserRoles(user.getId()));
             }
             return user;
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("userId: {}, Error: {}", userId, erae.toString());
             return null;
         }
@@ -76,7 +76,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
                 user.setRoles(getUserRoles(user.getId()));
             }
             return user;
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("username: {}, Error: {}", userName, erae.toString());
             return null;
         }
@@ -91,7 +91,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         query.append(" AND l.fk_role_id = r.id");
         try {
             roles = getJdbcTemplate().query(query.toString(), new Object[]{userId}, RolesTable.mapToRoleRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
         }
         // have to get privileges
@@ -110,7 +110,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         query.append(" AND l.fk_role_id = ?");
         try {
             return getJdbcTemplate().query(query.toString(), new Object[]{roleId}, UserAccountRowMapper.mapToPrivilegeRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
             return new ArrayList<>();
         }
@@ -151,7 +151,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
                 user.setRoles(getUserRoles(user.getId()));
             }
             return users;
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
             return new ArrayList<>();
         }
@@ -164,7 +164,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public List<String> getUserRoles() {
         try {
             return getJdbcTemplate().query("SELECT DISTINCT * FROM roles", new Object[]{}, RolesTable.mapToRoleNameRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
             return new ArrayList<>();
         }
@@ -225,7 +225,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public List<UserLog> getUserLogs() {
         try {
             return getJdbcTemplate().query("SELECT * FROM user_details_log ORDER BY last_logged_in_date_time DESC", new Object[]{}, UsersLogTable.mapToUserLogRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
             return new ArrayList<>();
         }
@@ -238,7 +238,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public UserLog getUserLastLogin(Integer userId) {
         try {
             return getJdbcTemplate().queryForObject("SELECT * FROM user_details_log WHERE fk_user_id = ?", new Object[]{userId}, UsersLogTable.mapToUserLogRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
             return null;
         }

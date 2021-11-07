@@ -72,7 +72,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
             query.append(" AND l.fk_user_id = u.id");
             return getJdbcTemplate().queryForObject(query.toString(), new Object[]{activityLogId},
                     ActivityRowMapper.mapToActivityLogRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error: {}", erae.toString());
             }
@@ -124,7 +124,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
                     String.class);
             assert name != null;
             return name.equals(username);
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error: {}", erae.toString());
             }

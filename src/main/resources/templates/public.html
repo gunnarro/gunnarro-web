@@ -5,13 +5,13 @@
 
 <body class="bg">
 <div th:replace="fragments/header :: header"></div>
+
 <div class="container">
-    <!-- <div class="m-3 card card-image" style="background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);"> -->
     <div class="m-3 card">
         <h3 class="card-header">Company</h3>
         <div class="card-body">
             <p class="card-text">gunnarro:as is a standalone independent consulting company which was established 2021.
-                See my <a href="@{/cv}">cv</a> and <a href="@{/cv/projects}">projects</a> for information about my
+                See my <a th:href="@{/cv}">CV</a> and <a th:href="@{/cv/projects}">Projects</a> for information about my
                 competence and experience.
             </p>
             <div>
@@ -37,6 +37,11 @@
                 </dl>
             </div>
         </div>
+        <!-- end card body -->
+        <div class="card-footer text-center text-muted">
+            gunnarro:as | org.nr. xxx xxx xxx | gunnarro@gmail.com | +47 45 46 55 00
+        </div>
+        <!-- end card footer -->
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>

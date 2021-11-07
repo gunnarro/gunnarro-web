@@ -1,20 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
-    <title>Gunnar Rønneberg</title>
-    <!--
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    -->
-    <!-- Font Awesome icons (free version)-->
-
-    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
-
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css">
+</head>
     <style type="text/css">
 .d-flex {
   display: flex !important;
@@ -70,7 +57,7 @@ section.resume-section .resume-section-content {
 
 .dt-style {
     text-transform: lowercase;
-    font-size: .65rem !important;
+ /*   font-size: .65rem !important; */
     font-weight: bold !important;
 }
 .dd-style {
@@ -85,11 +72,11 @@ section.resume-section .resume-section-content {
 }
 
 .text-list {
-	font-size: .65rem !important;
+/*	font-size: .65rem !important; */
 }
 
 .text-brand {
-	font-size: .65rem !important;
+/*	font-size: .65rem !important; */
     font-family: monospace !important;
 }
 
@@ -98,13 +85,13 @@ section.resume-section .resume-section-content {
 /*	background: linear-gradient(to right, blue 0%, red 50%); */
 /*	-webkit-background-clip: text; */
 /*	-webkit-text-fill-color: transparent; */
-	font-size: .65rem !important;
+/*	font-size: .65rem !important; */
     font-family: monospace !important;
 }
-
-    </style>
+</style>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <!-- left side-->
 <!--
 <div class="bg-primary fixed-top" id="leftSide">
@@ -123,7 +110,7 @@ section.resume-section .resume-section-content {
 </div>
 -->
 <!-- Page Content-->
-<div class="container-fluid p-0">
+<div class="container-fluid p-1">
     <!-- About-->
     <section class="resume-section bg-primary" id="about">
         <div class="resume-section-content p-1">

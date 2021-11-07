@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -24,7 +22,7 @@ import java.util.Properties;
  * @author admin
  */
 @Configuration
-@EnableTransactionManagement
+//@EnableTransactionManagement
 public class DataSourceConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfiguration.class);
@@ -64,10 +62,12 @@ public class DataSourceConfiguration {
         return ds;
     }
 
+    /**
     @Bean
     public DataSourceTransactionManager transactionManager(DataSource datasource) {
         return new DataSourceTransactionManager(datasource);
     }
+    */
 
     @Bean
     public UserAccountRepository userAccountRepository() {

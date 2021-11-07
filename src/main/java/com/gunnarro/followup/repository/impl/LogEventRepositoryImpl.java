@@ -143,7 +143,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
             List<LogComment> logComments = getLogComments(Objects.requireNonNull(log).getId());
             log.setLogComments(logComments);
             return log;
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
             return null;
         }
@@ -245,7 +245,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         try {
             return getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{"REPORT"},
                     LogEventRowMapper.mapToLogEntryRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.toString());
 
             // ignore this
@@ -268,7 +268,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         try {
             return getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{forLastDays, type},
                     LogEventRowMapper.mapToLogEntryRM());
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.getMessage());
             // ignore this
             return null;
@@ -310,7 +310,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
                     String.class);
             assert name != null;
             return name.equals(username);
-        } catch (org.springframework.dao.EmptyResultDataAccessException erae) {
+        } catch (Exception erae) {
             LOG.debug("Error: {}", erae.getMessage());
             // ignore this
             return false;

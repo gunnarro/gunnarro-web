@@ -4,16 +4,15 @@
 </head>
 <body>
 <div th:fragment="footer">
-    <div class="float-right">
+    <div class="float-end">
         <footer class="container">
-            <hr>
             <div>
                 <small>
-                    <a th:href="@{/releasenotes}">
-                        <span class="text-muted" th:inline="text">[[${@environment.getProperty('application.name')}]]_v[[${@environment.getProperty('application.version')}]]</span>
+                    <a th:href="@{/releasenotes}" >
+                        <span class="text-muted" th:inline="text">gunnarro:as v1.6.0 </span>
                     </a>
                     <span class="text-muted"
-                          th:inline="text"> [[${@environment.getProperty('application.build.time')}]]</span>
+                          th:inline="text"> 2021.11.05 22:00:00 GMT</span>
                 </small>
             </div>
             <div>
