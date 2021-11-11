@@ -100,9 +100,9 @@ public class FileUploadServiceImpl implements FileUploadService {
         try {
             String path = String.format("%s/%s", getUserImageDir(id), fileName);
             if (new File(path).delete()) {
-                LOG.debug("deleted: {}", path);
+                LOG.debug("deleted: {}", id);
             } else {
-                LOG.error("error deleting {}", path);
+                LOG.error("error deleting {}", id);
             }
         } catch (IOException e) {
             LOG.error(null, e);
@@ -150,7 +150,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         Path userDir = Paths.get(rootLocation.toString() + "/" + id);
         if (!Files.exists(userDir)) {
             Files.createDirectories(userDir);
-            LOG.debug("created images dir: {}", userDir);
+            LOG.debug("created images dir: {}", id);
         }
         return userDir;
     }
