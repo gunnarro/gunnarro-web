@@ -164,8 +164,8 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public List<String> getUserRoles() {
         try {
             return getJdbcTemplate().query("SELECT DISTINCT * FROM roles", new Object[]{}, RolesTable.mapToRoleNameRM());
-        } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+        } catch (Exception e) {
+            LOG.error(null, e);
             return new ArrayList<>();
         }
     }
@@ -225,8 +225,8 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public List<UserLog> getUserLogs() {
         try {
             return getJdbcTemplate().query("SELECT * FROM user_details_log ORDER BY last_logged_in_date_time DESC", new Object[]{}, UsersLogTable.mapToUserLogRM());
-        } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+        } catch (Exception e) {
+            LOG.error(null, e);
             return new ArrayList<>();
         }
     }
@@ -238,8 +238,8 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     public UserLog getUserLastLogin(Integer userId) {
         try {
             return getJdbcTemplate().queryForObject("SELECT * FROM user_details_log WHERE fk_user_id = ?", new Object[]{userId}, UsersLogTable.mapToUserLogRM());
-        } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+        } catch (Exception e) {
+            LOG.error(null, e);
             return null;
         }
     }

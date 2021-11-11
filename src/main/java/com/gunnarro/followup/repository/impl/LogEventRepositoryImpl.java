@@ -310,8 +310,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
                     String.class);
             assert name != null;
             return name.equals(username);
-        } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.getMessage());
+        } catch (Exception e) {
+            LOG.error("{}", e.getMessage());
             // ignore this
             return false;
         }

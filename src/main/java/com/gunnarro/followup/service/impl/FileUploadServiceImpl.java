@@ -105,7 +105,7 @@ public class FileUploadServiceImpl implements FileUploadService {
                 LOG.error("error deleting {}", path);
             }
         } catch (IOException e) {
-            LOG.error("", e);
+            LOG.error(null, e);
         }
     }
 

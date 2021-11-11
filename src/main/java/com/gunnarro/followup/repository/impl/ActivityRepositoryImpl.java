@@ -52,9 +52,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
     public int deleteActivityLog(Integer userId, Integer id) {
         int rows = getJdbcTemplate().update("DELETE FROM activity_log WHERE id = ? AND fk_user_id = ?",
                 id, userId);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("deleted activity log with id={}, deleted rows = {}", id, rows);
-        }
+        LOG.debug("deleted activity log with id={}, deleted rows = {}", id, rows);
         return rows;
     }
 
@@ -72,10 +70,8 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
             query.append(" AND l.fk_user_id = u.id");
             return getJdbcTemplate().queryForObject(query.toString(), new Object[]{activityLogId},
                     ActivityRowMapper.mapToActivityLogRM());
-        } catch (Exception erae) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Error: {}", erae.toString());
-            }
+        } catch (Exception e) {
+            LOG.error(null, e);
             return null;
         }
     }
@@ -124,10 +120,8 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
                     String.class);
             assert name != null;
             return name.equals(username);
-        } catch (Exception erae) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Error: {}", erae.toString());
-            }
+        } catch (Exception e) {
+            LOG.error(null, e);
             // ignore this
             return false;
         }
