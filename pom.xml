@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- latest java LTS version -->
         <java.version>11</java.version>
-        <spring.boot.version>2.5.6</spring.boot.version>
+        <spring.boot.version>2.6.0</spring.boot.version>
         <version.flexmark>0.62.2</version.flexmark>
         <version.jodatime>2.10.13</version.jodatime>
         <jib.version>3.1.4</jib.version>
