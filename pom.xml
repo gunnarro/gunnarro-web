@@ -11,8 +11,7 @@
     <!-- Check by sonarcube (ref. https://github.com/SonarSource/sonar-examples/tree/master/projects/languages/java/code-coverage/ut/ut-maven-jacoco) -->
     <!-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -->
     <!-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -->
-    <!-- mvn clean verify sonar:sonar -Dsonar.host.url=https://sonarqube.com
-                -Dsonar.organization=Gunnar Ronneberg -Dsonar.login=00e21528e5f07da596b49cd283f8ea61125eb2aa -->
+    <!-- mvn clean verify sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.organization=Gunnar Ronneberg -Dsonar.login=00e21528e5f07da596b49cd283f8ea61125eb2aa -->
     <!-- mvn clean verify sonar:sonar -->
     <!-- https://sonarqube.com/projects/favorite -->
     <!-- mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=2a992b24f92b4f573993300e78bb5daa07ea50d2 -->
@@ -31,7 +30,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- latest java LTS version -->
         <java.version>11</java.version>
-        <spring.boot.version>2.5.6</spring.boot.version>
+        <!-- spring versions -->
+        <spring.boot.version>2.5.7</spring.boot.version>
+        <!-- spring override library versions -->
+        <log4j2.version>2.16.0</log4j2.version>
         <version.flexmark>0.62.2</version.flexmark>
         <version.jodatime>2.10.13</version.jodatime>
         <jib.version>3.1.4</jib.version>
@@ -43,6 +45,13 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>${log4j2.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
