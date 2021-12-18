@@ -68,14 +68,15 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
      */
     @Override
     public LocalUser getUser(String userName) {
+        log.debug("get user: {}", userName);
         try {
             LocalUser user = getJdbcTemplate().queryForObject("SELECT * FROM users WHERE username = ?", UsersTable.mapToUserRM(), userName);
             if (user != null) {
                 user.setRoles(getUserRoles(user.getId()));
             }
             return user;
-        } catch (Exception erae) {
-            log.debug("username: {}, Error: {}", userName, erae.toString());
+        } catch (Exception e) {
+            log.debug("username: {}, Error: {}", userName, e.toString());
             return null;
         }
     }

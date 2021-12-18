@@ -1,8 +1,7 @@
 package com.gunnarro.followup.endpoint.handler;
 
 import com.gunnarro.followup.repository.table.user.RolesTable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -20,10 +19,9 @@ import java.util.List;
 /**
  * @author mentos
  */
+@Slf4j
 @Component
 public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AppSuccessHandler.class);
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -32,14 +30,14 @@ public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
      */
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        LOG.debug("authentication: {}", authentication);
+        log.debug("authentication: {}", authentication);
         String targetUrl = determineTargetUrl(authentication);
-        LOG.debug("redirect to: {}", targetUrl);
+        log.debug("redirect to: {}", targetUrl);
         if (response.isCommitted()) {
-            LOG.debug("Can't redirect");
+            log.debug("Can't redirect");
             return;
         }
-        LOG.debug("redirect to: {}", targetUrl);
+        log.debug("redirect to: {}", targetUrl);
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
@@ -57,7 +55,7 @@ public class AppSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         if (isAdmin(roles) || isUser(roles)) {
             url = "/home";
         } else {
-            LOG.debug("User is not authorized");
+            log.debug("User is not authorized");
             url = "/access-denied";
         }
         return url;

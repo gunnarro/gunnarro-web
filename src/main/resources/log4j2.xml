@@ -38,23 +38,19 @@
         </Logger>
 
         <!--  application specific logs will be asynchronous, other root logs is still synchronous -->
-        <Logger name="com.gunnarro.followup" level="DEBUG" additivity="false">
+        <Logger name="com.gunnarro.followup" level="INFO" additivity="false">
             <AppenderRef ref="consoleAppender"/>
         </Logger>
 
-        <Logger name="com.gunnarro.followup.endpoint" level="WARN" additivity="false">
+        <Logger name="com.gunnarro.followup.endpoint" level="DEBUG" additivity="false">
             <AppenderRef ref="consoleAppender"/>
         </Logger>
 
-        <Logger name="com.gunnarro.followup.service" level="WARN" additivity="false">
+        <Logger name="com.gunnarro.followup.service" level="DEBUG" additivity="false">
             <AppenderRef ref="consoleAppender"/>
         </Logger>
 
-        <Logger name="com.gunnarro.followup.repository" level="WARN" additivity="false">
-            <AppenderRef ref="consoleAppender"/>
-        </Logger>
-
-        <Logger name="com.gunnarro.useraccount" level="DEBUG" additivity="false">
+        <Logger name="com.gunnarro.followup.repository" level="DEBUG" additivity="false">
             <AppenderRef ref="consoleAppender"/>
         </Logger>
 

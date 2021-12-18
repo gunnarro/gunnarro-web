@@ -24,7 +24,7 @@ public class LoginController extends BaseController {
 
     @GetMapping("/home")
     public String home() {
-        String redirectUrl = null;
+        String redirectUrl;
         try {
             LocalUser user = authenticationFacade.getLoggedInUser();
             log.debug("logged in as user: {}", user);

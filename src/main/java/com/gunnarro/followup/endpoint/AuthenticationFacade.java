@@ -2,28 +2,24 @@ package com.gunnarro.followup.endpoint;
 
 import com.gunnarro.followup.domain.user.LocalUser;
 import com.gunnarro.followup.service.exception.NotLoggedInException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 
+@Slf4j
 @Component
 public class AuthenticationFacade implements AuthenticationFacadeInterface {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFacade.class);
-
     @Override
     public Authentication getAuthentication() {
-        LOG.debug(".....getAuth...");
+        log.debug(".....getAuth...");
         Authentication authentication = null;
         if (SecurityContextHolder.getContext() != null) {
             authentication = SecurityContextHolder.getContext().getAuthentication();
         }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("authentication: {}", authentication);
-        }
+        log.debug("authentication: {}", authentication);
         return authentication;
     }
 
