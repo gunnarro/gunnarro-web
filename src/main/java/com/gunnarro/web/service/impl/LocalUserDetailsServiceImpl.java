@@ -2,6 +2,7 @@ package com.gunnarro.web.service.impl;
 
 import com.gunnarro.web.domain.user.LocalUser;
 import com.gunnarro.web.repository.UserAccountRepository;
+import com.gunnarro.web.service.exception.ApplicationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+
+import java.util.regex.Pattern;
 
 
 /**
@@ -45,12 +49,17 @@ public class LocalUserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(final String userName) throws UsernameNotFoundException {
+        log.debug("get username: {}", userName);
         // final String ip = request.getRemoteAddr();
         // if (loginAttemptService.isBlocked(ip)) {
         // throw new
         // ApplicationException("Blocked, exceeded number of attempts!");
         // }
-        log.debug("get username: {}", userName);
+        if (ObjectUtils.isEmpty(userName)) {
+            throw new ApplicationException("validation error, userName is not valid!");
+        } else if (!Pattern.compile("[a-zA-Z]*").matcher(userName).matches()) {
+            throw new ApplicationException("validation error, userName is not valid!");
+        }
         LocalUser user = userAccountRepository.getUser(userName);
         if (user == null) {
             log.debug("User not found!, username: {}", userName);

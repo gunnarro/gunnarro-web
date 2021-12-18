@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @Slf4j
 @SpringBootApplication
-@ComponentScan("com.gunnarro.followup.*")
+@ComponentScan("com.gunnarro.web.*")
 public class Application {
 
     public static void main(String[] args) {
