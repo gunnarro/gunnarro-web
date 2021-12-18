@@ -19,6 +19,9 @@
     <!-- mvn compile jib:build -P build-docker -->
     <!-- or -->
     <!-- mvn compile com.google.cloud.tools:jib-maven-plugin:3.1.4:build -Dimage=registry.hub.docker.com/gunnarro/gunnarro-web -->
+    <!-- Azure -->
+    <!-- az acr login -n gunnarroregistry && mvn compile jib:build -P build-docker -->
+    <!-- mvn azure-webapp:deploy -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gunnarro.web</groupId>
     <artifactId>gunnarro-web</artifactId>
@@ -43,6 +46,11 @@
         <webjars-jquery-ui.version>1.13.0</webjars-jquery-ui.version>
         <webjars-jquery.version>3.6.0</webjars-jquery.version>
         <webjars-popper.version>1.16.1</webjars-popper.version>
+        <!-- maven plugins -->
+        <mvn-compiler.version>3.8.1</mvn-compiler.version>
+        <mvn-enforcer.version>3.0.0</mvn-enforcer.version>
+        <mvn-surfire.version>3.0.0-M5</mvn-surfire.version>
+        <mvn-jacoco.version>0.8.7</mvn-jacoco.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -69,7 +77,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${mvn-compiler.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -78,10 +86,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>${mvn-enforcer.version}</version>
                 <executions>
                     <execution>
-                        <id>enforce</id>
+                        <id>enforce-version</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
@@ -99,7 +107,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${mvn-surfire.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -120,7 +128,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
+                <version>${mvn-jacoco.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -156,6 +164,13 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.1</version>
+            </plugin>
+
         </plugins>
     </build>
     <dependencies>
@@ -199,20 +214,21 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.querydsl</groupId>
+                    <artifactId>querydsl-apt</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-layout-template-json</artifactId>
-            <version>2.14.1</version>
         </dependency>
         <dependency>
             <groupId>com.lmax</groupId>
@@ -302,6 +318,7 @@
             <scope>runtime</scope>
         </dependency>
         <!-- PDF tools -->
+        <!--
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
@@ -312,12 +329,15 @@
             <artifactId>xmlworker</artifactId>
             <version>5.5.13.2</version>
         </dependency>
+        -->
+        <!--
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>9.4.0.jre16</version>
             <scope>runtime</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
@@ -337,14 +357,12 @@
         <!-- ================= -->
         <!-- Test dependencies -->
         <!-- ================= -->
-        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        -->
         <dependency>
             <groupId>ch.vorburger.mariaDB4j</groupId>
             <artifactId>mariaDB4j-springboot</artifactId>
@@ -354,6 +372,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
+            <version>${mariadb.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -2,6 +2,7 @@ package com.gunnarro.followup.config;
 
 import com.gunnarro.followup.repository.UserAccountRepository;
 import com.gunnarro.followup.repository.impl.UserAccountRepositoryImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,11 +22,10 @@ import java.util.Properties;
  *
  * @author admin
  */
+@Slf4j
 @Configuration
 //@EnableTransactionManagement
 public class DataSourceConfiguration {
-
-    private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfiguration.class);
 
     // If the same property is defined as a system property and in the properties
     // file, then the system property would be applied.
@@ -53,11 +53,11 @@ public class DataSourceConfiguration {
         Properties p = new Properties();
         p.put("useSSL", "false");
         ds.setConnectionProperties(p);
-        LOG.info("jdbc url   : {}", jdbcUrl);
-        LOG.info("jdbc user  : {}", jdbcUser);
-        LOG.info("jdbc pwd   : {}", jdbcPwd);
-        LOG.info("jdbc driver: {}", jdbcDriverClassName);
-        LOG.info(System.getProperty("spring.config.location"));
+        log.info("jdbc url   : {}", jdbcUrl);
+        log.info("jdbc user  : {}", jdbcUser);
+        log.info("jdbc pwd   : {}", jdbcPwd.length());
+        log.info("jdbc driver: {}", jdbcDriverClassName);
+        log.info(System.getProperty("spring.config.location"));
         // runUpdateDBScript(ds);
         return ds;
     }

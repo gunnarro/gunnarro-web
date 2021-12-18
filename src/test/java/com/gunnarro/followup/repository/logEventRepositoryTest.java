@@ -19,7 +19,7 @@ import java.util.Calendar;
 @ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class})
 @Transactional
 @Rollback
-public class logEventRepositoryTest extends DefaultTestConfig {
+class logEventRepositoryTest extends DefaultTestConfig {
 
     @Autowired
     private LogEventRepository logEventRepository;
@@ -29,17 +29,17 @@ public class logEventRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void hasPermission_access_denied() {
+    void hasPermission_access_denied() {
         Assertions.assertFalse(logEventRepository.hasPermission(200, "per"));
     }
 
     @Test
-    public void hasPermission_access_ok() {
+    void hasPermission_access_ok() {
         Assertions.assertTrue(logEventRepository.hasPermission(3, "pepilie"));
     }
 
     @Test
-    public void CRUDEventLog() {
+    void CRUDEventLog() {
         int userId = 5;
         LogEntry newLog = LogEntry.builder()
                 .fkUserId(userId)
@@ -80,7 +80,7 @@ public class logEventRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void getLogComments() {
+    void getLogComments() {
         Assertions.assertEquals(2, logEventRepository.getLogComments(4).size());
         // for ( LogComment comment: logEventRepository.getLogComments(4)) {
         // System.out.println(comment);
@@ -88,7 +88,7 @@ public class logEventRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void createLogComment() {
+    void createLogComment() {
         int userId = 5;
         LogEntry newLog = LogEntry.builder()
                 .fkUserId(userId)
@@ -120,7 +120,7 @@ public class logEventRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void eventLogLogDateNotToday() {
+    void eventLogLogDateNotToday() {
         int userId = 5;
 
         Calendar cal = Calendar.getInstance();
@@ -147,13 +147,13 @@ public class logEventRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void count() {
+    void count() {
         Assertions.assertEquals(5, logEventRepository.count("SELECT count(*) FROM event_log"));
     }
 
     @Disabled
     @Test
-    public void getMyLastStatusReport() {
+    void getMyLastStatusReport() {
         LogEntry newLog = LogEntry.builder()
                 .fkUserId(1)
                 .title("title...")
@@ -167,13 +167,13 @@ public class logEventRepositoryTest extends DefaultTestConfig {
 
     @Disabled
     @Test
-    public void getRecentEventLog() {
+    void getRecentEventLog() {
         LogEntry recentLogEvent = logEventRepository.getRecentLogEvent(3, "CONFLICT", 7);
         System.out.println(recentLogEvent);
     }
 
     @Test
-    public void getAllLogEvents() {
+    void getAllLogEvents() {
         Page<LogEntry> page = logEventRepository.getAllLogEvents(4, 0, 25);
         System.out.println(page.toString());
         Assertions.assertEquals(1, page.getContent().size());

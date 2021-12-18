@@ -7,10 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public abstract class BaseJdbcRepository {
 
-    private JdbcTemplate jdbcTemplate;
-
-    protected BaseJdbcRepository() {
-    }
+    private final JdbcTemplate jdbcTemplate;
 
     /**
      * Creates a new JdbcRepositorySupport for the given JdbcTemplate.
@@ -25,7 +22,6 @@ public abstract class BaseJdbcRepository {
     /**
      * Returns the JdbcTemplate injected into the class.
      *
-     * @return
      */
     public final JdbcTemplate getJdbcTemplate() {
         return this.jdbcTemplate;

@@ -3,8 +3,7 @@ package com.gunnarro.followup.endpoint;
 import com.gunnarro.followup.domain.user.LocalUser;
 import com.gunnarro.followup.service.exception.ApplicationException;
 import com.gunnarro.followup.service.exception.NotLoggedInException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Controller
 public class LoginController extends BaseController {
 
@@ -22,14 +22,12 @@ public class LoginController extends BaseController {
     public static final String ADMIN_PAGE = "/admin";
     public static final String LOGIN_PAGE = "/login";
 
-    private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
-
     @GetMapping("/home")
     public String home() {
         String redirectUrl = null;
         try {
             LocalUser user = authenticationFacade.getLoggedInUser();
-            LOG.debug("logged in as user: {}", user);
+            log.debug("logged in as user: {}", user);
             if (user == null) {
                 // this was an ANONYMOUS user, i.e, not logged in
                 redirectUrl = HOME_PAGE;
@@ -48,13 +46,13 @@ public class LoginController extends BaseController {
                     redirectUrl = LOGIN_PAGE;
                 }
             }
-            LOG.debug("redirect user to: {}", redirectUrl);
+            log.debug("redirect user to: {}", redirectUrl);
             return "redirect:" + redirectUrl;
         } catch (NotLoggedInException nla) {
-            LOG.debug("not legged in, redirect to public page: {}", PUBLIC_PAGE);
+            log.debug("not legged in, redirect to public page: {}", PUBLIC_PAGE);
             return "redirect:" + PUBLIC_PAGE;
         } catch (ApplicationException ae) {
-            LOG.error("", ae);
+            log.error("", ae);
             // Will direct user to the error page
             throw ae;
         }
@@ -149,7 +147,7 @@ public class LoginController extends BaseController {
 
     private void logoutLocalUser(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = authenticationFacade.getAuthentication();
-        LOG.debug("logout: {}", auth.getPrincipal());
+        log.debug("logout: {}", auth.getPrincipal());
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }

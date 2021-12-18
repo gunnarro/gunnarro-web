@@ -9,18 +9,17 @@ import java.util.List;
 public interface UserAccountRepository {
 
     /**
-     * @param userName
-     * @return
      */
     LocalUser getUser(String userName);
 
     /**
-     * @param userId
-     * @return
+     * @param userId user id
+     * @return user
      */
     LocalUser getUser(Integer userId);
 
     /**
+     *
      * @param user
      * @return
      */

@@ -3,8 +3,7 @@ package com.gunnarro.followup.repository.mapper;
 import com.gunnarro.followup.domain.log.LogComment;
 import com.gunnarro.followup.domain.log.LogEntry;
 import com.gunnarro.followup.utility.Utility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.SQLException;
@@ -13,9 +12,8 @@ import java.sql.SQLException;
  * This call contain RowMapper which is required for converting ResultSet into
  * java domain class
  */
+@Slf4j
 public class LogEventRowMapper {
-
-    private static final Logger LOG = LoggerFactory.getLogger(LogEventRowMapper.class);
 
     /**
      * In order to hide public constructor
@@ -29,7 +27,7 @@ public class LogEventRowMapper {
 
     public static RowMapper<LogEntry> mapToLogEntryRM() {
         return (resultSet, rowNum) -> {
-            LogEntry log = LogEntry.builder()
+            LogEntry logEntry = LogEntry.builder()
                     .id(resultSet.getInt("id"))
                     .fkUserId(resultSet.getInt("fk_user_id"))
                     .createdTime(resultSet.getTimestamp("created_date_time").getTime())
@@ -40,22 +38,18 @@ public class LogEventRowMapper {
                     .title(resultSet.getString("title"))
                     .build();
             try {
-                log.setNumberOfComments(resultSet.getInt("number_of_comments"));
+                logEntry.setNumberOfComments(resultSet.getInt("number_of_comments"));
             } catch (SQLException sqle) {
                 // ignore, the column didn't exist
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Error: {}", sqle.getMessage());
-                }
+                log.debug("Error: {}", sqle.getMessage());
             }
             try {
-                log.setCreatedByUser(resultSet.getString("username"));
+                logEntry.setCreatedByUser(resultSet.getString("username"));
             } catch (SQLException sqle) {
                 // ignore, the column diden't exist
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Error: {}", sqle.getMessage());
-                }
+                log.debug("Error: {}", sqle.getMessage());
             }
-            return log;
+            return logEntry;
         };
     }
 
@@ -74,9 +68,7 @@ public class LogEventRowMapper {
                 comment.setCreatedByUser(resultSet.getString("username"));
             } catch (SQLException sqle) {
                 // ignore, the column diden't exist
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Error: {}", sqle.getMessage());
-                }
+                log.debug("Error: {}", sqle.getMessage());
             }
             return comment;
         };

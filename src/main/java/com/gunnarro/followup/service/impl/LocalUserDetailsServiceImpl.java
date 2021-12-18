@@ -2,8 +2,7 @@ package com.gunnarro.followup.service.impl;
 
 import com.gunnarro.followup.domain.user.LocalUser;
 import com.gunnarro.followup.repository.UserAccountRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,11 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author admin
  */
+@Slf4j
 @Service
 @Transactional
 public class LocalUserDetailsServiceImpl implements UserDetailsService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(LocalUserDetailsServiceImpl.class);
 
     @Autowired
     private UserAccountRepository userAccountRepository;
@@ -52,13 +50,13 @@ public class LocalUserDetailsServiceImpl implements UserDetailsService {
         // throw new
         // ApplicationException("Blocked, exceeded number of attempts!");
         // }
-        LOG.debug("get username: {}", userName);
+        log.debug("get username: {}", userName);
         LocalUser user = userAccountRepository.getUser(userName);
         if (user == null) {
-            LOG.debug("User not found!, username: {}", userName);
+            log.debug("User not found!, username: {}", userName);
             throw new UsernameNotFoundException("User not found!");
         }
-        LOG.debug("return user: {}", user);
+        log.debug("return user: {}", user);
         return user;
     }
 

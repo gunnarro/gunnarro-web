@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-public class LogEventControllerTest extends SpringTestSetup {
+class LogEventControllerTest extends SpringTestSetup {
 
     private static final int ADMIN_USER_ID = 1;
     @Mock
@@ -30,7 +30,7 @@ public class LogEventControllerTest extends SpringTestSetup {
     private LogEventService logEventServiceMock;
 
     @BeforeEach
-    public void init() {
+    void init() {
         MockitoAnnotations.initMocks(this);
         controller = new LogEventController();
         controller.setLogEventService(logEventServiceMock);
@@ -42,7 +42,7 @@ public class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test()
-    public void deleteLogEvent() throws Exception {
+    void deleteLogEvent() throws Exception {
         LogEntry logEntry = LogEntry.builder()
                 .fkUserId(ADMIN_USER_ID)
                 .build();
@@ -52,7 +52,7 @@ public class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    public void deleteLogEventNotAllowedToDelete() throws Exception {
+    void deleteLogEventNotAllowedToDelete() throws Exception {
         when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(null);
         Assertions.assertThrows(ApplicationException.class, () -> {
             controller.deletelogEvent(4);
@@ -60,7 +60,7 @@ public class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    public void editLogEvent() throws Exception {
+    void editLogEvent() throws Exception {
         LogEntry logEntry = LogEntry.builder()
                 .fkUserId(ADMIN_USER_ID)
                 .build();
@@ -70,7 +70,7 @@ public class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    public void editLogEventNotAllowedToEdit() throws Exception {
+    void editLogEventNotAllowedToEdit() throws Exception {
         when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(null);
         Assertions.assertThrows(ApplicationException.class, () -> {
             controller.initUpdateLogEventForm(4, null);
@@ -79,7 +79,7 @@ public class LogEventControllerTest extends SpringTestSetup {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void getLogEvents() throws Exception {
+    void getLogEvents() throws Exception {
         List<LogEntry> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             list.add(LogEntry.builder().id(i).build());
@@ -107,7 +107,7 @@ public class LogEventControllerTest extends SpringTestSetup {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void viewLogEventsAsPlainText() throws Exception {
+    void viewLogEventsAsPlainText() throws Exception {
         Pageable pageSpecification = PageRequest.of(1, 25, Sort.by("id"));
         Page<LogEntry> page = new PageImpl<>(new ArrayList<>(), pageSpecification, 100);
         when(logEventServiceMock.getAllLogEvents(ADMIN_USER_ID, 1, 25)).thenReturn(page);
@@ -122,7 +122,7 @@ public class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    public void initNewLogEventForm() throws Exception {
+    void initNewLogEventForm() throws Exception {
         String redirectUrl = controller.initNewLogEventForm(new ExtendedModelMap());
         Assertions.assertEquals("log/edit-event-log", redirectUrl);
     }

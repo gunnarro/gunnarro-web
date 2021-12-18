@@ -3,8 +3,6 @@ package com.gunnarro.followup.repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -42,8 +40,6 @@ public abstract class BaseJdbcRepository {
 
     /**
      * Returns the JdbcTemplate injected into the class.
-     *
-     * @return
      */
     public final JdbcTemplate getJdbcTemplate() {
         return this.jdbcTemplate;
@@ -55,7 +51,6 @@ public abstract class BaseJdbcRepository {
     public List<Integer> getGrantedUserIdsForFollower(Integer userIdFollowerId) {
         RowMapper<Integer> rm = (resultSet, rowNum) -> resultSet.getInt("fk_user_id");
         return getJdbcTemplate().query(
-                "SELECT fk_user_id FROM user_follower_lnk WHERE fk_user_follower_id = ? ORDER BY fk_user_id ASC",
-                new Object[]{userIdFollowerId}, rm);
+                "SELECT fk_user_id FROM user_follower_lnk WHERE fk_user_follower_id = ? ORDER BY fk_user_id ASC", rm, userIdFollowerId);
     }
 }

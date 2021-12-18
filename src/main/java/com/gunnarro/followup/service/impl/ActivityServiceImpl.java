@@ -4,8 +4,7 @@ import com.gunnarro.followup.domain.activity.ActivityLog;
 import com.gunnarro.followup.endpoint.AuthenticationFacade;
 import com.gunnarro.followup.repository.ActivityRepository;
 import com.gunnarro.followup.service.ActivityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +13,9 @@ import java.util.List;
 /**
  * @author mentos
  */
+@Slf4j
 @Service
 public class ActivityServiceImpl implements ActivityService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ActivityServiceImpl.class);
 
     @Autowired
     protected AuthenticationFacade authenticationFacade;
@@ -25,12 +23,11 @@ public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private ActivityRepository activityRepository;
 
-    private boolean checkPermission(Integer logEventId) {
+    private void checkPermission(Integer logEventId) {
         boolean hasPermission = activityRepository.hasPermission(logEventId, authenticationFacade.getAuthentication().getName());
         if (!hasPermission) {
             throw new SecurityException("Access denied");
         }
-        return true;
     }
 
     /**
@@ -46,9 +43,7 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public ActivityLog getActivityLog(Integer userId, int activityId) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("userId = {}, activityId = {}", +userId, activityId);
-        }
+        log.debug("userId = {}, activityId = {}", +userId, activityId);
         return activityRepository.getActivityLog(userId, activityId);
     }
 
@@ -78,8 +73,6 @@ public class ActivityServiceImpl implements ActivityService {
 
     /**
      * For unit testing only, inject mock
-     *
-     * @param activityRepository
      */
     public void setActivityRepository(ActivityRepository activityRepository) {
         this.activityRepository = activityRepository;

@@ -16,11 +16,8 @@ ref: [deploy-spring-boot-java-app-on-linux](https://docs.microsoft.com/en-us/azu
 ref: [deploy-spring-boot-java-app-on-kubernetes](https://docs.microsoft.com/en-us/azure/developer/java/spring-framework/deploy-spring-boot-java-app-on-kubernetes)
 ref: [spring-boot-for-azure](https://spring.io/guides/gs/spring-boot-for-azure/)
 We are using [jib](https://cloud.google.com/java/getting-started/jib) to build docker image 
+
 App service edit docker registry in Azure Admin GUI: App Services | gunnarro-web | Deployment Center
-
-mvn azure-webapp:deploy
-
-az acr login -n gunnarroregistry && mvn compile jib:build -P build-docker
 
 ## Code
 - [GitHub](https://github.com) Code repository

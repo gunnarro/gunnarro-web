@@ -8,8 +8,7 @@ import com.gunnarro.followup.repository.table.user.ProfilesTable;
 import com.gunnarro.followup.repository.table.user.RolesTable;
 import com.gunnarro.followup.repository.table.user.UsersLogTable;
 import com.gunnarro.followup.repository.table.user.UsersTable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -26,11 +25,10 @@ import java.util.Objects;
  *
  * @author admin
  */
+@Slf4j
 @Repository
 // @Transactional
 public class UserAccountRepositoryImpl extends BaseJdbcRepository implements UserAccountRepository {
-
-    private static final Logger LOG = LoggerFactory.getLogger(UserAccountRepositoryImpl.class);
 
     public UserAccountRepositoryImpl() {
         super(null);
@@ -45,7 +43,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
      */
     @Override
     public Profile getProfile(Integer userId) {
-        return getJdbcTemplate().queryForObject("SELECT * FROM profiles WHERE fk_user_id = ?", new Object[]{userId}, ProfilesTable.mapToProfileRM());
+        return getJdbcTemplate().queryForObject("SELECT * FROM profiles WHERE fk_user_id = ?", ProfilesTable.mapToProfileRM(), userId);
     }
 
     /**
@@ -54,13 +52,13 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public LocalUser getUser(Integer userId) {
         try {
-            LocalUser user = getJdbcTemplate().queryForObject("SELECT * FROM users WHERE id = ?", new Object[]{userId}, UsersTable.mapToUserRM());
+            LocalUser user = getJdbcTemplate().queryForObject("SELECT * FROM users WHERE id = ?", UsersTable.mapToUserRM(), userId);
             if (user != null) {
                 user.setRoles(getUserRoles(user.getId()));
             }
             return user;
         } catch (Exception erae) {
-            LOG.debug("userId: {}, Error: {}", userId, erae.toString());
+            log.debug("userId: {}, Error: {}", userId, erae.toString());
             return null;
         }
     }
@@ -71,13 +69,13 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public LocalUser getUser(String userName) {
         try {
-            LocalUser user = getJdbcTemplate().queryForObject("SELECT * FROM users WHERE username = ?", new Object[]{userName}, UsersTable.mapToUserRM());
+            LocalUser user = getJdbcTemplate().queryForObject("SELECT * FROM users WHERE username = ?", UsersTable.mapToUserRM(), userName);
             if (user != null) {
                 user.setRoles(getUserRoles(user.getId()));
             }
             return user;
         } catch (Exception erae) {
-            LOG.debug("username: {}, Error: {}", userName, erae.toString());
+            log.debug("username: {}, Error: {}", userName, erae.toString());
             return null;
         }
     }
@@ -90,9 +88,9 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         query.append(" WHERE l.fk_user_id = ?");
         query.append(" AND l.fk_role_id = r.id");
         try {
-            roles = getJdbcTemplate().query(query.toString(), new Object[]{userId}, RolesTable.mapToRoleRM());
+            roles = getJdbcTemplate().query(query.toString(), RolesTable.mapToRoleRM(), userId);
         } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+            log.debug("Error: {}", erae.toString());
         }
         // have to get privileges
         for (Role r : roles) {
@@ -109,9 +107,9 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         query.append(" AND l.fk_role_id = r.id");
         query.append(" AND l.fk_role_id = ?");
         try {
-            return getJdbcTemplate().query(query.toString(), new Object[]{roleId}, UserAccountRowMapper.mapToPrivilegeRM());
+            return getJdbcTemplate().query(query.toString(), UserAccountRowMapper.mapToPrivilegeRM(), roleId);
         } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+            log.debug("Error: {}", erae.toString());
             return new ArrayList<>();
         }
     }
@@ -128,7 +126,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         // for (Role role : user.getRoles()) {
         // addRoleToUser(user.getUsername(), role);
         // }
-        LOG.debug("updated user: {}", user);
+        log.debug("updated user: {}", user);
         return rows;
     }
 
@@ -146,13 +144,13 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public List<LocalUser> getUsers() {
         try {
-            List<LocalUser> users = getJdbcTemplate().query("SELECT * FROM users", new Object[]{}, UsersTable.mapToUserRM());
+            List<LocalUser> users = getJdbcTemplate().query("SELECT * FROM users", UsersTable.mapToUserRM());
             for (LocalUser user : users) {
                 user.setRoles(getUserRoles(user.getId()));
             }
             return users;
         } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+            log.debug("Error: {}", erae.toString());
             return new ArrayList<>();
         }
     }
@@ -163,9 +161,9 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public List<String> getUserRoles() {
         try {
-            return getJdbcTemplate().query("SELECT DISTINCT * FROM roles", new Object[]{}, RolesTable.mapToRoleNameRM());
+            return getJdbcTemplate().query("SELECT DISTINCT * FROM roles", RolesTable.mapToRoleNameRM());
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             return new ArrayList<>();
         }
     }
@@ -189,7 +187,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         for (Role role : user.getRoles()) {
             createUserRoleLnk(id, role.getId());
         }
-        LOG.debug("created user, id: {} ", id);
+        log.debug("created user, id: {} ", id);
         return id;
     }
 
@@ -197,7 +195,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
         KeyHolder keyHolder = new GeneratedKeyHolder();
         getJdbcTemplate().update(UserRoleLnkTable.createInsertPreparedStatement(userId, roleId), keyHolder);
         int id = Objects.requireNonNull(keyHolder.getKey()).intValue();
-        LOG.debug("created link, id: {}, userId: {}, roleId: {}", id, userId, roleId);
+        log.debug("created link, id: {}, userId: {}, roleId: {}", id, userId, roleId);
     }
 
     /**
@@ -224,9 +222,9 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public List<UserLog> getUserLogs() {
         try {
-            return getJdbcTemplate().query("SELECT * FROM user_details_log ORDER BY last_logged_in_date_time DESC", new Object[]{}, UsersLogTable.mapToUserLogRM());
+            return getJdbcTemplate().query("SELECT * FROM user_details_log ORDER BY last_logged_in_date_time DESC", UsersLogTable.mapToUserLogRM());
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             return new ArrayList<>();
         }
     }
@@ -237,9 +235,9 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
     @Override
     public UserLog getUserLastLogin(Integer userId) {
         try {
-            return getJdbcTemplate().queryForObject("SELECT * FROM user_details_log WHERE fk_user_id = ?", new Object[]{userId}, UsersLogTable.mapToUserLogRM());
+            return getJdbcTemplate().queryForObject("SELECT * FROM user_details_log WHERE fk_user_id = ?", UsersLogTable.mapToUserLogRM(), userId);
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             return null;
         }
     }
@@ -249,7 +247,7 @@ public class UserAccountRepositoryImpl extends BaseJdbcRepository implements Use
      */
     @Override
     public void checkIfUserIsBlocked(Integer userId) throws SecurityException {
-        LOG.debug("check if user is blocked! userId: {}", userId);
+        log.debug("check if user is blocked! userId: {}", userId);
     }
 
     /**

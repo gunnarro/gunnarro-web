@@ -6,8 +6,7 @@ import com.gunnarro.followup.repository.BaseJdbcRepository;
 import com.gunnarro.followup.repository.mapper.ActivityRowMapper;
 import com.gunnarro.followup.repository.table.activity.ActivityLogTable;
 import com.gunnarro.followup.service.exception.ApplicationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,10 +16,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Repository
 public class ActivityRepositoryImpl extends BaseJdbcRepository implements ActivityRepository {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ActivityRepositoryImpl.class);
 
     @Autowired
     public ActivityRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -32,15 +30,13 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
      */
     @Override
     public int createActivityLog(ActivityLog activityLog) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug(activityLog.toString());
-        }
+        log.debug("{}", activityLog.toString());
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             getJdbcTemplate().update(ActivityLogTable.createInsertPreparedStatement(activityLog), keyHolder);
             return Objects.requireNonNull(keyHolder.getKey()).intValue();
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             throw new ApplicationException(e.getMessage());
         }
     }
@@ -52,7 +48,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
     public int deleteActivityLog(Integer userId, Integer id) {
         int rows = getJdbcTemplate().update("DELETE FROM activity_log WHERE id = ? AND fk_user_id = ?",
                 id, userId);
-        LOG.debug("deleted activity log with id={}, deleted rows = {}", id, rows);
+        log.debug("deleted activity log with id={}, deleted rows = {}", id, rows);
         return rows;
     }
 
@@ -68,10 +64,10 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
             query.append(" WHERE l.id = ?");
             // query.append(" AND l.fk_user_id = ?");
             query.append(" AND l.fk_user_id = u.id");
-            return getJdbcTemplate().queryForObject(query.toString(), new Object[]{activityLogId},
-                    ActivityRowMapper.mapToActivityLogRM());
+            return getJdbcTemplate().queryForObject(query.toString(),
+                    ActivityRowMapper.mapToActivityLogRM(), activityLogId);
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             return null;
         }
     }
@@ -88,8 +84,8 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
         query.append(" AND l.fk_user_id = u.id");
         query.append(" AND l.fk_activity_id = a.id");
         query.append(" ORDER BY l.last_modified_date_time DESC");
-        return getJdbcTemplate().query(query.toString(), new Object[]{userId},
-                ActivityRowMapper.mapToActivityLogRM());
+        return getJdbcTemplate().query(query.toString(),
+                ActivityRowMapper.mapToActivityLogRM(), userId);
     }
 
     /**
@@ -97,9 +93,7 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
      */
     @Override
     public int updateActivityLog(ActivityLog activityLog) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug(activityLog.toString());
-        }
+        log.debug("{}", activityLog.toString());
         return getJdbcTemplate().update(ActivityLogTable.createUpdateQuery(),
                 ActivityLogTable.createUpdateParam(activityLog));
     }
@@ -116,12 +110,12 @@ public class ActivityRepositoryImpl extends BaseJdbcRepository implements Activi
         // sqlQuery.append(" AND l.fk_user_id = u.id");
         sqlQuery.append("SELECT * FROM users WHERE username = ?");
         try {
-            String name = getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{logEventId},
-                    String.class);
+            String name = getJdbcTemplate().queryForObject(sqlQuery.toString(),
+                    String.class, logEventId);
             assert name != null;
             return name.equals(username);
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             // ignore this
             return false;
         }

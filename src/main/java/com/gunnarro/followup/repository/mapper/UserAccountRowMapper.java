@@ -1,6 +1,7 @@
 package com.gunnarro.followup.repository.mapper;
 
 import com.gunnarro.followup.domain.user.Privilege;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 
@@ -22,9 +23,9 @@ public class UserAccountRowMapper {
 
 
     public static SingleColumnRowMapper<Integer> mapCountRM() {
-        return new SingleColumnRowMapper<Integer>() {
+        return new SingleColumnRowMapper<>() {
             @Override
-            public Integer mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+            public Integer mapRow(@NotNull ResultSet resultSet, int rowNum) throws SQLException {
                 return resultSet.getInt("count");
             }
         };

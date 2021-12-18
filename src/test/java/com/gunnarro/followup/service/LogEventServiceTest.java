@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class, LogEventServiceImpl.class, AuthenticationFacade.class, FileUploadServiceImpl.class})
 @Transactional(timeout = 10)
-public class LogEventServiceTest extends DefaultTestConfig {
+class LogEventServiceTest extends DefaultTestConfig {
 
     @Mock
     private static AuthenticationFacade authenticationFacadeMock;
@@ -66,7 +66,7 @@ public class LogEventServiceTest extends DefaultTestConfig {
     // }
 
     @Test
-    public void getLogEventsWithComments() {
+    void getLogEventsWithComments() {
         LogEntry logEvent = logEventService.getLogEvent(5, 4);
         Assertions.assertNotNull(logEvent);
         Assertions.assertEquals(5, logEvent.getFkUserId().intValue());

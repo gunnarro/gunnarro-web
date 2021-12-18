@@ -1,5 +1,5 @@
 package com.gunnarro.followup.utillity;
-
+/**
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorker;
@@ -15,6 +15,7 @@ import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
+*/
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ import java.io.FileOutputStream;
 
 // https://itextpdf.com/en/demos/convert-html-css-to-pdf-free-online
 @Disabled
-public class HtmlToPdfTest {
+class HtmlToPdfTest {
 
     public static final String HTML = "src/main/resources/templates/gr-gr-cv-en.html";
     public static final String CSS = "src/main/resources/static/css/cv/bootstrap.min-4.5.2.css";
@@ -32,9 +33,9 @@ public class HtmlToPdfTest {
     public static final String IMG_PATH = "src/resources/static/images/profile.jpg";
     public static final String RELATIVE_PATH = "~/code/github/microapp-master/diet-manager";
 
-
+/*
     @Test
-    public void convertHtmlToPdf() throws Exception {
+    void convertHtmlToPdf() throws Exception {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("src/test/resources/cv.pdf"));
         document.open();
@@ -47,7 +48,7 @@ public class HtmlToPdfTest {
 
 
     @Test
-    public void createPdfTest() throws Exception {
+    void createPdfTest() throws Exception {
         // step 1
         Document document = new Document();
         // step 2
@@ -82,7 +83,7 @@ public class HtmlToPdfTest {
     }
 
     @Test
-    public void createPdf() throws Exception {
+    void createPdf() throws Exception {
         // step 1
         Document document = new Document();
 
@@ -117,4 +118,6 @@ public class HtmlToPdfTest {
         // step 5
         document.close();
     }
+
+ */
 }

@@ -6,8 +6,7 @@ import com.gunnarro.followup.endpoint.AuthenticationFacade;
 import com.gunnarro.followup.repository.LogEventRepository;
 import com.gunnarro.followup.service.FileUploadService;
 import com.gunnarro.followup.service.LogEventService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -17,10 +16,9 @@ import java.util.List;
 /**
  * @author mentos
  */
+@Slf4j
 @Service
 public class LogEventServiceImpl implements LogEventService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(LogEventServiceImpl.class);
 
     @Autowired
     protected AuthenticationFacade authenticationFacade;
@@ -31,13 +29,12 @@ public class LogEventServiceImpl implements LogEventService {
     @Autowired
     private LogEventRepository logEventRepository;
 
-    private boolean checkPermission(Integer logEventId) {
+    private void checkPermission(Integer logEventId) {
         boolean hasPermission = logEventRepository.hasPermission(logEventId,
                 authenticationFacade.getAuthentication().getName());
         if (!hasPermission) {
             throw new SecurityException("Access denied");
         }
-        return true;
     }
 
     /**
@@ -53,9 +50,7 @@ public class LogEventServiceImpl implements LogEventService {
      */
     @Override
     public LogEntry getLogEvent(Integer userId, Integer logEntryId) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("userId = {}, logEntryId = {}", +userId, logEntryId);
-        }
+        log.debug("userId = {}, logEntryId = {}", +userId, logEntryId);
         LogEntry logEvent = logEventRepository.getLogEvent(userId, logEntryId);
         logEvent.setResources(fileUploadService.getImages(logEntryId.toString()));
         return logEvent;

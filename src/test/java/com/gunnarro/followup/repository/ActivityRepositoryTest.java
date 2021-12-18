@@ -19,7 +19,7 @@ import java.util.List;
 @ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class})
 @Transactional
 @Rollback
-public class ActivityRepositoryTest extends DefaultTestConfig {
+class ActivityRepositoryTest extends DefaultTestConfig {
 
     @Autowired
     private ActivityRepository activityRepository;
@@ -29,14 +29,14 @@ public class ActivityRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void getActivityLogs() {
+    void getActivityLogs() {
         List<ActivityLog> activityLogs = activityRepository.getActivityLogs(1);
         System.out.println(activityLogs);
         Assertions.assertNotNull(activityLogs);
     }
 
     @Test
-    public void createActivityLog() {
+    void createActivityLog() {
         Activity a = Activity.builder()
                 .id(1)
                 .build();
@@ -54,7 +54,7 @@ public class ActivityRepositoryTest extends DefaultTestConfig {
     }
 
     @Test
-    public void deleteActivityLog() {
+    void deleteActivityLog() {
         Assertions.assertTrue(activityRepository.deleteActivityLog(1, 1) == 1);
     }
 }

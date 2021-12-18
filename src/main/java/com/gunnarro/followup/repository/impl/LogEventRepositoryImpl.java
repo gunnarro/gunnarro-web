@@ -8,8 +8,7 @@ import com.gunnarro.followup.repository.mapper.LogEventRowMapper;
 import com.gunnarro.followup.repository.table.log.EventLogTable;
 import com.gunnarro.followup.repository.table.log.LogCommentTable;
 import com.gunnarro.followup.service.exception.ApplicationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,10 +20,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Repository
 public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEventRepository {
-
-    private static final Logger LOG = LoggerFactory.getLogger(LogEventRepositoryImpl.class);
 
     @Autowired
     public LogEventRepositoryImpl(JdbcTemplate jdbcTemplate) {
@@ -36,13 +34,13 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
      */
     @Override
     public int createLogEvent(LogEntry logEntry) {
-        LOG.debug("{}", logEntry);
+        log.debug("{}", logEntry);
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             getJdbcTemplate().update(EventLogTable.createInsertPreparedStatement(logEntry), keyHolder);
             return Objects.requireNonNull(keyHolder.getKey()).intValue();
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             throw new ApplicationException(e.getMessage());
         }
     }
@@ -52,13 +50,13 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
      */
     @Override
     public int createLogComment(LogComment logComment) {
-        LOG.debug("{}", logComment);
+        log.debug("{}", logComment);
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             getJdbcTemplate().update(LogCommentTable.createInsertPreparedStatement(logComment), keyHolder);
             return Objects.requireNonNull(keyHolder.getKey()).intValue();
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             throw new ApplicationException(e.getMessage());
         }
     }
@@ -70,7 +68,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
     public int deleteLogComment(Integer userId, Integer id) {
         int rows = getJdbcTemplate().update("DELETE FROM event_log_comment WHERE id = ? AND fk_user_id = ?",
                 id, userId);
-        LOG.debug("deleted log comment with id={}, deleted rows={}", id, rows);
+        log.debug("deleted log comment with id={}, deleted rows={}", id, rows);
         return rows;
     }
 
@@ -81,7 +79,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
     public int deleteLogEvent(Integer userId, Integer id) {
         int rows = getJdbcTemplate().update("DELETE FROM event_log WHERE id = ? AND fk_user_id = ?",
                 id, userId);
-        LOG.debug("deleted log event with id={}, deleted rows={}", id, rows);
+        log.debug("deleted log event with id={}, deleted rows={}", id, rows);
         return rows;
     }
 
@@ -91,7 +89,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
     @Override
     public Page<LogEntry> getAllLogEvents(Integer userId, int pageNumber, int pageSize) {
         Pageable pageSpecification = PageRequest.of(pageNumber, pageSize, Sort.by("id"));
-        LOG.debug("pageSpecification: {}, offset: {}", pageSpecification, pageSpecification.getOffset());
+        log.debug("pageSpecification: {}, offset: {}", pageSpecification, pageSpecification.getOffset());
         StringBuilder inQuery = new StringBuilder();
         inQuery.append("IN(?");
         List<Integer> grantedUserIdsForFollower = getGrantedUserIdsForFollower(userId);
@@ -114,9 +112,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(" ORDER BY l.last_modified_date_time DESC");
         query.append(" LIMIT ").append(pageSpecification.getPageSize()).append(" OFFSET ").append(pageSpecification.getOffset());
         int totalCount = count("SELECT count(*) FROM event_log");
-        List<LogEntry> list = getJdbcTemplate().query(query.toString(), grantedUserIdsForFollower.toArray(),
-                LogEventRowMapper.mapToLogEntryRM());
-        LOG.debug("list size: {}", list.size());
+        List<LogEntry> list = getJdbcTemplate().query(query.toString(), LogEventRowMapper.mapToLogEntryRM(), grantedUserIdsForFollower.toArray());
+        log.debug("list size: {}", list.size());
         return new PageImpl<>(list, pageSpecification, totalCount);
     }
 
@@ -138,13 +135,13 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
             query.append(" WHERE l.id = ?");
             // query.append(" AND l.fk_user_id = ?");
             query.append(" AND l.fk_user_id = u.id");
-            LogEntry log = getJdbcTemplate().queryForObject(query.toString(), new Object[]{logEntryId},
-                    LogEventRowMapper.mapToLogEntryRM());
+            LogEntry log = getJdbcTemplate().queryForObject(query.toString(),
+                    LogEventRowMapper.mapToLogEntryRM(), logEntryId);
             List<LogComment> logComments = getLogComments(Objects.requireNonNull(log).getId());
             log.setLogComments(logComments);
             return log;
         } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
+            log.debug("Error: {}", erae.toString());
             return null;
         }
     }
@@ -160,8 +157,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(" WHERE l.fk_event_log_id = ?");
         query.append(" AND l.fk_user_id = u.id");
         query.append(" ORDER BY l.created_date_time ASC");
-        return getJdbcTemplate().query(query.toString(), new Object[]{logEntryId},
-                LogEventRowMapper.mapToLogCommentRM());
+        return getJdbcTemplate().query(query.toString(),
+                LogEventRowMapper.mapToLogCommentRM(), logEntryId);
     }
 
     /**
@@ -176,8 +173,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(" AND l.fk_user_id = u.id");
         query.append(" AND l.level = ?");
         query.append(" ORDER BY l.last_modified_date_time DESC");
-        return getJdbcTemplate().query(query.toString(), new Object[]{userId, type.replace("*", "%")},
-                LogEventRowMapper.mapToLogEntryRM());
+        return getJdbcTemplate().query(query.toString(),
+                LogEventRowMapper.mapToLogEntryRM(), userId, type.replace("*", "%"));
     }
 
     /**
@@ -192,8 +189,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(" AND l.fk_user_id = u.id");
         query.append(" AND l.title = ?");
         query.append(" ORDER BY l.last_modified_date_time DESC");
-        return getJdbcTemplate().query(query.toString(), new Object[]{userId, title.replace("*", "%")},
-                LogEventRowMapper.mapToLogEntryRM());
+        return getJdbcTemplate().query(query.toString(),
+                LogEventRowMapper.mapToLogEntryRM(), userId, title.replace("*", "%"));
     }
 
     /**
@@ -208,8 +205,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(" AND l.fk_user_id = u.id");
         query.append(" AND l.content = ?");
         query.append(" ORDER BY l.last_modified_date_time DESC");
-        return getJdbcTemplate().query(query.toString(), new Object[]{userId, text.replace("*", "%")},
-                LogEventRowMapper.mapToLogEntryRM());
+        return getJdbcTemplate().query(query.toString(),
+                LogEventRowMapper.mapToLogEntryRM(), userId, text.replace("*", "%"));
     }
 
     /**
@@ -226,8 +223,8 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         query.append(" WHERE l.fk_user_id = ?");
         query.append(" AND l.fk_user_id = u.id");
         query.append(" ORDER BY l.last_modified_date_time DESC");
-        return getJdbcTemplate().query(query.toString(), new Object[]{userId},
-                LogEventRowMapper.mapToLogEntryRM());
+        return getJdbcTemplate().query(query.toString(),
+                LogEventRowMapper.mapToLogEntryRM(), userId);
     }
 
     /**
@@ -243,11 +240,10 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         sqlQuery.append(" ORDER BY last_modified_date_time DESC");
         sqlQuery.append(" LIMIT 1");
         try {
-            return getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{"REPORT"},
-                    LogEventRowMapper.mapToLogEntryRM());
+            return getJdbcTemplate().queryForObject(sqlQuery.toString(),
+                    LogEventRowMapper.mapToLogEntryRM(), "REPORT");
         } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.toString());
-
+            log.debug("Error: {}", erae.toString());
             // ignore this
             return null;
         }
@@ -266,10 +262,10 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         sqlQuery.append(" ORDER BY last_modified_date_time DESC");
         sqlQuery.append(" LIMIT 1");
         try {
-            return getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{forLastDays, type},
-                    LogEventRowMapper.mapToLogEntryRM());
+            return getJdbcTemplate().queryForObject(sqlQuery.toString(),
+                    LogEventRowMapper.mapToLogEntryRM(), forLastDays, type);
         } catch (Exception erae) {
-            LOG.debug("Error: {}", erae.getMessage());
+            log.debug("Error: {}", erae.getMessage());
             // ignore this
             return null;
         }
@@ -280,7 +276,7 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
      */
     @Override
     public int updateLogEvent(LogEntry logEntry) {
-        LOG.debug("{}", logEntry);
+        log.debug("{}", logEntry);
         return getJdbcTemplate().update(EventLogTable.createUpdateQuery(), EventLogTable.createUpdateParam(logEntry));
     }
 
@@ -306,12 +302,12 @@ public class LogEventRepositoryImpl extends BaseJdbcRepository implements LogEve
         sqlQuery.append(" WHERE l.id = ?");
         sqlQuery.append(" AND l.fk_user_id = u.id");
         try {
-            String name = getJdbcTemplate().queryForObject(sqlQuery.toString(), new Object[]{logEventId},
-                    String.class);
+            String name = getJdbcTemplate().queryForObject(sqlQuery.toString(),
+                    String.class, logEventId);
             assert name != null;
             return name.equals(username);
         } catch (Exception e) {
-            LOG.error("{}", e.getMessage());
+            log.error("{}", e.getMessage());
             // ignore this
             return false;
         }

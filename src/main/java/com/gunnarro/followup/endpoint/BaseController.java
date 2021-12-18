@@ -6,6 +6,7 @@ import com.gunnarro.followup.service.LogEventService;
 import com.gunnarro.followup.service.exception.ApplicationException;
 import com.gunnarro.followup.service.exception.UploadFileException;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,8 @@ import java.sql.SQLException;
 /**
  * URL security is applied in the spring security config.
  */
+@Slf4j
 public class BaseController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 
     @Autowired
     protected AuthenticationFacade authenticationFacade;
@@ -114,8 +114,8 @@ public class BaseController {
     }
 
     private ModelAndView handleException(String requestUrl, String backUrl, Exception e, String errorMsg) {
-        LOG.error("Requested URL=" + requestUrl);
-        LOG.error("Exception Raised", e);
+        log.error("Requested URL=" + requestUrl);
+        log.error("Exception Raised", e);
         ModelAndView modelAndView = new ModelAndView("error");
         modelAndView.getModel().put("errorMsg", errorMsg);
         modelAndView.getModel().put("requestUrl", requestUrl);
