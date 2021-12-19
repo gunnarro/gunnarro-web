@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header-css">
+<head th:replace="fragments/header :: header-include">
 </head>
     <style type="text/css">
 .d-flex {
@@ -89,7 +89,6 @@ section.resume-section .resume-section-content {
     font-family: monospace !important;
 }
 </style>
-</head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <!-- left side-->
@@ -115,7 +114,7 @@ section.resume-section .resume-section-content {
     <section class="resume-section bg-primary" id="about">
         <div class="resume-section-content p-1">
             <div align="right">
-                <label class="text-created">opprettet: 07.11.2021</label>
+                <label class="text-created">opprettet: 19.12.2021</label>
             </div>
             <div class="d-flex flex-column flex-md-row">
                 <div align="center" class="flex-grow-1">
@@ -133,6 +132,13 @@ section.resume-section .resume-section-content {
             <h2 class="mb-3">Kompetanse</h2>
             <hr class="bg-primary"/>
             <ul class="mb-3 text-list">
+                <li>Roller/Ansvar
+                    <ul>
+                        <li>System ansvarlig - plattform, applikasjoner</li>
+                        <li>AM,AO - applikasjoner</li>
+                        <li>Chapter lead - Java</li>
+                    </ul>
+                </li>
                 <li>3 års erfaring som arkitekt og utvikler i Telenor med å bygge opp ny microservice plattform for TV
                     tjenester. Plattformen betjener blant annet Telenor Mine sider med hundretusenvis av brukere.
                     <ul>
@@ -207,9 +213,9 @@ section.resume-section .resume-section-content {
                         <dt class="col-sm-3 dt-style">Meldingskø/bus</dt>
                         <dd class="col-sm-8 text-gradient">oracle service bus, jms, rabbitmq, activemq</dd>
                         <dt class="col-sm-3 dt-style">Applikasjons container</dt>
-                        <dd class="col-sm-8 text-gradient">tomcat, jetty, docker</dd>
+                        <dd class="col-sm-8 text-gradient">tomcat, jetty</dd>
                         <dt class="col-sm-3 dt-style">Applikasjons servere</dt>
-                        <dd class="col-sm-8 text-gradient">weblogic, apache, tomcat, jetty</dd>
+                        <dd class="col-sm-8 text-gradient">weblogic, apache</dd>
                         <dt class="col-sm-3 dt-style">Skyløsninger</dt>
                         <dd class="col-sm-8 text-gradient">openshift, google cloud, Azure</dd>
                     </dl>

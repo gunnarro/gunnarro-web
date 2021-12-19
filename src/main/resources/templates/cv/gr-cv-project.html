@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header-css">
+<head th:replace="fragments/header :: header-include">
 </head>
-
-    <style type="text/css">
+<style type="text/css">
 .d-flex {
   display: flex !important;
 }
@@ -60,10 +59,7 @@ section.resume-section .resume-section-content {
 	font-size: .60rem !important;
 	font-family: SFMono-Regular !important;
 }
-
-
-    </style>
-</head>
+</style>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <!-- convert to pdf -->

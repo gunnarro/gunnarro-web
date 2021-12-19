@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header-css">
+<head th:replace="fragments/header :: header-include">
 </head>
 
 <body class="bg">
@@ -11,6 +11,13 @@
         <h3 class="card-header">Release notes</h3>
         <div class="card-body">
             <div>
+                <h5 class="card-title"><a href="https://github.com/gunnarro/gunnarro-web">2021-12-19 <span>v1.6.1</span></a></h5>
+                <ul>
+                    <li>log4j2 fix</li>
+                    <li>minor improvements</li>
+                    <li>cv updated</li>
+                </ul>
+
                 <h5 class="card-title"><a href="https://github.com/gunnarro/gunnarro-web">2021-11-05 <span>v1.6.0</span></a></h5>
                 <ul>
                     <li>Prepared for Azure</li>
@@ -35,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="fragments/footer :: footer"></div>
 </div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
