@@ -42,12 +42,12 @@ public class DataSourceConfiguration {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName(jdbcDriverClassName);
         dataSourceBuilder.url(jdbcUrl);
-        dataSourceBuilder.username(jdbcUrl);
+        dataSourceBuilder.username(jdbcUser);
         dataSourceBuilder.password(jdbcPwd);
 
         log.info("jdbc url   : {}", jdbcUrl);
         log.info("jdbc user  : {}", jdbcUser);
-        log.info("jdbc pwd   : {}", jdbcPwd.length());
+        log.info("jdbc pwd   : {}", jdbcPwd);
         log.info("jdbc driver: {}", jdbcDriverClassName);
         log.info(System.getProperty("spring.config.location"));
 
