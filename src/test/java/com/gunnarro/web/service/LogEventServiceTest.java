@@ -26,10 +26,11 @@ import static org.mockito.Mockito.when;
 @Transactional(timeout = 10)
 class LogEventServiceTest extends DefaultTestConfig {
 
-    @Mock
-    private static AuthenticationFacade authenticationFacadeMock;
     @Autowired
     protected LogEventServiceImpl logEventService;
+
+    @Mock
+    private static AuthenticationFacade authenticationFacadeMock;
 
     @AfterAll
     public static void terminate() {
@@ -37,15 +38,12 @@ class LogEventServiceTest extends DefaultTestConfig {
     }
 
     @BeforeEach
-    public void setUp() throws Exception {
-        // Because of security we have to set user and pwd before every unit
-        // test
+    public void setUp()  {
+        // Because of security we have to set user and pwd before every unittest
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken("admin", "uiL2oo3");
         SecurityContext ctx = SecurityContextHolder.createEmptyContext();
         SecurityContextHolder.setContext(ctx);
         ctx.setAuthentication(authRequest);
-
-        // logEventService.setAuthenticationFacade(authenticationFacadeMock);
 
         // create mock
         LocalUser user = new LocalUser();
@@ -54,19 +52,18 @@ class LogEventServiceTest extends DefaultTestConfig {
         when(authenticationFacadeMock.getLoggedInUser()).thenReturn(user);
     }
 
-    // @Test(expected = SecurityException.class)
-    // public void hasPermission_access_denied() {
-    // logEventService.checkPermission(3, "guest");
-    // Assert.assertTrue(false);
-    // }
-    //
-    // @Test
-    // public void hasPermission_access_ok() {
-    // Assert.assertTrue(logEventService.checkPermission(3, "pepilie"));
-    // }
+    @Test
+    void deleteLogEventAccessDenied() {
+        Assertions.assertThrows(SecurityException.class, () -> logEventService.deleteLogEvent(34, 23));
+    }
 
     @Test
-    void getLogEventsWithComments() {
+    void getLogEvents() {
+        Assertions.assertEquals(1, logEventService.getLogEvents(5).size());
+    }
+
+    @Test
+    void getLogEventWithComments() {
         LogEntry logEvent = logEventService.getLogEvent(5, 4);
         Assertions.assertNotNull(logEvent);
         Assertions.assertEquals(5, logEvent.getFkUserId().intValue());
@@ -80,51 +77,4 @@ class LogEventServiceTest extends DefaultTestConfig {
         Assertions.assertEquals("added comment 1", logEvent.getLogComments().get(0).getContent());
     }
 
-//    @Test
-//    public void logEventCRUD() {
-//        int adminUserId = 1;
-//        // Read
-//        Assert.assertEquals(2, logEventService.getAllLogEvents(adminUserId).size());
-//        LogEntry log = new LogEntry();
-//        log.setFkUserId(adminUserId);
-//        log.setTitle("title");
-//        log.setContent("content");
-//        // Create
-//        int logEventId = logEventService.saveLogEvent(log);
-//        Assert.assertEquals(3, logEventService.getAllLogEvents(adminUserId).size());
-//        LogEntry logEvent = logEventService.getLogEvent(adminUserId, logEventId);
-//        Assert.assertEquals("title", logEvent.getTitle());
-//        Assert.assertEquals("content", logEvent.getContent());
-//        Assert.assertEquals(1, logEvent.getFkUserId().intValue());
-//        // Update
-//        logEvent.setContent("updated content");
-//        logEventService.saveLogEvent(logEvent);
-//        LogEntry updatedLogEvent = logEventService.getLogEvent(adminUserId, logEventId);
-//        Assert.assertEquals("updated content", updatedLogEvent.getContent());
-//        // Delete
-//        int deletedRows = logEventService.deleteLogEvent(adminUserId, logEventId);
-//        Assert.assertEquals(1, deletedRows);
-//        Assert.assertEquals(2, logEventService.getAllLogEvents(adminUserId).size());
-//    }
-//
-//    @Test
-//    public void getLogEventsFiltered() {
-//        Assert.assertEquals(0, logEventService.getLogEvents(99, "", "").size());
-//        Assert.assertEquals(0, logEventService.getLogEvents(99, null, null).size());
-//        Assert.assertEquals(0, logEventService.getLogEvents(99, "title", "*dd*").size());
-//        Assert.assertEquals(0, logEventService.getLogEvents(99, "type", "INFO").size());
-//        Assert.assertEquals(0, logEventService.getLogEvents(99, "content", "*").size());
-//    }
-//
-//    /**
-//     * users must see each other log events
-//     */
-//    @Disabled
-//    @Test
-//    public void noLogEventesForUser() {
-//        int userId = 3;
-//        Assert.assertEquals(0, logEventService.getAllLogEvents(userId).size());
-//        Assert.assertNull(logEventService.getLogEvent(userId, 5));
-//        Assert.assertNull(logEventService.getLogEvent(userId, 3));
-//    }
 }

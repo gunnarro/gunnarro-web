@@ -111,20 +111,4 @@ public class LogEventServiceImpl implements LogEventService {
         }
     }
 
-    /**
-     * For unit testing only, inject mock
-     *
-     * @param logEventRepository
-     */
-    public void setLogEventRepository(LogEventRepository logEventRepository) {
-        this.logEventRepository = logEventRepository;
-    }
-
-    /**
-     * For unit testing only, inject mock
-     */
-    public void setAuthenticationFacade(AuthenticationFacade authenticationFacade) {
-        this.authenticationFacade = authenticationFacade;
-    }
-
 }

@@ -9,6 +9,7 @@ import com.gunnarro.web.repository.table.user.RolesTable;
 import com.gunnarro.web.repository.table.user.UsersLogTable;
 import com.gunnarro.web.repository.table.user.UsersTable;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -21,7 +22,6 @@ import java.util.Objects;
 
 
 /**
- * Database: jbossews User: admincnVhNH8 Password: suSNhqkXILV-
  *
  * @author admin
  */
@@ -30,10 +30,7 @@ import java.util.Objects;
 // @Transactional
 public class UserAccountRepositoryImpl extends BaseJdbcRepository implements UserAccountRepository {
 
-    public UserAccountRepositoryImpl() {
-        super(null);
-    }
-
+    @Autowired
     public UserAccountRepositoryImpl(JdbcTemplate jdbcTemplate) {
         super(jdbcTemplate);
     }

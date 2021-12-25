@@ -25,37 +25,17 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 public class TestMariDBDataSourceConfiguration {
-/*
-    @Value("${mariadb.jdbc.url}")
-    private String jdbcUrl;
-
-    @Value("${mariadb.jdbc.user}")
-    private String jdbcUser;
-
-    @Value("${mariadb.jdbc.pwd}")
-    private String jdbcPwd;
-
-    @Bean
-    @Qualifier(value = "pwdEncoder")
-    public PasswordEncoder passwordEncoder() {
-        String idForEncode = "bcrypt";
-        Map<String, PasswordEncoder> encoders = new HashMap<>();
-        encoders.put(idForEncode, new BCryptPasswordEncoder(13));
-        return new DelegatingPasswordEncoder(idForEncode, encoders);
-    }
-*/
     @Bean
     public MariaDB4jSpringService mariaDB4jSpringService() {
         return new MariaDB4jSpringService();
     }
 
     @Bean
-    public JdbcTemplate dietManagerJdbcTemplate(DataSource dataSource) {
+    public JdbcTemplate databaseJdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
     @Bean
-//    @Qualifier(value = "dietManagerDataSource")
     @Primary
     public DataSource dietManagerDataSource(MariaDB4jSpringService mariaDB4jSpringService) throws ManagedProcessException {
         // Create our database with default root user and no password

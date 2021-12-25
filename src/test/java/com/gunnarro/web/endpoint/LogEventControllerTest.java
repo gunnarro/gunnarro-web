@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.*;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,20 +17,21 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
+//@ContextConfiguration(classes={LogEventServiceImpl.class, FileUploadServiceImpl.class, AuthenticationFacade.class})
 class LogEventControllerTest extends SpringTestSetup {
 
     private static final int ADMIN_USER_ID = 1;
-    @Mock
-    private AuthenticationFacade authenticationFacadeMock;
 
     private LogEventController controller;
+
+    @Mock
+    private AuthenticationFacade authenticationFacadeMock;
 
     @Mock
     private LogEventService logEventServiceMock;
 
     @BeforeEach
     void init() {
-        MockitoAnnotations.initMocks(this);
         controller = new LogEventController();
         controller.setLogEventService(logEventServiceMock);
         controller.setAuthenticationFacade(authenticationFacadeMock);
@@ -51,16 +51,23 @@ class LogEventControllerTest extends SpringTestSetup {
         Assertions.assertEquals("redirect:/log/events", redirectUrl);
     }
 
-    @Test
-    void deleteLogEventNotAllowedToDelete() {
-        when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(null);
-        Assertions.assertThrows(ApplicationException.class, () -> {
-            controller.deletelogEvent(4);
-        });
+    @Test()
+    void deleteLogEventNotFound() {
+        LogEntry logEntry = LogEntry.builder()
+                .fkUserId(ADMIN_USER_ID)
+                .build();
+        when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 43)).thenReturn(logEntry);
+        Assertions.assertThrows(ApplicationException.class, () -> controller.deletelogEvent(45));
     }
 
     @Test
-    void editLogEvent() throws Exception {
+    void deleteLogEventNotAllowedToDelete() {
+        when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(null);
+        Assertions.assertThrows(ApplicationException.class, () -> controller.deletelogEvent(4));
+    }
+
+    @Test
+    void editLogEvent()  {
         LogEntry logEntry = LogEntry.builder()
                 .fkUserId(ADMIN_USER_ID)
                 .build();
@@ -70,16 +77,16 @@ class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    void editLogEventNotAllowedToEdit() throws Exception {
+    void editLogEventNotAllowedToEdit() {
         when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(null);
-        Assertions.assertThrows(ApplicationException.class, () -> {
-            controller.initUpdateLogEventForm(4, null);
-        });
+        Assertions.assertThrows(ApplicationException.class, () ->
+            controller.initUpdateLogEventForm(4, null)
+        );
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    void getLogEvents() throws Exception {
+    void getLogEvents()  {
         List<LogEntry> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             list.add(LogEntry.builder().id(i).build());
@@ -107,7 +114,7 @@ class LogEventControllerTest extends SpringTestSetup {
 
     @Test
     @SuppressWarnings("unchecked")
-    void viewLogEventsAsPlainText() throws Exception {
+    void viewLogEventsAsPlainText() {
         Pageable pageSpecification = PageRequest.of(1, 25, Sort.by("id"));
         Page<LogEntry> page = new PageImpl<>(new ArrayList<>(), pageSpecification, 100);
         when(logEventServiceMock.getAllLogEvents(ADMIN_USER_ID, 1, 25)).thenReturn(page);
@@ -122,7 +129,7 @@ class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    void initNewLogEventForm() throws Exception {
+    void initNewLogEventForm() {
         String redirectUrl = controller.initNewLogEventForm(new ExtendedModelMap());
         Assertions.assertEquals("log/edit-event-log", redirectUrl);
     }

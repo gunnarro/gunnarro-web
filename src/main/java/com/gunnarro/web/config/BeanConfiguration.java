@@ -42,8 +42,14 @@ public class BeanConfiguration {
         return new CustomAccessDeniedHandler();
     }
 
+    /**
+     * Use custom local user service
+     * @return
+     */
+    /*
     @Bean
     public UserDetailsService userDetailsService() {
         return new LocalUserDetailsServiceImpl();
     }
+     */
 }

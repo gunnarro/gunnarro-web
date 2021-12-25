@@ -3,6 +3,7 @@ package com.gunnarro.web.domain.activity;
 import com.gunnarro.web.domain.BaseDomain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalTime;
@@ -10,6 +11,7 @@ import java.time.LocalTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder
+@ToString
 public class ActivityLog extends BaseDomain {
 
     private static final long serialVersionUID = -180659968576477898L;

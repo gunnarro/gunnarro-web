@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  * @author admin
  */
 @Slf4j
-@Service
-@Transactional
+//@Service
+//@Transactional
 public class LocalUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

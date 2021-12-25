@@ -201,4 +201,7 @@ public class LoginController extends BaseController {
 
     @GetMapping("/releasenotes")
     public String releasenotes() { return PUBLIC_DOMAIN + "/release-notes"; }
+
+    @GetMapping("/loglevel")
+    public String loglevel() { return PUBLIC_DOMAIN + "/log"; }
 }

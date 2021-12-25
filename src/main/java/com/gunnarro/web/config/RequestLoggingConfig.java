@@ -37,7 +37,7 @@ public class RequestLoggingConfig {
     @Bean
     public Advisor endpointAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression("execution(public * com.gunnarro.dietmanager.endpoint.*.*(..))");
+        pointcut.setExpression("execution(public * om.gunnarro.web.endpoint.*.*(..))");
         return new DefaultPointcutAdvisor(pointcut, customizableTraceInterceptor());
     }
 }

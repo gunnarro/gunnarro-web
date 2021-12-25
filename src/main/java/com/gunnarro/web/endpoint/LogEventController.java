@@ -6,8 +6,7 @@ import com.gunnarro.web.domain.log.LogEntry;
 import com.gunnarro.web.domain.user.LocalUser;
 import com.gunnarro.web.service.exception.ApplicationException;
 import com.gunnarro.web.utility.Utility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
@@ -30,11 +29,10 @@ import java.util.Map;
  * http://microbuilder.io/blog/2016/01/10/plotting-json-data-with-chart-js.html
  * https://github.com/chartjs/Chart.js/tree/master/dist
  */
+@Slf4j
 @Controller
 @Scope("session")
 public class LogEventController extends BaseController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(LogEventController.class);
 
     private static final String REDIRECT = "redirect";
     private static final String URI_LOG_EVENTS = "/log/events";
@@ -53,7 +51,7 @@ public class LogEventController extends BaseController {
     public ModelAndView getLogEvents(@RequestParam(value = "page", required = false) Integer pageNumber, @RequestParam(value = "size", required = false) Integer pageSize) {
         LocalUser loggedInUser = authenticationFacade.getLoggedInUser();
         Page<LogEntry> logsPage = logEventService.getAllLogEvents(loggedInUser.getId(), pageNumber != null ? pageNumber : 0, pageSize != null ? pageSize : 25);
-        LOG.debug("number = {}, logs = {}, total pages = {}", logsPage.getNumber(), logsPage.getNumberOfElements(), logsPage.getTotalPages());
+        log.debug("number = {}, logs = {}, total pages = {}", logsPage.getNumber(), logsPage.getNumberOfElements(), logsPage.getTotalPages());
         PageWrapper<LogEntry> page = new PageWrapper<>(logsPage, URI_LOG_EVENTS);
         ModelAndView modelView = new ModelAndView("log/view-event-logs");
         modelView.getModel().put("page", page);
@@ -69,7 +67,7 @@ public class LogEventController extends BaseController {
             throw new ApplicationException("Not logged in!");
         }
         LogEntry logEvent = logEventService.getLogEvent(loggedInUser.getId(), logId);
-        LOG.debug("{}", logEvent);
+        log.debug("{}", logEvent);
         ModelAndView modelView = new ModelAndView("log/view-log-event");
         modelView.getModel().put("log", logEvent);
         return modelView;
@@ -80,7 +78,7 @@ public class LogEventController extends BaseController {
     public ModelAndView viewLogEventsAsPlainText() {
         LocalUser loggedInUser = authenticationFacade.getLoggedInUser();
         Page<LogEntry> page = logEventService.getAllLogEvents(loggedInUser.getId(), 1, 25);
-        LOG.debug("number of log entries: {}", page.getNumber());
+        log.debug("number of log entries: {}", page.getNumber());
         ModelAndView modelView = new ModelAndView("log/view-event-logs-txt");
         modelView.getModel().put("page", page);
         return modelView;
@@ -110,15 +108,15 @@ public class LogEventController extends BaseController {
      * User POST for new
      */
     @PostMapping(URI_LOG_EVENT + "/new")
-    public String processNewLogEventForm(@Valid @ModelAttribute("log") LogEntry log, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", log);
+    public String processNewLogEventForm(@Valid @ModelAttribute("log") LogEntry logEntry, BindingResult result, SessionStatus status) {
+        log.debug("{}", logEntry);
         if (result.hasErrors()) {
-            LOG.debug("{}", result);
+            log.debug("{}", result);
             return "log/edit-event-log";
         } else {
             // set created by user id
-            log.setFkUserId(authenticationFacade.getLoggedInUser().getId());
-            this.logEventService.saveLogEvent(log);
+            logEntry.setFkUserId(authenticationFacade.getLoggedInUser().getId());
+            this.logEventService.saveLogEvent(logEntry);
             status.setComplete();
             return String.format("%s:%s", REDIRECT, URI_LOG_EVENTS);
         }
@@ -127,12 +125,11 @@ public class LogEventController extends BaseController {
     @GetMapping(URI_LOG_EVENT + "/edit/{logEventId}")
     public String initUpdateLogEventForm(@PathVariable("logEventId") int logEventId, Model model) {
         LocalUser loggedInUser = authenticationFacade.getLoggedInUser();
-        LogEntry log = logEventService.getLogEvent(loggedInUser.getId(), logEventId);
-        if (log == null) {
+        LogEntry logEntry = logEventService.getLogEvent(loggedInUser.getId(), logEventId);
+        if (logEntry == null) {
             throw new ApplicationException(String.format("Object Not Found, logEventId=%s", logEventId));
         }
-
-        LOG.debug("{}", log);
+        log.debug("{}", logEntry);
         model.addAttribute("log", log);
         return "log/edit-event-log";
     }
@@ -141,13 +138,13 @@ public class LogEventController extends BaseController {
      * Use PUT for updates
      */
     @PostMapping(URI_LOG_EVENT + "/edit")
-    public String processUpdateLogEventForm(@Valid @ModelAttribute("log") LogEntry log, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", log);
+    public String processUpdateLogEventForm(@Valid @ModelAttribute("log") LogEntry logEntry, BindingResult result, SessionStatus status) {
+        log.debug("{}", logEntry);
         if (result.hasErrors()) {
-            LOG.debug("{}", result);
+            log.debug("{}", result);
             return "log/edit-event-log";
         } else {
-            logEventService.saveLogEvent(log);
+            logEventService.saveLogEvent(logEntry);
             status.setComplete();
             return String.format("%s:%s", REDIRECT, URI_LOG_EVENTS);
         }
@@ -157,13 +154,13 @@ public class LogEventController extends BaseController {
      * Use PUT for updates
      */
     @PostMapping(URI_LOG_EVENT + "/edit/{logEventId}")
-    public String processUpdateLogEventIdForm(@Valid @ModelAttribute("log") LogEntry log, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", log);
+    public String processUpdateLogEventIdForm(@Valid @ModelAttribute("log") LogEntry logEntry, BindingResult result, SessionStatus status) {
+        log.debug("{}", logEntry);
         if (result.hasErrors()) {
-            LOG.debug("{}", result);
+            log.debug("{}", result);
             return "log/edit-event-log";
         } else {
-            logEventService.saveLogEvent(log);
+            logEventService.saveLogEvent(logEntry);
             status.setComplete();
             return String.format("%s:%s", REDIRECT, URI_LOG_EVENTS);
         }
@@ -197,7 +194,7 @@ public class LogEventController extends BaseController {
             return String.format("redirect:/upload/%s", id);
         }
         fileUploadService.store(file, id, description);
-        LOG.debug("Successfully uploaded: {}/{}", id, file.getName());
+        log.debug("Successfully uploaded: {}/{}", id, file.getName());
         // Add parameters to be viewed on the redirect page
         redirectAttributes.addFlashAttribute("message", String.format("You successfully uploaded %s", file.getOriginalFilename()));
         return String.format("redirect:/upload/%s", id);
@@ -209,9 +206,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(URI_LOG_EVENT + "/img/delete")
     public String processDeleteLogImageForm(@Valid @ModelAttribute("resource") ImageResource resource, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", resource);
+        log.debug("{}", resource);
         if (result.hasErrors()) {
-            LOG.debug("{}", result);
+            log.debug("{}", result);
         } else {
             fileUploadService.deleteImage(resource.getId(), resource.getName());
             logEventService.deleteLogEventImage(Integer.parseInt(resource.getId()), resource.getName());
@@ -260,9 +257,9 @@ public class LogEventController extends BaseController {
      */
     @PostMapping(value = URI_LOG_EVENT + "/comment/new")
     public String processNewCommentLogEventForm(@Valid @ModelAttribute("logComment") LogComment logComment, BindingResult result, SessionStatus status) {
-        LOG.debug("{}", logComment);
+        log.debug("{}", logComment);
         if (result.hasErrors()) {
-            LOG.debug("{}", result);
+            log.debug("{}", result);
             return "log/edit-comment-event-log";
         } else {
             // set created by user id

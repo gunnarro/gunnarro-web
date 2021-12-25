@@ -20,7 +20,7 @@ import java.net.ConnectException;
 import java.sql.SQLException;
 
 /**
- * URL security is applied in the spring security config.
+ * URL security is supplied in the spring security config.
  */
 @Slf4j
 public class BaseController {

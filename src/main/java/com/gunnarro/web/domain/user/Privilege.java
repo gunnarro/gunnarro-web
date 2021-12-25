@@ -3,6 +3,7 @@ package com.gunnarro.web.domain.user;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Builder
+@ToString
 public class Privilege implements Serializable {
     private Integer id;
     private String name;

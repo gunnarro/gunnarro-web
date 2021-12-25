@@ -4,8 +4,7 @@ import com.gunnarro.web.domain.log.ImageResource;
 import com.gunnarro.web.service.FileUploadService;
 import com.gunnarro.web.service.exception.UploadFileException;
 import com.gunnarro.web.service.exception.UploadFileNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
@@ -27,10 +26,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(FileUploadServiceImpl.class);
 
     @Autowired
     private Environment environment;
@@ -42,10 +40,10 @@ public class FileUploadServiceImpl implements FileUploadService {
         try {
             this.rootLocation = Paths.get(environment.getProperty("fileupload.root.dir"));
             Files.createDirectories(rootLocation);
-            LOG.debug("root dir: {}", rootLocation.toString());
+            log.debug("root dir: {}", rootLocation.toString());
             System.out.println(rootLocation.toString());
         } catch (Exception e) {
-            LOG.error("Error init root dir: {}, error: {}", environment.getProperty("fileupload.root.dir"), e);
+            log.error("Error init root dir: {}, error: {}", environment.getProperty("fileupload.root.dir"), e);
             throw new UploadFileException("Could not initialize storage", e);
         }
     }
@@ -63,10 +61,10 @@ public class FileUploadServiceImpl implements FileUploadService {
             }
             Path userDir = getUserImageDir(id);
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
-            LOG.debug("Store file: {}", userDir.resolve(filename));
+            log.debug("Store file: {}", userDir.resolve(filename));
             Files.copy(file.getInputStream(), userDir.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
-            LOG.error(null, e);
+            log.error(null, e);
             throw new UploadFileException("Failed to store file!", e);
         }
     }
@@ -100,12 +98,12 @@ public class FileUploadServiceImpl implements FileUploadService {
         try {
             String path = String.format("%s/%s", getUserImageDir(id), fileName);
             if (new File(path).delete()) {
-                LOG.debug("deleted: {}", id);
+                log.debug("deleted: {}", id);
             } else {
-                LOG.error("error deleting {}", id);
+                log.error("error deleting {}", id);
             }
         } catch (IOException e) {
-            LOG.error(null, e);
+            log.error(null, e);
         }
     }
 
@@ -116,7 +114,7 @@ public class FileUploadServiceImpl implements FileUploadService {
             return Files.walk(userImageDir, 1).filter(path -> !path.equals(userImageDir))
                     .map(userImageDir::relativize);
         } catch (Exception e) {
-            LOG.error("root path: {}", this.rootLocation.toAbsolutePath());
+            log.error("root path: {}", this.rootLocation.toAbsolutePath());
             throw new UploadFileException("Failed to read stored files", e);
         }
     }
@@ -150,7 +148,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         Path userDir = Paths.get(rootLocation.toString() + "/" + id);
         if (!Files.exists(userDir)) {
             Files.createDirectories(userDir);
-            LOG.debug("created images dir: {}", id);
+            log.debug("created images dir: {}", id);
         }
         return userDir;
     }

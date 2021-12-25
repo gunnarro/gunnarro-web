@@ -2,6 +2,7 @@ package com.gunnarro.web.domain.user;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Data
 @Builder
+@ToString
 public class Role implements Serializable {
     private Integer id;
     private String name;

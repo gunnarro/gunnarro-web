@@ -3,6 +3,7 @@ package com.gunnarro.web.domain.log;
 import com.gunnarro.web.domain.BaseDomain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder
+@ToString
 public class LogEntry extends BaseDomain {
 
     private static final long serialVersionUID = 3799683509174086447L;

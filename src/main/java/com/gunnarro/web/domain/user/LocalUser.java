@@ -1,6 +1,7 @@
 package com.gunnarro.web.domain.user;
 
 import com.gunnarro.web.repository.table.user.RolesTable;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Holds details for logged in user.
  */
+@ToString
 public class LocalUser implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -3112437958212912495L;
@@ -239,27 +241,5 @@ public class LocalUser implements UserDetails, Serializable {
         if (username == null) {
             return other.username == null;
         } else return username.equals(other.username);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("LocalUser{");
-        sb.append("id=").append(id);
-        sb.append(", createdDate=").append(createdDate);
-        sb.append(", lastModifiedDate=").append(lastModifiedDate);
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", passwordRepeat='").append(passwordRepeat).append('\'');
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", userId='").append(userId).append('\'');
-        sb.append(", accountNonExpired=").append(accountNonExpired);
-        sb.append(", accountNonLocked=").append(accountNonLocked);
-        sb.append(", activated=").append(activated);
-        sb.append(", credentialsNonExpired=").append(credentialsNonExpired);
-        sb.append(", enabled=").append(enabled);
-        sb.append(", roles=").append(roles);
-        sb.append(", socialProvider='").append(socialProvider).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 }

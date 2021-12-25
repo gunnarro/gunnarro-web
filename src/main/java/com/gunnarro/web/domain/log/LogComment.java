@@ -3,11 +3,13 @@ package com.gunnarro.web.domain.log;
 import com.gunnarro.web.domain.BaseDomain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder
+@ToString
 public class LogComment extends BaseDomain {
 
     private static final long serialVersionUID = 8461304356156397577L;
