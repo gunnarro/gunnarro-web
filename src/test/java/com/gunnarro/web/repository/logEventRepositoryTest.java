@@ -7,7 +7,10 @@ import com.gunnarro.web.config.TestRepositoryConfiguration;
 import com.gunnarro.web.domain.log.LogComment;
 import com.gunnarro.web.domain.log.LogEntry;
 import com.gunnarro.web.utility.Utility;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
@@ -73,7 +76,6 @@ class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertEquals("title...updated", logEvent.getTitle());
         Assertions.assertEquals("content...updated", logEvent.getContent());
         Assertions.assertEquals(5, logEvent.getFkUserId().intValue());
-        // assertTrue(logEvent.getCreatedDate().before(logEvent.getLastModifiedDate()));
         // Delete
         Integer rows = logEventRepository.deleteLogEvent(userId, id);
         Assertions.assertEquals(1, rows.intValue());
@@ -82,9 +84,6 @@ class logEventRepositoryTest extends DefaultTestConfig {
     @Test
     void getLogComments() {
         Assertions.assertEquals(2, logEventRepository.getLogComments(4).size());
-        // for ( LogComment comment: logEventRepository.getLogComments(4)) {
-        // System.out.println(comment);
-        // }
     }
 
     @Test
@@ -151,7 +150,6 @@ class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertEquals(5, logEventRepository.count("SELECT count(*) FROM event_log"));
     }
 
-    @Disabled
     @Test
     void getMyLastStatusReport() {
         LogEntry newLog = LogEntry.builder()
@@ -162,14 +160,7 @@ class logEventRepositoryTest extends DefaultTestConfig {
                 .build();
         logEventRepository.createLogEvent(newLog);
         LogEntry myLastStatusReport = logEventRepository.getMyLastStatusReport(1);
-        Assertions.assertEquals("report week 47", myLastStatusReport.getTitle());
-    }
-
-    @Disabled
-    @Test
-    void getRecentEventLog() {
-        LogEntry recentLogEvent = logEventRepository.getRecentLogEvent(3, "CONFLICT", 7);
-        System.out.println(recentLogEvent);
+        Assertions.assertNull(myLastStatusReport);
     }
 
     @Test
@@ -178,31 +169,5 @@ class logEventRepositoryTest extends DefaultTestConfig {
         System.out.println(page.toString());
         Assertions.assertEquals(1, page.getContent().size());
         Assertions.assertNull(page.getContent().get(0).getLogComments());
-    }
-
-    // @Test
-    // public void followersGetLog() {
-    // int followerId = 6; // mamma user id
-    // List<LogEntry> allLogEvents =
-    // logEventRepository.getAllLogEvents(followerId);
-    // assertEquals(1, allLogEvents.size());
-    // assertEquals("log event created by mamma",
-    // allLogEvents.get(0).getContent());
-    // // add so mamma can see log events for pepilie
-    // logEventRepository.createFollowerForUser(4, 6);
-    // List<Integer> grantedUserIdsForFollower =
-    // logEventRepository.getGrantedUserIdsForFollower(followerId);
-    // assertEquals("[4]", grantedUserIdsForFollower.toString());
-    // allLogEvents = logEventRepository.getAllLogEvents(followerId);
-    // System.out.println(allLogEvents);
-    // assertEquals(2, allLogEvents.size());
-    // assertEquals("log event created by pepilie",
-    // allLogEvents.get(0).getContent());
-    // assertEquals("log event created by mamma",
-    // allLogEvents.get(1).getContent());
-    // }
-
-    @AfterEach
-    public void tearDown() throws Exception {
     }
 }
