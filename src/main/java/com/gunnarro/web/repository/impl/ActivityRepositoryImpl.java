@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Slf4j
-@Repository
+//@Repository
 public class ActivityRepositoryImpl extends BaseJdbcRepository implements ActivityRepository {
 
     @Autowired

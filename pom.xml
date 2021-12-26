@@ -433,6 +433,8 @@
             <build>
                 <plugins>
                     <plugin>
+                        <!-- build and deploy docker image -->
+                        <!-- mvn compile jib:build -P build-docker -->
                         <groupId>com.google.cloud.tools</groupId>
                         <artifactId>jib-maven-plugin</artifactId>
                         <version>${jib.version}</version>
@@ -451,6 +453,59 @@
                                     <tag>latest</tag>
                                 </tags>
                             </to>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>deploy-azure</id>
+            <properties>
+                <web.app.name>gunnarro-web-at</web.app.name>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- The Maven Plugin for Azure App Service helps Java developers to deploy Maven projects to Azure App Service. -->
+                        <!-- this plugin requires azure cli installed -->
+                        <!-- mvn package azure-webapp:deploy -DskipTests -P deploy-azure -->
+                        <groupId>com.microsoft.azure</groupId>
+                        <artifactId>azure-webapp-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <configuration>
+                            <subscriptionId>d21ecdd9-09c2-465d-9b87-7311465d683a</subscriptionId>
+                            <resourceGroup>gunnarro-web-resource-group</resourceGroup>
+                            <appName>${web.app.name}</appName>
+                            <pricingTier>P1v2</pricingTier>
+                            <region>westeurope</region>
+                            <runtime>
+                                <os>linux</os>
+                                <webContainer>Java SE</webContainer>
+                                <javaVersion>Java 11</javaVersion>
+                            </runtime>
+                            <!-- Begin of App Settings  -->
+                            <appSettings>
+                                <property>
+                                    <name>JAVA_OPTS</name>
+                                    <value>-Dserver.port=80</value>
+                                </property>
+                                <property>
+                                    <name>JAVA_OPTS</name>
+                                    <value>-Xmx512m -Xms512m</value>
+                                </property>
+                            </appSettings>
+                            <!-- End of App Settings  -->
+                            <deployment>
+                                <resources>
+                                    <resource>
+                                        <type>jar</type>
+                                        <directory>${project.basedir}/target</directory>
+                                        <includes>
+                                            <include>*.jar</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </deployment>
                         </configuration>
                     </plugin>
                 </plugins>

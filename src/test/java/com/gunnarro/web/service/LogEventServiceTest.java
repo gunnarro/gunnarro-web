@@ -8,10 +8,7 @@ import com.gunnarro.web.domain.user.LocalUser;
 import com.gunnarro.web.endpoint.AuthenticationFacade;
 import com.gunnarro.web.service.impl.FileUploadServiceImpl;
 import com.gunnarro.web.service.impl.LogEventServiceImpl;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +21,7 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class, LogEventServiceImpl.class, AuthenticationFacade.class, FileUploadServiceImpl.class})
 @Transactional(timeout = 10)
+@Disabled
 class LogEventServiceTest extends DefaultTestConfig {
 
     @Autowired

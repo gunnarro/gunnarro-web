@@ -26,7 +26,7 @@ import java.util.Objects;
  * @author admin
  */
 @Slf4j
-@Repository
+//@Repository
 // @Transactional
 public class UserAccountRepositoryImpl extends BaseJdbcRepository implements UserAccountRepository {
 

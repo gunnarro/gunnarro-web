@@ -1,15 +1,31 @@
 package com.gunnarro.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author mentos
  */
 @Slf4j
-@SpringBootApplication
+//@SpringBootApplication
+// disable datasource autoconfiguration
+@SpringBootApplication(exclude = {
+        DataSourceAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class
+})
 @ComponentScan("com.gunnarro.web.*")
 public class Application {
 
@@ -18,6 +34,15 @@ public class Application {
         log.info("server.ssl.key-store: {}", System.getenv("GUNNARRO_KEYSTORE_PATH"));
         log.info("server.ssl.key-alias: {}", System.getenv("GUNNARRO_KEYSTORE_ALIAS"));
         log.info("server.ssl.key-store: {}", System.getProperty("server.ssl.key-store"));
+
+        Map<String, String> map = new TreeMap<>();
+        log.info("===================================================");
+        for(Package pkg: ClassLoader.getSystemClassLoader().getDefinedPackages()){
+            if (ObjectUtils.allNotNull(pkg.getImplementationTitle(), pkg.getImplementationVersion())) {
+                map.put(pkg.getImplementationTitle(), pkg.getImplementationVersion());
+            }
+        }
+        map.entrySet().forEach( e -> log.info("application bom: vendor={}, version={}", e.getKey(),e.getValue()));
         SpringApplication.run(Application.class, args);
     }
 }

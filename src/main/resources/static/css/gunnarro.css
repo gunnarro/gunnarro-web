@@ -8,33 +8,14 @@
 	-dinner-accessories-color: #800000; -
 	-dinner-portions-color: #993d00;
 }
-
-.bg {
-  /* The image used */
-  background-image: url("/images/background.png");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+a {
+  text-decoration: none !important
 }
 
 .container-custom {
 	padding-top: 10px;
 	margin-left: 50px;
 	width: 700px;
-}
-
-.jumbotron {
-	background: #fff url("/images/background.jpg") no-repeat center center
-		fixed;
-	background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	-o-background-size: cover;
 }
 
 table.table thead tr th {

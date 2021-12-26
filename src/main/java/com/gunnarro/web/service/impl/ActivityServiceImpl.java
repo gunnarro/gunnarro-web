@@ -17,10 +17,10 @@ import java.util.List;
 @Service
 public class ActivityServiceImpl implements ActivityService {
 
-    @Autowired
+   // @Autowired
     protected AuthenticationFacade authenticationFacade;
 
-    @Autowired
+   // @Autowired
     private ActivityRepository activityRepository;
 
     private void checkPermission(Integer logEventId) {

@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 //@Transactional
 public class LocalUserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    //@Autowired
     private UserAccountRepository userAccountRepository;
 
     // @Autowired

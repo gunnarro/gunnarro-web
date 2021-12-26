@@ -20,13 +20,13 @@ import java.util.List;
 @Service
 public class LogEventServiceImpl implements LogEventService {
 
-    @Autowired
+   // @Autowired
     protected AuthenticationFacade authenticationFacade;
 
-    @Autowired
+  //  @Autowired
     private FileUploadService fileUploadService;
 
-    @Autowired
+  //  @Autowired
     private LogEventRepository logEventRepository;
 
     private void checkPermission(Integer logEventId) {

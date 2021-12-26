@@ -9,8 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * FIXME turned off for running on Azure
@@ -18,8 +22,8 @@ import javax.sql.DataSource;
  * @author admin
  */
 @Slf4j
-@Configuration
-//@EnableTransactionManagement
+//@Configuration
+@EnableTransactionManagement
 public class DataSourceConfiguration {
 
     // If the same property is defined as a system property and in the properties
@@ -47,19 +51,17 @@ public class DataSourceConfiguration {
 
         log.info("jdbc url   : {}", jdbcUrl);
         log.info("jdbc user  : {}", jdbcUser);
-        log.info("jdbc pwd   : {}", jdbcPwd);
+        log.info("jdbc pwd   : {}", jdbcPwd.length());
         log.info("jdbc driver: {}", jdbcDriverClassName);
         log.info(System.getProperty("spring.config.location"));
 
         return dataSourceBuilder.build();
     }
 
-    /**
     @Bean
     public DataSourceTransactionManager transactionManager(DataSource datasource) {
         return new DataSourceTransactionManager(datasource);
     }
-    */
 
     @Bean
     public UserAccountRepository userAccountRepository() {
