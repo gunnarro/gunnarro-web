@@ -1,14 +1,10 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: "build and deploy to azure at"
+name: "package and deploy to azure at"
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
     branches: [ main ]
 
 jobs:
@@ -23,8 +19,8 @@ jobs:
         with:
           java-version: '11'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Package application
+        run: mvn -B clean package -DskipTests
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
