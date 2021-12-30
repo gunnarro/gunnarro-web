@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-include"></head>
+
+<body class="bg">
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="card m-3">
+        <h3 class="card-header">Availability</h3>
+        Basic conditions, which of course is flexible.
+        Note! Conditions may differ when hired through an agency broker.
+        <div class="card-body">
+            <div>
+                <h5 class="card-title">Available</h5>
+                <dl class="mb-3 row">
+                    <dt>Consultant</dt>
+                    <dd><a th:href="@{/public/employees}">Gunnar Rønneberg</a></dd>
+                    <dt>Availability</dt>
+                    <dd>100% from 01.02.2022</dd>
+                    <dt>Type of availability</dt>
+                    <dd>OnSite/home office</dd>
+                    <dt>Location</dt>
+                    <dd>Oslo</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="card-body">
+            <div>
+                <h5 class="card-title">Pricing</h5>
+                <dl class="mb-3 row">
+                    <dt>Hourly rate</dt>
+                    <dd>1000 - 1300 nkr</dd>
+                    <dt>Termination costs</dt>
+                    <dd>0</dd>
+                </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

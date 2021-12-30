@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="employee">
+    <div class="card-body">
+        <div class="m-3 card">
+            <div class="row g-0">
+                <div class="col-md-1 m-2">
+                    <img alt="gunnar rønneberg" class="rounded float-start" height="100vh" src="/images/employees/gr-tumb.jpg"
+                         width="100vh">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Gunnar Rønneberg</h5>
+                        <p class="card-text">Founder and sole employee. See <a th:href="@{/public/cv}">CV</a> and <a
+                                th:href="@{/public/cv/projects}">Projects</a> for information about my competence and
+                            experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
