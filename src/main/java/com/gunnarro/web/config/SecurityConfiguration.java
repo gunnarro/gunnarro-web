@@ -53,13 +53,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().build();
     }
      */
-    // roles admin allow to access /admin/**
-    // roles user allow to access /user/**
+    // roles admin allow access to: /admin/**
+    // roles user allow access to: /user/**
     // custom 403 access denied handler
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/public", "/loglevel", "/login*", "/about", "/index", "/site/**", "/cv/**", "/releasenotes", "/webjars/**", "/css/**", "/js/**", "/images/**", "/error/**", "/actuator/**").permitAll()
+                .antMatchers("/", "/public/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/error/**", "/actuator/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/rest/**").hasAnyRole("USER")
                 .antMatchers("/**").hasAnyRole("USER")

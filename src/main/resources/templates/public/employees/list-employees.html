@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-include"></head>
+
+<body class="bg">
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="m-3 card">
+        <h3 class="card-header">Employees</h3>
+        <!-- insert employees -->
+        <div th:replace="public/employees/employee :: employee"></div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
+

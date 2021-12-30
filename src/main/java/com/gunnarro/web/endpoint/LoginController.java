@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController extends BaseController {
 
-    public static final String PUBLIC_DOMAIN = "";
-    public static final String PUBLIC_PAGE = "/public";
+    public static final String PUBLIC_PAGE = "/index";
     public static final String HOME_PAGE = "/home";
     public static final String ADMIN_PAGE = "/admin";
     public static final String LOGIN_PAGE = "/login";
@@ -61,72 +60,10 @@ public class LoginController extends BaseController {
     /**
      * @return the login page
      */
-    @GetMapping("/login")
+    @GetMapping("/public/login")
     public String login() {
-        return PUBLIC_DOMAIN + "/login";
+        return "/public/login";
     }
-
-    /**
-     * @return the select profile page
-     */
-    @GetMapping("/profile")
-    public String profile() {
-        return "profile";
-    }
-
-    /**
-     * @return the login page
-     */
-    @GetMapping("/error")
-    public String error() {
-        return PUBLIC_DOMAIN + "/application-error";
-    }
-
-    @GetMapping("/403")
-    public String error403() {
-        return "error/403";
-    }
-
-    @GetMapping("/access-denied")
-    public String denied() {
-        return "access-denied";
-    }
-
-    /**
-     * Log out user and redirects to the login page
-     *
-     * Note! If using Spring Security's CSRF protection, you must POST to log
-     * out.
-     *
-     * @param request
-     * @param response
-     * @return the login page
-     */
-    // @RequestMapping(value = "/perform-logout", method = RequestMethod.GET)
-    // public String logout(HttpServletRequest request, HttpServletResponse
-    // response) {
-    // LOG.debug("start logout user...");
-    // Authentication auth = authenticationFacade.getAuthentication();
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("auth: " + auth);
-    // String clientIp = request.getHeader("X-FORWARDED-FOR") != null ?
-    // request.getHeader("X-FORWARDED-FOR") : request.getRemoteAddr();
-    // LOG.debug("clientIp: " + clientIp);
-    // }
-    // if (auth != null) {
-    // // The logout part is configured in spring-security.xml
-    // // SecurityContextLogoutHandler ss = new
-    // // SecurityContextLogoutHandler();
-    // // ss.setClearAuthentication(true);
-    // // ss.setInvalidateHttpSession(true);
-    // // ss.logout(request, response, auth);
-    // if (LOG.isDebugEnabled()) {
-    // LOG.debug("logged out: " + auth.getName());
-    // LOG.debug("logged in user: " + authenticationFacade.getLoggedInUser());
-    // }
-    // }
-    // return "redirect:/login?loggedout";
-    // }
 
     /**
      * logout performs Invalidates HTTP Session ,then unbinds any objects bound
@@ -152,56 +89,4 @@ public class LoginController extends BaseController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
     }
-
-    // @RequestMapping(value = { "/perform-logout-user" }, method =
-    // RequestMethod.GET)
-    // public String logout(HttpServletRequest request, Model model, Principal
-    // principal) throws ServletException {
-    // LOG.debug("logout.... " + principal);
-    // if (null != principal) {
-    // HttpSession session = request.getSession(false);
-    // if (session != null) {
-    // session.invalidate();
-    // }
-    // SecurityContext context = SecurityContextHolder.getContext();
-    // context.setAuthentication(null);
-    // SecurityContextHolder.clearContext();
-    // }
-    // return "redirect:/login?loggedout";
-    // }
-
-    @GetMapping("/")
-    public String defaultPage() { return publicHome(); }
-
-    @GetMapping("/public")
-    public String publicHome() { return PUBLIC_DOMAIN + "/public"; }
-
-    @GetMapping("/about")
-    public String about() { return PUBLIC_DOMAIN + "/about"; }
-
-    @GetMapping("/index")
-    public String indexPublic() {
-        return PUBLIC_DOMAIN + "/index";
-    }
-
-    @GetMapping("/cv")
-    public String cv() {
-        return PUBLIC_DOMAIN + "/cv/gr-cv";
-    }
-
-    @GetMapping("/cv/projects")
-    public String cvProjects() {
-        return PUBLIC_DOMAIN + "/cv/gr-cv-project";
-    }
-
-    @GetMapping("/cv/pdf")
-    public String cvPdf() {
-        return PUBLIC_DOMAIN + "/cv/gr-cv-pdf";
-    }
-
-    @GetMapping("/releasenotes")
-    public String releasenotes() { return PUBLIC_DOMAIN + "/release-notes"; }
-
-    @GetMapping("/loglevel")
-    public String loglevel() { return PUBLIC_DOMAIN + "/log"; }
 }

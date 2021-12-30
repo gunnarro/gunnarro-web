@@ -29,8 +29,13 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.azure.core" level="error" additivity="true">
+        <Logger name="com.azure.core" level="ERROR" additivity="true">
             <appender-ref ref="consoleAppender" />
+        </Logger>
+
+        <Logger name="org.springframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="debugFileAppender"/>
         </Logger>
 
         <Logger name="org.springframework.security" level="ERROR" additivity="false">
@@ -40,6 +45,7 @@
         <!--  application specific logs will be asynchronous, other root logs is still synchronous -->
         <Logger name="com.gunnarro.web" level="INFO" additivity="false">
             <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="debugFileAppender"/>
         </Logger>
 
         <Logger name="com.gunnarro.web.endpoint" level="DEBUG" additivity="false">
@@ -51,6 +57,10 @@
         </Logger>
 
         <Logger name="com.gunnarro.web.repository" level="DEBUG" additivity="false">
+            <AppenderRef ref="consoleAppender"/>
+        </Logger>
+
+        <Logger name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener" level="OFF" additivity="false">
             <AppenderRef ref="consoleAppender"/>
         </Logger>
 
