@@ -1,9 +1,8 @@
 name: ducker hub build and deploy image
 
 on:
-  push:
-    branches:
-      - 'master'
+  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   docker:
