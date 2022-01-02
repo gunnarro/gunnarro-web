@@ -33,7 +33,7 @@ public class LogEventRowMapper {
                     .createdTime(resultSet.getTimestamp("created_date_time").getTime())
                     .lastModifiedTime(resultSet.getTimestamp("last_modified_date_time").getTime())
                     .content(resultSet.getString("content"))
-                    .contentHtml(Utility.convertMarkdownToHtml(resultSet.getString("content")))
+                    .contentHtml(resultSet.getString("content"))
                     .level(resultSet.getString("level"))
                     .title(resultSet.getString("title"))
                     .build();
@@ -62,7 +62,7 @@ public class LogEventRowMapper {
                     .createdTime(resultSet.getTimestamp("created_date_time").getTime())
                     .lastModifiedTime(resultSet.getTimestamp("last_modified_date_time").getTime())
                     .content(resultSet.getString("content"))
-                    .contentHtml(Utility.convertMarkdownToHtml(resultSet.getString("content")))
+                    .contentHtml(resultSet.getString("content"))
                     .build();
             try {
                 comment.setCreatedByUser(resultSet.getString("username"));

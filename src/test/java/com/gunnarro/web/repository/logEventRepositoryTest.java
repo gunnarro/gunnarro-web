@@ -61,7 +61,7 @@ class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertEquals("INFO", logEvent.getLevel());
         Assertions.assertEquals("title...", logEvent.getTitle());
         Assertions.assertEquals("content", logEvent.getContent());
-        Assertions.assertEquals("<p>content</p>\n", logEvent.getContentHtml());
+        Assertions.assertEquals("content", logEvent.getContentHtml());
         Assertions.assertEquals(5, logEvent.getFkUserId().intValue());
         Assertions.assertEquals("pappa", logEvent.getCreatedByUser());
         // Update

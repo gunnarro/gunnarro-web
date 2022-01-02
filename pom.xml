@@ -250,108 +250,20 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- bootstrap -->
-        <!--
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>${webjars-bootstrap.version}</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.webjars</groupId>
-                    <artifactId>jquery</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        -->
-        <!--
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery-ui</artifactId>
-            <version>${webjars-jquery-ui.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.webjars</groupId>
-                    <artifactId>jquery</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>${webjars-jquery.version}</version>
-        </dependency>
-        -->
-        <!-- <dependency> <groupId>org.webjars</groupId> <artifactId>popper.js</artifactId>
-                            <version>${webjars-popper.version}</version> </dependency> -->
-        <!-- For Cloud sql datasource usage -->
-        <!-- <dependency> <groupId>com.google.oauth-client</groupId> <artifactId>google-oauth-client</artifactId>
-                            <version>1.25.0</version> </dependency> -->
-        <!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId>
-                            <version>8.0.12</version> </dependency> <dependency> <groupId>com.google.cloud.sql</groupId>
-                            <artifactId>mysql-socket-factory-connector-j-8</artifactId> <version>1.0.10</version>
-                            </dependency> -->
-        <!-- <dependency> <groupId>com.google.cloud.sql</groupId> <artifactId>mysql-socket-factory</artifactId>
-                            <version>1.0.10</version> </dependency> -->
-        <!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
-                            <version>1.0.0.RELEASE</version> <scope>compile</scope> </dependency> -->
-        <!-- <dependency> <groupId>com.google.apis</groupId> <artifactId>google-api-services-oauth2</artifactId>
-                            <version>v1-rev145-1.25.0</version> <scope>runtime</scope> </dependency> -->
-        <!-- markdown to html converter -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${version.jodatime}</version>
-        </dependency>
-        <!-- html parser -->
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-all</artifactId>
-            <version>${version.flexmark}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-properties-migrator</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- PDF tools -->
-        <!--
         <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.13.2</version>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${version.jodatime}</version>
         </dependency>
-        <dependency>
-            <groupId>com.itextpdf.tool</groupId>
-            <artifactId>xmlworker</artifactId>
-            <version>5.5.13.2</version>
-        </dependency>
-        -->
-        <!--
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>9.4.0.jre16</version>
-            <scope>runtime</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
         </dependency>
-        <!--
-                <dependency>
-                    <groupId>org.apache.poi</groupId>
-                    <artifactId>poi-ooxml</artifactId>
-                    <version>4.1.2</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.poi</groupId>
-                    <artifactId>poi-scratchpad</artifactId>
-                    <version>4.1.2</version>
-                </dependency>
-                -->
         <!-- ================= -->
         <!-- Test dependencies -->
         <!-- ================= -->

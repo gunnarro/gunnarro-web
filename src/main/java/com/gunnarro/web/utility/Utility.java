@@ -1,11 +1,5 @@
 package com.gunnarro.web.utility;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.profile.pegdown.Extensions;
-import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.DataHolder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
@@ -35,18 +29,7 @@ public class Utility {
     public static final String TIME24HOURS_REGEXP_PATTERN = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String VALIDATOR_PATTERN_EMAIL = "[\\w-]+@([\\w-]+\\.)+[\\w-]+";
     public static final String VALIDATOR_PATTERN_STRING = "[\\wæøå\\WÆØÅ0-9-\\_ \\]*";
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(Extensions.ALL);
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    static final HtmlRenderer HTML_RENDERER = HtmlRenderer.builder(OPTIONS).build();
     private static final Logger LOG = LoggerFactory.getLogger(Utility.class);
-
-    public static String convertMarkdownToHtml(String markdownTxt) {
-        if (markdownTxt != null) {
-            Node doc = PARSER.parse(markdownTxt);
-            return HTML_RENDERER.render(doc);
-        }
-        return null;
-    }
 
     public static String capitalizationWord(String s) {
         if (s == null || s.isEmpty()) {
