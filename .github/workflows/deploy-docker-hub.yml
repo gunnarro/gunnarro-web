@@ -1,4 +1,4 @@
-name: ducker hub build and deploy image
+name: docker.hub build and deploy image
 
 on:
   workflow_dispatch:
