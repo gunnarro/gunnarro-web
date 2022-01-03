@@ -27,6 +27,13 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>gunnarro:as</name>
     <packaging>jar</packaging>
+
+    <scm>
+        <url>https://github.com/gunnarro/gunnarro-web</url>
+        <connection>scm:git:https://github.com/gunnarro/gunnarro-web.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/gunnarro/gunnarro-web.git</developerConnection>
+    </scm>
+
     <properties>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
