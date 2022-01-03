@@ -383,7 +383,7 @@
                         <!-- mvn package azure-webapp:deploy -DskipTests -P deploy-azure -->
                         <groupId>com.microsoft.azure</groupId>
                         <artifactId>azure-webapp-maven-plugin</artifactId>
-                        <version>2.2.0</version>
+                        <version>2.3.0</version>
                         <configuration>
                             <subscriptionId>d21ecdd9-09c2-465d-9b87-7311465d683a</subscriptionId>
                             <resourceGroup>gunnarro-web-resource-group</resourceGroup>
