@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <!-- start from command line -->
@@ -51,7 +50,10 @@
         <mvn-enforcer.version>3.0.0</mvn-enforcer.version>
         <mvn-surfire.version>3.0.0-M5</mvn-surfire.version>
         <mvn-jacoco.version>0.8.7</mvn-jacoco.version>
+        <mvn-release.version>3.0.0-M4</mvn-release.version>
+        <mvn-site.version>3.9.1</mvn-site.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -70,6 +72,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
         <finalName>${project.artifactId}</finalName>
         <!-- To use the plugin goals in your POM or parent POM -->
@@ -167,10 +170,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
+                <version>${mvn-site.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${mvn-release.version}</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
         <!-- import from spring bom -->
         <dependency>
@@ -320,6 +332,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <reporting>
         <plugins>
             <plugin>
