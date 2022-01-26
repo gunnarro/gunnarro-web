@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="m-3 card">
-        <h3 class="card-header">Employees</h3>
+        <h3 class="card-header" th:text="#{page.employees.title}"></h3>
         <!-- insert employees -->
         <div th:replace="public/employees/employee :: employee"></div>
     </div>

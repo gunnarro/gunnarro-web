@@ -7,29 +7,29 @@
 
 <div class="container">
     <div class="card m-3">
-        <h3 class="card-header">Availability</h3>
+        <h3 class="card-header" th:text="#{page.availability.title}"></h3>
         <div class="card-body">
-            <p class="card-text">Basic conditions, which of course is flexible.</p>
-            <p class="card-text text-info">NB! Conditions may differ when hired through an agency broker</p>
+            <p class="card-text" th:text="#{page.employees.info.txt.1}"></p>
+            <p class="card-text text-info" th:text="#{page.employees.info.txt.2}"></p>
             <div>
-                <h4 class="card-title">Available</h4>
+                <h4 class="card-title" th:text="#{page.availability.available}"></h4>
                 <dl class="mb-3 row">
-                    <dt class="col-sm-3">Consultant</dt>
+                    <dt class="col-sm-3" th:text="#{page.availability.consultant}"></dt>
                     <dd class="col-sm-8"><a th:href="@{/public/employees}">Gunnar Rønneberg</a></dd>
-                    <dt class="col-sm-3">Availability</dt>
+                    <dt class="col-sm-3" th:text="#{page.availability.availability}"></dt>
                     <dd class="col-sm-8">100% from 01.02.2022</dd>
-                    <dt class="col-sm-3">Type of availability</dt>
-                    <dd class="col-sm-8">OnSite/home office</dd>
-                    <dt class="col-sm-3">Location</dt>
+                    <dt class="col-sm-3" th:text="#{page.availability.availability,type}"></dt>
+                    <dd class="col-sm-8">on-site/home office</dd>
+                    <dt class="col-sm-3" th:text="#{page.availability.location}"></dt>
                     <dd class="col-sm-8">Oslo</dd>
                 </dl>
             </div>
             <div>
-                <h4 class="card-title">Pricing</h4>
+                <h4 class="card-title" th:text="#{page.availability.pricing}"></h4>
                 <dl class="mb-3 row">
-                    <dt class="col-sm-3">Hourly rate</dt>
+                    <dt class="col-sm-3" th:text="#{page.availability.pricing.rate}"></dt>
                     <dd class="col-sm-8">1000 - 1300 nkr</dd>
-                    <dt class="col-sm-3">Termination costs</dt>
+                    <dt class="col-sm-3" th:text="#{page.availability.pricing.termination.cost}"></dt>
                     <dd class="col-sm-8">0</dd>
                     </dd>
                 </dl>

@@ -14,9 +14,13 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">Gunnar Rønneberg</h5>
-                        <p class="card-text">Founder and sole employee. See <a th:href="@{/public/cv}">CV</a> and <a
-                                th:href="@{/public/cv/projects}">Projects</a> for information about my competence and
-                            experience.</p>
+                        <h6 class="card-title" th:text="#{page.employee.role.ceo}"></h6>
+                        <p class="card-text"></p>
+                            <ul>
+                                <li><a th:href="@{/public/cv}"><span th:text="#{page.employee.cv}"></span></a></li>
+                                <li><a th:href="@{/public/cv/projects}"><span th:text="#{page.employee.projects}"></span></a></li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
             </div>

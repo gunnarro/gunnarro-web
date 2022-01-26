@@ -8,15 +8,15 @@
         <footer class="container">
             <div>
                 <small class="text-white" style="font-size: .7em;">
-                    <a class="text-white" th:href="@{/public/releasenotes}" >
-                        <span th:inline="text">Release v1.6.2 </span>
+                    <a class="text-white" th:href="@{/public/releasenotes}"
+                        th:text="${@environment.getProperty('project.version')}">
                     </a>
                     <span class="text-white"
-                          th:inline="text"> 2021.12.31 08:39:00 GMT</span>
+                          th:text="${@environment.getProperty('application.build.time')}"></span>
                 </small>
             </div>
             <div>
-                <small class="text-white" style="font-size: .7em;" >Powered by gunnarro:as</small>
+                <small class="text-white" style="font-size: .7em;" th:text="#{lbl.footer.poweredby}"></small>
             </div>
         </footer>
     </div>
