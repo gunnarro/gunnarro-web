@@ -45,7 +45,7 @@
         <log4j2.version>2.17.1</log4j2.version>
         <version.flexmark>0.62.2</version.flexmark>
         <version.jodatime>2.10.13</version.jodatime>
-        <jib.version>3.1.4</jib.version>
+        <jib.version>3.2.0</jib.version>
         <mariadb.version>2.5.3</mariadb.version>
         <!-- Web dependencies -->
        <!-- <webjars-bootstrap.version>5.1.3</webjars-bootstrap.version> -->
@@ -53,11 +53,11 @@
         <webjars-jquery.version>3.6.0</webjars-jquery.version>
         <webjars-popper.version>1.16.1</webjars-popper.version>
         <!-- maven plugins -->
-        <mvn-compiler.version>3.8.1</mvn-compiler.version>
+        <mvn-compiler.version>3.9.0</mvn-compiler.version>
         <mvn-enforcer.version>3.0.0</mvn-enforcer.version>
         <mvn-surfire.version>3.0.0-M5</mvn-surfire.version>
         <mvn-jacoco.version>0.8.7</mvn-jacoco.version>
-        <mvn-release.version>3.0.0-M4</mvn-release.version>
+        <mvn-release.version>3.0.0-M5</mvn-release.version>
         <mvn-site.version>3.9.1</mvn-site.version>
     </properties>
 
