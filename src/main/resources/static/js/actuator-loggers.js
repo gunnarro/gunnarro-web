@@ -42,7 +42,7 @@ function changeLogLevel(selectedLoggerId, logLevel, hosts) {
 		mimeType : "application/json",
 		cache : false,
 		 headers: {
-            "Authorization": "Basic er34356474ge434tfwetwt"
+            "Authorization": "Basic <use envir variable>"
         },
 		success : function(response) {
 			$('#logger-status').text("log level changed to " + logLevel);
