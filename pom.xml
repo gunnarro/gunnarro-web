@@ -295,11 +295,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- only needed when migrating to new spring major version
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-properties-migrator</artifactId>
             <scope>runtime</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -312,6 +314,7 @@
         <!-- ================= -->
         <!-- Test dependencies -->
         <!-- ================= -->
+        <!-- automatically excluded for jar packaging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

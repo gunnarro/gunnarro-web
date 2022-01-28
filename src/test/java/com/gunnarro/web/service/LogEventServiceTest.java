@@ -11,6 +11,7 @@ import com.gunnarro.web.service.impl.LogEventServiceImpl;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,10 +36,16 @@ class LogEventServiceTest extends DefaultTestConfig {
         SecurityContextHolder.clearContext();
     }
 
+    @Value("${jdbc.user}")
+    private String user;
+
+    @Value("${jdbc.pwd}")
+    private String pass;
+
     @BeforeEach
     public void setUp()  {
         // Because of security we have to set user and pwd before every unittest
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken("admin", "uiL2oo3");
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user, pass);
         SecurityContext ctx = SecurityContextHolder.createEmptyContext();
         SecurityContextHolder.setContext(ctx);
         ctx.setAuthentication(authRequest);
