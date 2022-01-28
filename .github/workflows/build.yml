@@ -1,6 +1,6 @@
 # workflow for build, unittest and deploy to azure
 
-name: "build, test and deploy azure"
+name: "Build and Verify"
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Build and Verify
+    name: Build-Test-Install
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
