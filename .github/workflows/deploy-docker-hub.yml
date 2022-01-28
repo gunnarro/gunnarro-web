@@ -1,6 +1,11 @@
 name: docker.hub build and deploy image
 
 on:
+  workflow_run:
+      workflows: [ Build and Verify ]
+      types:
+        - completed
+
   workflow_dispatch:
     branches: [ main ]
 
