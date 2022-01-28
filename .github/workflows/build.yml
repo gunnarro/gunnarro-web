@@ -39,24 +39,25 @@ jobs:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'gunnarro-web-at'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_116723539578440BB251C6ED033E2DDA }}
-          package: '*.jar'
+ # use deploy-docker-hub workflow
+ # deploy:
+ #   runs-on: ubuntu-latest
+ #   needs: build
+ #   environment:
+ #     name: 'Production'
+ #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+ #
+ #   steps:
+ #     - name: Download artifact from build job
+ #       uses: actions/download-artifact@v2
+ #       with:
+ #        name: java-app
+ #
+ #     - name: Deploy to Azure Web App
+ #       id: deploy-to-webapp
+ #      uses: azure/webapps-deploy@v2
+ #       with:
+ #         app-name: 'gunnarro-web-at'
+ #         slot-name: 'Production'
+ #         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_116723539578440BB251C6ED033E2DDA }}
+ #         package: '*.jar'
