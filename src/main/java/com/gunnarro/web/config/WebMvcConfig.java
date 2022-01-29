@@ -12,6 +12,8 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 
+import java.util.Locale;
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -41,14 +43,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public LocaleResolver localeResolver() {
         return new CookieLocaleResolver();
     }
-
-    @Bean("messageSource")
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:i18n/messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setUseCodeAsDefaultMessage(true);
-        return messageSource;
-    }
-
 }

@@ -10,14 +10,14 @@
         <h3 class="card-header" th:text="#{page.availability.title}"></h3>
         <div class="card-body">
             <p class="card-text" th:text="#{page.employees.info.txt.1}"></p>
-            <p class="card-text text-info" th:text="#{page.employees.info.txt.2}"></p>
+            <p class="card-text text-secondary" th:text="#{page.employees.info.txt.2}"></p>
             <div>
                 <h4 class="card-title" th:text="#{page.availability.available}"></h4>
                 <dl class="mb-3 row">
                     <dt class="col-sm-3" th:text="#{page.availability.consultant}"></dt>
                     <dd class="col-sm-8"><a th:href="@{/public/employees}">Gunnar Rønneberg</a></dd>
                     <dt class="col-sm-3" th:text="#{page.availability.availability}"></dt>
-                    <dd class="col-sm-8">engaged until 31.12.2022</dd>
+                    <dd class="col-sm-8">engaged to 31.12.2022</dd>
                     <dt class="col-sm-3" th:text="#{page.availability.availability,type}"></dt>
                     <dd class="col-sm-8">on-site/home office</dd>
                     <dt class="col-sm-3" th:text="#{page.availability.location}"></dt>
@@ -31,7 +31,6 @@
                     <dd class="col-sm-8">1000 - 1300 nkr</dd>
                     <dt class="col-sm-3" th:text="#{page.availability.pricing.termination.cost}"></dt>
                     <dd class="col-sm-8">0</dd>
-                    </dd>
                 </dl>
             </div>
         </div>

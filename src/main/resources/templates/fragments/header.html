@@ -41,19 +41,22 @@
                         <a class="nav-item nav-link" th:href="@{/public/employees}"><span th:text="#{lbl.topmenu.employees}"></span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-item nav-link" th:href="@{/public/codeofconduct}"><span th:text="#{lbl.topmenu.codeofconduct}"></span></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-item nav-link" th:href="@{/public/about}"><span th:text="#{lbl.topmenu.about}"></span></a>
                     </li>
                 </ul>
                 <div class="navbar-nav ms-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <a class="nav-item nav-link" th:href="@{/public/login}"><span th:text="#{lbl.topmenu.login}"></span></a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-item nav-link" th:href="@{?lang=no}"><img src="/svg/no.svg" alt="norwegian" width="24" height="24"></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-item nav-link" th:href="@{?lang=en}"><img src="/svg/uk.svg" alt="english" width="24" height="24"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link" th:href="@{/public/login}"><span th:text="#{lbl.topmenu.login}"></span></a>
                         </li>
                     </ul>
                 </div>

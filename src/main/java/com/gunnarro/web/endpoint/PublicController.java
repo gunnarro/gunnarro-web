@@ -25,6 +25,11 @@ public class PublicController {
         return createUri("/about");
     }
 
+    @GetMapping(PUBLIC_URI + "/codeofconduct")
+    public String codeOfConduct() {
+        return createUri("/codeofconduct");
+    }
+
     @GetMapping(PUBLIC_URI + "/cv")
     public String cv() {
         return createUri("/cv/gr-cv");

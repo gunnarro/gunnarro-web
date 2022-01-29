@@ -382,3 +382,21 @@ table.table tfoot tr {
 .list-group-item-text {
 	margin: 0 0 11px;
 }
+
+.fi {
+    background-size:contain;
+    background-position:50%;
+    background-repeat:no-repeat;
+    position:relative;
+    display:inline-block;
+    width:1.33333333em;
+    line-height:1em
+}
+
+.fi-gb {
+    background-image: url("/svg/gb.svg");
+}
+
+.fi-no {
+    background-image: url("/svg/no.svg");
+}

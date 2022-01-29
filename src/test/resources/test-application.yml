@@ -1,0 +1,30 @@
+cloudsql:
+    jdbc:
+        pwd: ''
+        url2: jdbc:mysql://google/microdb?cloudSqlInstance=big-genre-214416:europe-north1:microdb&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=ABcd2o1o
+        username: ''
+fileupload:
+    root:
+        dir: data
+mariaDB4j:
+    dataDir: ''
+server:
+    port: 9080
+    ssl:
+        ciphers: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_DSS_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_SHA256,TLS_ECDHE_RSA_WITH_AES_128_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_SHA,TLS_ECDHE_RSA_WITH_AES_256_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_SHA384,TLS_ECDHE_RSA_WITH_AES_256_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_SHA,TLS_DHE_RSA_WITH_AES_128_SHA256,TLS_DHE_RSA_WITH_AES_128_SHA,TLS_DHE_DSS_WITH_AES_128_SHA256,TLS_DHE_RSA_WITH_AES_256_SHA256,TLS_DHE_DSS_WITH_AES_256_SHA,TLS_DHE_RSA_WITH_AES_256_SHA
+        enabled: true
+        enabled-protocols: TLSv1.2
+        key-alias: ${GUNNARRO_KEYSTORE_ALIAS}
+        key-password: ${GUNNARRO_KEYSTORE_PASS}
+        key-store: src/test/resources/gunnarro-identity.jks
+        key-store-password: ${GUNNARRO_KEYSTORE_PASS}
+        protocol: TLS
+spring:
+    datasource:
+        continue-on-error: true
+        driver-class-name: com.mysql.jdbc.Driver
+        initialization-mode: always
+        password: ${MARIADB_PASS}
+        sqlScriptEncoding: UTF-8
+        url: jdbc:mysql://localhost/microdb
+        username: ${MARIADB_USER}

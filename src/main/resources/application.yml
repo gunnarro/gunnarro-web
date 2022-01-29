@@ -1,0 +1,65 @@
+app:
+    encoding: '@project.build.sourceEncoding@'
+    java:
+        version: '@java.version@'
+application:
+    build:
+        time: '@build.timestamp@'
+    name: '@project.name@'
+    version: '@project.version@'
+fileupload:
+    root:
+        dir: ~/code/github/microapp-master/followup-manager/data
+jdbc:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    pwd: ${MYSQL_PASS}
+    url: ${MYSQL_URL}/followup?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    user: ${MYSQL_USER}
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+server:
+    compression:
+        enabled: true
+    context-path: /
+    error:
+        whitelabel:
+            enabled: false
+    port: ${GUNNARRO_SERVER_PORT}
+    servlet:
+        application-display-name: gunnarro
+        session:
+            timeout: 36000
+    servlet-path: /
+    ssl:
+        ciphers: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_DSS_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_SHA256,TLS_ECDHE_RSA_WITH_AES_128_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_SHA,TLS_ECDHE_RSA_WITH_AES_256_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_SHA384,TLS_ECDHE_RSA_WITH_AES_256_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_SHA,TLS_DHE_RSA_WITH_AES_128_SHA256,TLS_DHE_RSA_WITH_AES_128_SHA,TLS_DHE_DSS_WITH_AES_128_SHA256,TLS_DHE_RSA_WITH_AES_256_SHA256,TLS_DHE_DSS_WITH_AES_256_SHA,TLS_DHE_RSA_WITH_AES_256_SHA
+        enabled: ${GUNNARRO_SERVER_SSL_ENABLED}
+        enabled-protocols: TLSv1.2
+        key-alias: g${GUNNARRO_KEYSTORE_ALIAS}
+        key-password: ${GUNNARRO_KEYSTORE_PASS}
+        key-store: ${GUNNARRO_KEYSTORE_PATH}
+        key-store-password: ${GUNNARRO_KEYSTORE_PASS}
+        key-store-type: JKS
+        protocol: TLS
+servlet:
+    name: gunnarro
+spring:
+    application:
+        name: gunnarro
+    messages:
+        basename: i18n/messages
+        encoding: UTF-8
+    servlet:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 10MB
+    thymeleaf:
+        cache: false
+        check-template-location: true
+        content-type: text/html
+        encoding: UTF-8
+        mode: HTML5
+        prefix: classpath:/templates/
+        suffix: .html
