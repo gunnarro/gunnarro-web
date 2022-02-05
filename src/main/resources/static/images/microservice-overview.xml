@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-02-05T13:23:13.724Z" agent="5.0 (X11)" etag="KEpondCzHH2DOFcrkk5Y" version="16.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-05T13:35:49.155Z" agent="5.0 (X11)" etag="d-QA_FNeEhz3a9mPYL0G" version="16.5.3" type="github">
   <diagram id="iSKjr5TIBtfGmS1ZjRDf" name="Page-1">
     <mxGraphModel dx="1350" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -74,11 +74,11 @@
             <mxPoint y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-30" value="GitHub Actions / Jenkins" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
-          <mxGeometry x="317" y="450" width="151" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-33" value="Docker hub" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-33" value="Docker registry" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
           <mxGeometry x="345" y="487" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-34" value="Helm" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
+          <mxGeometry x="361" y="446" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
