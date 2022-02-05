@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-02-05T12:59:55.686Z" agent="5.0 (X11)" etag="xriyPTxBkoxHigujQTly" version="16.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-05T13:01:17.656Z" agent="5.0 (X11)" etag="1RwlJnhIiOcIkIdGXWBl" version="16.5.3" type="github">
   <diagram id="iSKjr5TIBtfGmS1ZjRDf" name="Page-1">
     <mxGraphModel dx="1350" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -50,6 +50,11 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="760" y="340" as="sourcePoint" />
             <mxPoint x="760" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-21" value="Technology stack" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#3333FF;" vertex="1" connectable="0" parent="dB07nsZ7sSIzAmQCZ6KJ-13">
+          <mxGeometry x="-0.26" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-14" value="Maven / Gradle" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
