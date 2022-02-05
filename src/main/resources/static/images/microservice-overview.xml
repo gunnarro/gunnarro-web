@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-02-05T13:01:17.656Z" agent="5.0 (X11)" etag="1RwlJnhIiOcIkIdGXWBl" version="16.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-05T13:10:12.796Z" agent="5.0 (X11)" etag="jU96sDm2eQduNI8s3tqC" version="16.5.3" type="github">
   <diagram id="iSKjr5TIBtfGmS1ZjRDf" name="Page-1">
     <mxGraphModel dx="1350" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -40,21 +40,15 @@
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-11" value="Docker image" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
           <mxGeometry x="329" y="250" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-12" value="" style="endArrow=classic;html=1;rounded=0;fillColor=#008a00;strokeColor=#005700;fontColor=#006600;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="760" y="480" as="sourcePoint" />
-            <mxPoint x="760" y="560" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-13" value="" style="endArrow=classic;html=1;rounded=0;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#3333FF;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="760" y="340" as="sourcePoint" />
-            <mxPoint x="760" y="240" as="targetPoint" />
+            <mxPoint x="760" y="360" as="sourcePoint" />
+            <mxPoint x="760" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-21" value="Technology stack" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#3333FF;" vertex="1" connectable="0" parent="dB07nsZ7sSIzAmQCZ6KJ-13">
           <mxGeometry x="-0.26" y="-2" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="-2" y="-21" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-14" value="Maven / Gradle" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
@@ -68,6 +62,20 @@
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-20" value="openshift / Azure / AWS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
           <mxGeometry x="311.5" y="170" width="165" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-23" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
+          <mxGeometry x="390" y="270" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-28" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#006600;labelBorderColor=none;strokeColor=#006600;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="760" y="440" as="sourcePoint" />
+            <mxPoint x="760" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-29" value="Tool stack" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#006600;" vertex="1" connectable="0" parent="dB07nsZ7sSIzAmQCZ6KJ-28">
+          <mxGeometry x="0.125" y="2" relative="1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
