@@ -1,49 +1,49 @@
-<mxfile host="app.diagrams.net" modified="2022-02-05T13:21:31.227Z" agent="5.0 (X11)" etag="uQkYz_Co48Hcm_k3gPPk" version="16.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-05T13:23:13.724Z" agent="5.0 (X11)" etag="KEpondCzHH2DOFcrkk5Y" version="16.5.3" type="github">
   <diagram id="iSKjr5TIBtfGmS1ZjRDf" name="Page-1">
     <mxGraphModel dx="1350" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-19" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="160" y="160" width="480" height="480" as="geometry" />
+          <mxGeometry x="159" y="40" width="480" height="480" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-16" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="200" y="200" width="400" height="400" as="geometry" />
+          <mxGeometry x="199" y="80" width="400" height="400" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-8" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="240" y="240" width="320" height="320" as="geometry" />
+          <mxGeometry x="239" y="120" width="320" height="320" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-6" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="280" y="280" width="240" height="240" as="geometry" />
+          <mxGeometry x="279" y="160" width="240" height="240" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-4" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="320" y="320" width="160" height="160" as="geometry" />
+          <mxGeometry x="319" y="200" width="160" height="160" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="360" y="360" width="80" height="80" as="geometry" />
+          <mxGeometry x="359" y="240" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-2" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="90" y="401" as="sourcePoint" />
-            <mxPoint x="760" y="401" as="targetPoint" />
+            <mxPoint x="89" y="281" as="sourcePoint" />
+            <mxPoint x="759" y="281" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-3" value="Java" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="370" y="370" width="60" height="30" as="geometry" />
+          <mxGeometry x="369" y="250" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-5" value="Spring boot" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="360" y="330" width="80" height="30" as="geometry" />
+          <mxGeometry x="359" y="210" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-7" value="Maven microservice archetype" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="315" y="290" width="170" height="30" as="geometry" />
+          <mxGeometry x="314" y="170" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-11" value="Docker image" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="329" y="250" width="140" height="30" as="geometry" />
+          <mxGeometry x="328" y="130" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-13" value="" style="endArrow=classic;html=1;rounded=0;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#3333FF;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="760" y="360" as="sourcePoint" />
-            <mxPoint x="760" y="200" as="targetPoint" />
+            <mxPoint x="759" y="240" as="sourcePoint" />
+            <mxPoint x="759" y="80" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-21" value="Technology stack" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#3333FF;" vertex="1" connectable="0" parent="dB07nsZ7sSIzAmQCZ6KJ-13">
@@ -52,21 +52,21 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-14" value="Maven / Gradle" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
-          <mxGeometry x="349" y="490" width="100" height="30" as="geometry" />
+          <mxGeometry x="348" y="370" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-15" value="Google Jib" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
-          <mxGeometry x="361" y="530" width="60" height="20" as="geometry" />
+          <mxGeometry x="360" y="410" width="60" height="20" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-18" value="Kubernetes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="364" y="207" width="60" height="30" as="geometry" />
+          <mxGeometry x="363" y="87" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-20" value="openshift / Azure / AWS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="311.5" y="170" width="165" height="30" as="geometry" />
+          <mxGeometry x="310.5" y="50" width="165" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-28" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#006600;labelBorderColor=none;strokeColor=#006600;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="760" y="440" as="sourcePoint" />
-            <mxPoint x="760" y="600" as="targetPoint" />
+            <mxPoint x="759" y="320" as="sourcePoint" />
+            <mxPoint x="759" y="480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-29" value="Tool stack" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#006600;" vertex="1" connectable="0" parent="dB07nsZ7sSIzAmQCZ6KJ-28">
@@ -75,10 +75,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-30" value="GitHub Actions / Jenkins" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
-          <mxGeometry x="318" y="570" width="151" height="30" as="geometry" />
+          <mxGeometry x="317" y="450" width="151" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-33" value="Docker hub" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#006600;" vertex="1" parent="1">
-          <mxGeometry x="346" y="607" width="90" height="30" as="geometry" />
+          <mxGeometry x="345" y="487" width="90" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
