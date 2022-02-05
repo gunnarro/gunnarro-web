@@ -1,9 +1,12 @@
-<mxfile host="app.diagrams.net" modified="2022-02-05T12:43:53.358Z" agent="5.0 (X11)" etag="jg8Bb7YFm9Ra-bM4z1PJ" version="16.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-05T12:48:28.354Z" agent="5.0 (X11)" etag="nBK_z9_X8NNOVJcHcf8z" version="16.5.3" type="github">
   <diagram id="iSKjr5TIBtfGmS1ZjRDf" name="Page-1">
     <mxGraphModel dx="1350" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-16" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="400" height="400" as="geometry" />
+        </mxCell>
         <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-8" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="240" y="240" width="320" height="320" as="geometry" />
         </mxCell>
@@ -45,6 +48,12 @@
             <mxPoint x="760" y="340" as="sourcePoint" />
             <mxPoint x="760" y="240" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-14" value="Maven / Gradle" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="349" y="490" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dB07nsZ7sSIzAmQCZ6KJ-15" value="Google Jib" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="530" width="60" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
