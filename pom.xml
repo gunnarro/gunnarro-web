@@ -54,7 +54,7 @@
         <webjars-jquery.version>3.6.0</webjars-jquery.version>
         <webjars-popper.version>1.16.1</webjars-popper.version>
         <!-- maven plugins -->
-        <mvn-compiler.version>3.9.0</mvn-compiler.version>
+        <mvn-compiler.version>3.10.0</mvn-compiler.version>
         <mvn-enforcer.version>3.0.0</mvn-enforcer.version>
         <mvn-surfire.version>3.0.0-M5</mvn-surfire.version>
         <mvn-jacoco.version>0.8.7</mvn-jacoco.version>
