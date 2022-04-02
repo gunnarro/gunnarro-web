@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
+<head th:replace="fragments/header :: header-include"></head>
+
+<body class="bg">
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="m-3 card">
+        <h3 class="card-header" th:text="#{page.microservice.title}"></h3>
+        <div class="card-body">
+            <p class="card-text" th:text="#{page.microservice.info.txt}"></p>
+            <div>
+                <h4 class="card-title" th:text="#{page.microservice.info}"></h4>
+                <dl class="mb-3 row">
+                    <dt class="col-sm-3 dt-style">Highly maintainable and testable</dt>
+                    <dd class="col-sm-8 text-gradient"></dd>
+
+                    <dt class="col-sm-3 dt-style">Loosely coupled with other services</dt>
+                    <dd class="col-sm-8 text-gradient"></dd>
+
+                    <dt class="col-sm-3 dt-style">Independently deployable</dt>
+                    <dd class="col-sm-8 text-gradient"></dd>
+
+                    <dt class="col-sm-3 dt-style">Capable of being developed and maintained by a small team</dt>
+                    <dd class="col-sm-8 text-gradient"></dd>
+                </dl>
+            </div>
+        </div>
+        <!-- end card body -->
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="employee">
+    <div class="card-body">
+        <div class="m-3 card">
+            <div class="row g-0">
+                <div class="col-md-1 m-2">
+                    <img alt="gunnar rønneberg" class="rounded float-start" height="100vh" src="/images/employees/gr-tumb.jpg"
+                         width="100vh">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Gunnar Rønneberg</h5>
+                        <h6 class="card-title" th:text="#{page.employee.role.ceo}"></h6>
+                        <p class="card-text"></p>
+                            <ul>
+                                <li><a th:href="@{/public/cv}"><span th:text="#{page.employee.cv}"></span></a></li>
+                                <li><a th:href="@{/public/cv/projects}"><span th:text="#{page.employee.projects}"></span></a></li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
