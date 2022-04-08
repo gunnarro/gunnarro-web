@@ -38,6 +38,10 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+          
+      - name: sonarqube
+        run:  mvn sonar:sonar -Dsonar.organization=gunnarro-github -Dsonar.host.url=${{ secrets.SONAR_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
 
  # use deploy-docker-hub workflow
  # deploy:
