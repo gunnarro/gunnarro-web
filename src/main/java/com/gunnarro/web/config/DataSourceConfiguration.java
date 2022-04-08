@@ -6,15 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * FIXME turned off for running on Azure
@@ -43,7 +40,7 @@ public class DataSourceConfiguration {
     @Primary
     @Bean
     public DataSource dietManagerDataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName(jdbcDriverClassName);
         dataSourceBuilder.url(jdbcUrl);
         dataSourceBuilder.username(jdbcUser);

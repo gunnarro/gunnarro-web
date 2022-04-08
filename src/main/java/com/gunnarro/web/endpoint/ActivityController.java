@@ -153,7 +153,7 @@ public class ActivityController extends BaseController {
     /**
      *
      */
-    @RequestMapping(value = "/activity/log/delete/{activityId}", method = RequestMethod.GET)
+    @GetMapping(value = "/activity/log/delete/{activityId}")
     public String deleteActivityLog(@PathVariable("activityId") int activityId) {
         LocalUser loggedInUser = authenticationFacade.getLoggedInUser();
         ActivityLog log = activityService.getActivityLog(loggedInUser.getId(), activityId);

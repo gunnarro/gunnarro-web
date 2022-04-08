@@ -112,7 +112,7 @@ public class Utility {
             }
             return sdf.parse(time);
         } catch (Exception e) {
-            LOG.warn("time: " + time + ", pattern: " + pattern + ", return null", e.getMessage());
+            LOG.warn("time: {}, pattern: {}, error: {}", time, pattern, e.getMessage());
             return null;
         }
     }

@@ -14,7 +14,7 @@ public interface ActivityRepository {
 
     List<ActivityLog> getActivityLogs(Integer userId);
 
-    int deleteActivityLog(Integer userId, Integer ActivityLogId);
+    int deleteActivityLog(Integer userId, Integer activityLogId);
 
     boolean hasPermission(Integer activityLogId, String username);
 

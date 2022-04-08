@@ -17,7 +17,7 @@ public abstract class BaseJdbcRepository {
      */
     private JdbcTemplate jdbcTemplate;
 
-    public BaseJdbcRepository() {
+    protected BaseJdbcRepository() {
     }
 
     /**
@@ -25,7 +25,7 @@ public abstract class BaseJdbcRepository {
      *
      * @param jdbcTemplate the JDBC template to create the JDBC Repository Support for.
      */
-    public BaseJdbcRepository(JdbcTemplate jdbcTemplate) {
+    protected BaseJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

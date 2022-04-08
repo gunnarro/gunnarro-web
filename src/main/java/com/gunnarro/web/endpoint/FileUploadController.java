@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 public class FileUploadController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileUploadController.class);
-    private final FileUploadService fileUploadService;
 
     @Autowired
     public FileUploadController(FileUploadService fileUploadService) {

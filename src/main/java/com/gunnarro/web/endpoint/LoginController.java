@@ -70,10 +70,6 @@ public class LoginController extends BaseController {
      * to it. Removes the Authentication from the SecurityContext to prevent
      * issues with concurrent requests. Explicitly clears the context value from
      * the current thread.
-     *
-     * @param request
-     * @param response
-     * @return
      */
     @GetMapping("/perform-logout-user")
     public String logout(HttpServletRequest request, HttpServletResponse response) {

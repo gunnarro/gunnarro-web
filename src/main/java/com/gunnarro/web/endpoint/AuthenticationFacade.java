@@ -30,10 +30,8 @@ public class AuthenticationFacade implements AuthenticationFacadeInterface {
     @Override
     public LocalUser getLoggedInUser() {
         LocalUser user = null;
-        if (getAuthentication() != null) {
-            if (getAuthentication().getPrincipal() instanceof LocalUser) {
+        if (getAuthentication() != null && getAuthentication().getPrincipal() instanceof LocalUser) {
                 user = (LocalUser) getAuthentication().getPrincipal();
-            }
         }
         if (user == null || user.getUsername() == null || user.getUsername().isEmpty()) {
             throw new NotLoggedInException();
