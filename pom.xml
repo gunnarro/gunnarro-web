@@ -6,7 +6,7 @@
     <!-- -->
     <!-- mvn clean install -Dmaven.test.skip=true -->
     <!-- mysql -u USERNAME -pPASSWORD -h HOSTNAMEORIP DATABASENAME -->
-    <!-- Check by sonarcube (ref. https://github.com/SonarSource/sonar-examples/tree/master/projects/languages/java/code-coverage/ut/ut-maven-jacoco) -->
+    <!-- Check by sonarcube (ref. https://github.com/SonarSource/sonar-scanning-examples/blob/master/doc/jacoco.md) -->
     <!-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -->
     <!-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -->
     <!-- mvn clean verify sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.organization=Gunnar Ronneberg -Dsonar.login=00e21528e5f07da596b49cd283f8ea61125eb2aa -->
