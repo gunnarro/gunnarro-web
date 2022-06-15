@@ -3,14 +3,15 @@ package com.gunnarro.web.config;
 import com.gunnarro.web.endpoint.handler.AppSuccessHandler;
 import com.gunnarro.web.endpoint.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author admin
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
 
     @Autowired
     private AppSuccessHandler successHandler;
@@ -31,13 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    /**
-     * default constructor
-     */
-    public SecurityConfiguration() {
-        super();
-    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -56,15 +50,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // roles admin allow access to: /admin/**
     // roles user allow access to: /user/**
     // custom 403 access denied handler
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "/public/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/svg/**", "/error/**", "/actuator/**").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/rest/**").hasAnyRole("USER")
-                .antMatchers("/**").hasAnyRole("USER")
-                .anyRequest().authenticated()
-                .and()
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((authz) -> authz
+                        .antMatchers("/", "/public/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/svg/**", "/error/**", "/actuator/**").permitAll()
+                        .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                        .antMatchers("/rest/**").hasAnyRole("USER")
+                        .antMatchers("/**").hasAnyRole("USER")
+                        .anyRequest().authenticated()
+                )
                 .formLogin()
                 .loginPage("/login")
                 .successHandler(successHandler)
@@ -75,5 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(this.accessDeniedHandler);
+
+        return http.build();
     }
 }
