@@ -43,7 +43,7 @@
         <!-- spring versions -->
         <spring.boot.version>2.7.0</spring.boot.version>
         <!-- spring override library versions -->
-        <log4j2.version>2.17.2</log4j2.version>
+        <log4j2.version>2.18.0</log4j2.version>
         <version.flexmark>0.62.2</version.flexmark>
         <version.jodatime>2.11.0</version.jodatime>
         <mariadb.version>2.5.3</mariadb.version>
