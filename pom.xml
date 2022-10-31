@@ -45,7 +45,7 @@
         <!-- spring override library versions -->
         <log4j2.version>2.18.0</log4j2.version>
         <version.flexmark>0.62.2</version.flexmark>
-        <version.jodatime>2.12.0</version.jodatime>
+        <version.jodatime>2.12.1</version.jodatime>
         <mariadb.version>2.6.0</mariadb.version>
         <!-- Web dependencies -->
         <!-- <webjars-bootstrap.version>5.1.3</webjars-bootstrap.version> -->
