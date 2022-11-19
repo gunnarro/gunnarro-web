@@ -44,9 +44,12 @@
         <spring.boot.version>2.7.5</spring.boot.version>
         <!-- spring override library versions -->
         <log4j2.version>2.19.0</log4j2.version>
-        <version.flexmark>0.62.2</version.flexmark>
-        <version.jodatime>2.12.0</version.jodatime>
+        <snakeyaml.version>1.32</snakeyaml.version>
+        <!-- div dependencies -->
         <mariadb.version>2.6.0</mariadb.version>
+        <version.jodatime>2.12.0</version.jodatime>
+
+
         <!-- Web dependencies -->
         <!-- <webjars-bootstrap.version>5.1.3</webjars-bootstrap.version> -->
         <!--
@@ -55,8 +58,10 @@
         <webjars-popper.version>1.16.1</webjars-popper.version>
         -->
         <!-- maven plugins -->
+        <spotbugs-maven-plugin.version>4.7.3.0</spotbugs-maven-plugin.version>
+        <azure-webapp-maven-plugin.version>2.7.0</azure-webapp-maven-plugin.version>
         <mvn-compiler.version>3.10.1</mvn-compiler.version>
-        <mvn-enforcer.version>3.0.0</mvn-enforcer.version>
+        <mvn-enforcer.version>3.1.0</mvn-enforcer.version>
         <mvn-surfire.version>3.0.0-M7</mvn-surfire.version>
         <mvn-jacoco.version>0.8.8</mvn-jacoco.version>
         <mvn-release.version>3.0.0-M5</mvn-release.version>
@@ -301,8 +306,8 @@
             <version>3.4.4</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -424,7 +429,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.3.0</version>
+                <version>${spotbugs-maven-plugin.version}</version>
                 <configuration>
                     <xmlOutput>true</xmlOutput>
                     <!-- Optional directory to put spotbugs xdoc xml report -->
@@ -481,7 +486,7 @@
                         <!-- mvn package azure-webapp:deploy -DskipTests -P deploy-azure -->
                         <groupId>com.microsoft.azure</groupId>
                         <artifactId>azure-webapp-maven-plugin</artifactId>
-                        <version>2.2.0</version>
+                        <version>${azure-webapp-maven-plugin.version}</version>
                         <configuration>
                             <subscriptionId>d21ecdd9-09c2-465d-9b87-7311465d683a</subscriptionId>
                             <resourceGroup>gunnarro-web-resource-group</resourceGroup>
