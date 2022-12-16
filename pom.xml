@@ -47,7 +47,7 @@
         <snakeyaml.version>1.32</snakeyaml.version>
         <!-- div dependencies -->
         <mariadb.version>2.6.0</mariadb.version>
-        <version.jodatime>2.12.1</version.jodatime>
+        <version.jodatime>2.12.2</version.jodatime>
 
 
         <!-- Web dependencies -->
