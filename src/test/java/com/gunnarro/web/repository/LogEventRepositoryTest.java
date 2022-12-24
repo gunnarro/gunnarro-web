@@ -9,7 +9,6 @@ import com.gunnarro.web.domain.log.LogEntry;
 import com.gunnarro.web.utility.Utility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +21,7 @@ import java.util.Calendar;
 @ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class})
 @Transactional
 @Rollback
-class logEventRepositoryTest extends DefaultTestConfig {
+class LogEventRepositoryTest extends DefaultTestConfig {
 
     @Autowired
     private LogEventRepository logEventRepository;
@@ -57,7 +56,7 @@ class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertEquals(id, logEvent.getId());
         Assertions.assertTrue(newLog.getCreatedTime() >= 0);
         Assertions.assertTrue(newLog.getLastModifiedTime() >= 0);
-        Assertions.assertTrue(newLog.getCreatedTime() == newLog.getLastModifiedTime());
+        Assertions.assertEquals(newLog.getCreatedTime(), newLog.getLastModifiedTime());
         Assertions.assertEquals("INFO", logEvent.getLevel());
         Assertions.assertEquals("title...", logEvent.getTitle());
         Assertions.assertEquals("content", logEvent.getContent());
@@ -69,7 +68,7 @@ class logEventRepositoryTest extends DefaultTestConfig {
         logEvent.setTitle("title...updated");
         logEvent.setContent("content...updated");
         logEventRepository.updateLogEvent(logEvent);
-        Assertions.assertTrue(id > 0);
+        Assertions.assertTrue(true);
         logEvent = logEventRepository.getLogEvent(userId, id);
         Assertions.assertEquals(id, logEvent.getId());
         Assertions.assertEquals("CONFLICT", logEvent.getLevel());
@@ -77,8 +76,8 @@ class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertEquals("content...updated", logEvent.getContent());
         Assertions.assertEquals(5, logEvent.getFkUserId().intValue());
         // Delete
-        Integer rows = logEventRepository.deleteLogEvent(userId, id);
-        Assertions.assertEquals(1, rows.intValue());
+        int rows = logEventRepository.deleteLogEvent(userId, id);
+        Assertions.assertEquals(1, (int) rows);
     }
 
     @Test
@@ -141,7 +140,7 @@ class logEventRepositoryTest extends DefaultTestConfig {
         Assertions.assertEquals(id, logEvent.getId());
         Assertions.assertTrue(newLog.getCreatedTime() >= 0);
         Assertions.assertTrue(newLog.getLastModifiedTime() >= 0);
-        Assertions.assertFalse(newLog.getCreatedTime() == newLog.getLastModifiedTime());
+        Assertions.assertNotEquals(newLog.getCreatedTime(), newLog.getLastModifiedTime());
         Assertions.assertEquals("01.02.2016", Utility.formatTime(newLog.getCreatedTime(), "dd.MM.yyyy"));
     }
 

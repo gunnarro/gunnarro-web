@@ -85,14 +85,13 @@ class LogEventControllerTest extends SpringTestSetup {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void getLogEvents()  {
         List<LogEntry> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             list.add(LogEntry.builder().id(i).build());
         }
         Pageable pageSpecification = PageRequest.of(0, 5, Sort.by("id"));
-        Page<LogEntry> page = new PageImpl(list, pageSpecification, list.size());
+        Page<LogEntry> page = new PageImpl<>(list, pageSpecification, list.size());
         when(logEventServiceMock.getAllLogEvents(ADMIN_USER_ID, 1, 5)).thenReturn(page);
         ModelAndView modelAndView = controller.getLogEvents(1, 5);
         Assertions.assertEquals("log/view-event-logs", modelAndView.getViewName());

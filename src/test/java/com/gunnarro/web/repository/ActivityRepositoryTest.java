@@ -25,7 +25,7 @@ class ActivityRepositoryTest extends DefaultTestConfig {
     private ActivityRepository activityRepository;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
     }
 
     @Test
@@ -55,6 +55,6 @@ class ActivityRepositoryTest extends DefaultTestConfig {
 
     @Test
     void deleteActivityLog() {
-        Assertions.assertTrue(activityRepository.deleteActivityLog(1, 1) == 1);
+        Assertions.assertEquals(1, activityRepository.deleteActivityLog(1, 1));
     }
 }
