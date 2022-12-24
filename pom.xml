@@ -47,7 +47,7 @@
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- div dependencies -->
         <mariadb.version>2.6.0</mariadb.version>
-        <version.jodatime>2.12.1</version.jodatime>
+        <version.jodatime>2.12.2</version.jodatime>
 
         <!-- Web dependencies -->
         <version.thymeleaf-extras>3.1.1.RELEASE</version.thymeleaf-extras>
@@ -352,12 +352,14 @@
         <!-- Test dependencies -->
         <!-- ================= -->
         <!-- automatically excluded for jar packaging -->
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        -->
         <dependency>
             <groupId>ch.vorburger.mariaDB4j</groupId>
             <artifactId>mariaDB4j-springboot</artifactId>
