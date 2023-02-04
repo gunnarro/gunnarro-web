@@ -46,7 +46,7 @@ class LogEventControllerTest extends SpringTestSetup {
         LogEntry logEntry = LogEntry.builder()
                 .fkUserId(ADMIN_USER_ID)
                 .build();
-        when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(logEntry);
+            when(logEventServiceMock.getLogEvent(ADMIN_USER_ID, 4)).thenReturn(logEntry);
         String redirectUrl = controller.deletelogEvent(4);
         Assertions.assertEquals("redirect:/log/events", redirectUrl);
     }
