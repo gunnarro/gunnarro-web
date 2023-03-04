@@ -40,9 +40,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- latest java LTS version -->
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <!-- spring versions -->
-        <spring.boot.version>3.0.3</spring.boot.version>
+        <spring.boot.version>3.0.4</spring.boot.version>
         <!-- spring override library versions -->
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- div dependencies -->
@@ -259,8 +259,7 @@
         </dependency>
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-            <version>${version.thymeleaf-extras}</version>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

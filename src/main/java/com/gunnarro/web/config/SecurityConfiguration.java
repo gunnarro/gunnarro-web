@@ -5,10 +5,12 @@ import com.gunnarro.web.endpoint.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,7 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfiguration {
 
     @Autowired
@@ -48,12 +50,27 @@ public class SecurityConfiguration {
                 .and().build();
     }
      */
+    /*
+    .authorizeHttpRequests(autorizeRequests -> autorizeRequests
+      .requestMatchers(HttpMethod.GET, "/ws/healthz", "/ws/ready", "/ws/version").permitAll()
+      .requestMatchers(HttpMethod.GET,
+        "/ws/user/**",
+        "/ws/user/avatar/*",
+        "/ws/user/search").hasAnyAuthority("SCOPE_tmt:user")
+      .requestMatchers(HttpMethod.POST,
+        "/ws/friend",
+        "/ws/user/trip",
+        "/ws/trip/*").hasAnyAuthority("SCOPE_tmt:user")
+     */
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/")).permitAll()
+                .cors()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeHttpRequests(
+                        (requests) -> requests.requestMatchers(HttpMethod.GET, "/", "/public/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/svg/**", "/error/**", "/actuator/**").permitAll()
                                     .anyRequest()
                                     .authenticated())
                 .formLogin()
