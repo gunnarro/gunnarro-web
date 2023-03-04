@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author admin
@@ -47,9 +48,30 @@ public class SecurityConfiguration {
                 .and().build();
     }
      */
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/")).permitAll()
+                                    .anyRequest()
+                                    .authenticated())
+                .formLogin()
+                .loginPage("/login")
+                .successHandler(successHandler)
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(this.accessDeniedHandler);
+        return http.build();
+    }
     // roles admin allow access to: /admin/**
     // roles user allow access to: /user/**
     // custom 403 access denied handler
+    /*
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -73,4 +95,6 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
+     */
 }

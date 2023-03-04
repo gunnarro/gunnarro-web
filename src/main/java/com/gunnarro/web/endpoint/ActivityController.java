@@ -5,6 +5,7 @@ import com.gunnarro.web.domain.log.LogEntry;
 import com.gunnarro.web.domain.user.LocalUser;
 import com.gunnarro.web.service.exception.ApplicationException;
 import com.gunnarro.web.utility.Utility;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Scope;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

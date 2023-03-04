@@ -1,3 +1,4 @@
+
 package com.gunnarro.web.endpoint;
 
 import com.gunnarro.web.service.ActivityService;
@@ -6,6 +7,7 @@ import com.gunnarro.web.service.LogEventService;
 import com.gunnarro.web.service.exception.ApplicationException;
 import com.gunnarro.web.service.exception.UploadFileException;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.ConnectException;
 import java.sql.SQLException;
 

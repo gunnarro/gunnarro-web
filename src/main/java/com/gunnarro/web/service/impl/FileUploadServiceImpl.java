@@ -4,6 +4,7 @@ import com.gunnarro.web.domain.log.ImageResource;
 import com.gunnarro.web.service.FileUploadService;
 import com.gunnarro.web.service.exception.UploadFileException;
 import com.gunnarro.web.service.exception.UploadFileNotFoundException;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -14,7 +15,6 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

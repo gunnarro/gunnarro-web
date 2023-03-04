@@ -8,15 +8,14 @@ import com.gunnarro.web.repository.mapper.LogEventRowMapper;
 import com.gunnarro.web.repository.table.log.EventLogTable;
 import com.gunnarro.web.repository.table.log.LogCommentTable;
 import com.gunnarro.web.service.exception.ApplicationException;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 

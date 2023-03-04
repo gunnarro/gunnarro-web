@@ -1,10 +1,10 @@
 package com.gunnarro.web.repository.mapper;
 
 import com.gunnarro.web.domain.user.Privilege;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 
-import javax.validation.constraints.NotNull;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

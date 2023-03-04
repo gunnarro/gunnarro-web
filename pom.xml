@@ -42,7 +42,7 @@
         <!-- latest java LTS version -->
         <java.version>11</java.version>
         <!-- spring versions -->
-        <spring.boot.version>2.7.8</spring.boot.version>
+        <spring.boot.version>3.0.3</spring.boot.version>
         <!-- spring override library versions -->
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- div dependencies -->
@@ -309,8 +309,8 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
         <!-- lombok -->
         <dependency>

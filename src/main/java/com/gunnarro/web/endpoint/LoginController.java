@@ -3,14 +3,14 @@ package com.gunnarro.web.endpoint;
 import com.gunnarro.web.domain.user.LocalUser;
 import com.gunnarro.web.service.exception.ApplicationException;
 import com.gunnarro.web.service.exception.NotLoggedInException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Controller
