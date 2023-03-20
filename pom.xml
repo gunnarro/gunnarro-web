@@ -62,7 +62,7 @@
         <azure-webapp-maven-plugin.version>2.8.0</azure-webapp-maven-plugin.version>
         <mvn-compiler.version>3.11.0</mvn-compiler.version>
         <mvn-enforcer.version>3.1.0</mvn-enforcer.version>
-        <mvn-surfire.version>3.0.0-M7</mvn-surfire.version>
+        <mvn-surfire.version>3.0.0</mvn-surfire.version>
         <mvn-jacoco.version>0.8.8</mvn-jacoco.version>
         <mvn-release.version>3.0.0-M5</mvn-release.version>
         <mvn-site.version>3.12.0</mvn-site.version>
