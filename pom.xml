@@ -47,7 +47,7 @@
         <snakeyaml.version>2.0</snakeyaml.version>
         <!-- div dependencies -->
         <mariadb.version>2.6.0</mariadb.version>
-        <version.jodatime>2.12.4</version.jodatime>
+        <version.jodatime>2.12.5</version.jodatime>
 
         <!-- Web dependencies -->
         <version.thymeleaf-extras>3.1.1.RELEASE</version.thymeleaf-extras>
