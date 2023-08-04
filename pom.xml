@@ -50,7 +50,7 @@
         <version.jodatime>2.12.4</version.jodatime>
 
         <!-- Web dependencies -->
-        <version.thymeleaf-extras>3.1.1.RELEASE</version.thymeleaf-extras>
+        <version.thymeleaf-extras>3.1.2.RELEASE</version.thymeleaf-extras>
         <!-- <webjars-bootstrap.version>5.1.3</webjars-bootstrap.version> -->
         <!--
         <webjars-jquery-ui.version>1.13.0</webjars-jquery-ui.version>
