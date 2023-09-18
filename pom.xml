@@ -67,7 +67,7 @@
         <mvn-release.version>3.0.0-M5</mvn-release.version>
         <mvn-site.version>3.12.0</mvn-site.version>
         <mvn-jib-plugin.version>3.2.1</mvn-jib-plugin.version>
-        <mvm-sonar-plugin>3.9.1.2184</mvm-sonar-plugin>
+        <mvm-sonar-plugin>3.10.0.2594</mvm-sonar-plugin>
     </properties>
 
     <dependencyManagement>
