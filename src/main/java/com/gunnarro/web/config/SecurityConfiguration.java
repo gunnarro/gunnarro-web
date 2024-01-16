@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,13 +43,13 @@ public class SecurityConfiguration {
     }
 
     /**
-    public SecurityWebFilterChain securityWebFilterChain(
-            ServerHttpSecurity http) {
-        return http.authorizeExchange()
-                .pathMatchers("/actuator/**").permitAll()
-                .anyExchange().authenticated()
-                .and().build();
-    }
+     * public SecurityWebFilterChain securityWebFilterChain(
+     * ServerHttpSecurity http) {
+     * return http.authorizeExchange()
+     * .pathMatchers("/actuator/**").permitAll()
+     * .anyExchange().authenticated()
+     * .and().build();
+     * }
      */
     /*
     .authorizeHttpRequests(autorizeRequests -> autorizeRequests
@@ -62,56 +63,28 @@ public class SecurityConfiguration {
         "/ws/user/trip",
         "/ws/trip/*").hasAnyAuthority("SCOPE_tmt:user")
      */
-    @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        http
-                .cors()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests(
-                        (requests) -> requests.requestMatchers(HttpMethod.GET, "/", "/public/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/svg/**", "/error/**", "/actuator/**").permitAll()
-                                    .anyRequest()
-                                    .authenticated())
-                .formLogin()
-                .loginPage("/login")
-                .successHandler(successHandler)
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling()
-                .accessDeniedHandler(this.accessDeniedHandler);
-        return http.build();
-    }
+
+
     // roles admin allow access to: /admin/**
     // roles user allow access to: /user/**
     // custom 403 access denied handler
-    /*
     @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authz -> authz
-                        .antMatchers("/", "/public/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/svg/**", "/error/**", "/actuator/**").permitAll()
-                        .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                        .antMatchers("/rest/**").hasAnyRole("USER")
-                        .antMatchers("/**").hasAnyRole("USER")
-                        .anyRequest().authenticated()
+                .authorizeHttpRequests(
+                        (requests) -> requests.requestMatchers("/**").permitAll()
+                       //         .requestMatchers(HttpMethod.GET, "/", "/public/**", "/static/**", "/index", "/site/**", "/webjars/**", "/css/**", "/js/**", "/images/**", "/svg/**", "/error/**", "/actuator/**").permitAll()
+                       //         .requestMatchers("/admin/**").hasRole("ADMIN")
+                       //         .requestMatchers("/rest/**").hasRole("USER")
+                       //         .requestMatchers("/**").hasRole("USER")
+                        //        .anyRequest().authenticated()
                 )
-                .formLogin()
-                .loginPage("/login")
-                .successHandler(successHandler)
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling()
-                .accessDeniedHandler(this.accessDeniedHandler);
-
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .successHandler(successHandler)
+                        .permitAll()
+                )
+                .logout(LogoutConfigurer::permitAll);
         return http.build();
     }
-
-     */
 }
