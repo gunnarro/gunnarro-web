@@ -8,11 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
 
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -42,7 +38,7 @@ public class Application {
                 map.put(pkg.getImplementationTitle(), pkg.getImplementationVersion());
             }
         }
-        map.entrySet().forEach( e -> log.info("application bom: vendor={}, version={}", e.getKey(),e.getValue()));
+        map.forEach((key, value) -> log.info("application bom: vendor={}, version={}", key, value));
         SpringApplication.run(Application.class, args);
     }
 }

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-include"></head>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link href="/static/css/timeline-7.css" media="screen" rel="stylesheet" th:href="@{/static/css/timeline-7.css}"/>
+<style>
+    .div-fixed-size {
+        width: 200px;
+    }
+</style>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- left side-->
+<!--
+<div class="bg-primary fixed-top" id="leftSide">
+    <div class="leftside-brand bt-1">
+        <span class="d-block d-lg-none">Gunnar Rønneberg</span>
+        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../static/images/profile.jpg" alt="" /></span>
+    </div>
+    <div class="leftside-box bt-1">
+        <dl class="dl-horizontal">
+            <dt class="leftside-text"><span class="glyphicon glyphicon-earphone">Mobile</span></dt>
+            <dd class="leftside-text"><span class="">+47 45 46 55 00</span></dd>
+            <dt class="leftside-text"><span class="glyphicon glyphicon-envelope">Email</span></dt>
+            <dd class="leftside-text"><span class="">gunnar_ronneberg@yahoo.no</span></dd>
+        </dl>
+    </div>
+</div>
+-->
+<!-- Page Content-->
+<div class="container-fluid p-1">
+    <!-- Timeline 7 - Bootstrap Brain Component -->
+    <section class="bsb-timeline-7 bg-light py-3 py-md-5 py-xl-8">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10 col-md-12 col-xl-10 col-xxl-9">
+                    <ul class="timeline">
+                        <li class="timeline-item">
+                            <div class="timeline-body">
+                                <div class="timeline-meta">
+                                    <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <span class="fw-bold">2024</span>
+                                        <span>Februar</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-content timeline-indicator">
+                                    <div class="card border-0 shadow">
+                                        <div class="card-body p-xl-4">
+                                            <h5 class="card-title mb-2">gunnarro as</h5>
+                                            <h6 class="card-subtitle text-secondary mb-2">IT Konsulent</h6>
+                                            <p class="card-text m-0">
+                                            <ul>
+                                                <li><b>gunnarro as</b>: Videreutvikle gunnarro as web applikasjon og microservice rammeverk</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <ul class="timeline">
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2023</span>
+                                            <span>Mai</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">gunnarro as</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">IT konsulent</h6>
+                                                <p class="card-text m-0">
+                                                    <ul>
+                                                    <li><b>CatalystOne Solutions AS</b>: Engasjert som Tech lead for å modernisere HR web applikasjon over til en microservice basert arkitekture.</li>
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2022</span>
+                                            <span>Februar</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">gunnarro as</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">IT Konsulent</h6>
+                                                <p class="card-text m-0">
+                                                    <ul>
+                                                        <li><b>Mastercard Payment Services</b>: Engasjert som system utvikler for å moderniserer og oppgradere delvis monolitisk applikasjons porteføljen til å bruke Spring Boot rammeverket, etc</li>
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2014</span>
+                                            <span>August</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">Telenor AS</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">System Arkitekt</h6>
+                                                <p class="card-text m-0">Arkitekt for Telenors microservice plattform for TV tjenester, kjent som Telenor T-We og tidligere CanalDigital Kabel. Som i all hovedsak er basert på åpen kildekode. Det brukes både synkrone og asynkrone REST tjenester over en meldingsbasert arkitektur. Tjenestene eksponeres via en API Gateway over 2-way-TLS. Prometheus og Grafana brukes til monitorering. Har også arkitektur ansvaret for TV integrasjonsplattformen, som er basert på Oracle Service Bus, Oracle SOA Suite og Oracle Database. Min oppgave er å forvalte og videreutvikle hele livsløpet til integrasjons - og microservice plattformen for Telenors TV tjenester. Hvor systemarkitektur og applikasjonsdrift også inngår i mine arbeidsoppgaver.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2008</span>
+                                            <span>Januar</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">TeliaSonera Norge AS</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">Senior system utvikler</h6>
+                                                <p class="card-text m-0">Utvikling av integrasjonslaget til TeliaSoneras web service baserte ordre grensesnitt. hvor det ble brukt Scrum og Testdreven utviklingsmetodikk. Integrasjonslaget består i all hovedsak av mange java applikasjoner bygd på Spring rammeverket og Oracle database. Applikasjons drift har også vært en del av mine arbeidsoppgaver. På eget intiativ lagde jeg ett verktøy for å forenkle søk i logg filer.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2005</span>
+                                            <span>Juni</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">Software Innovation AS</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">Senior IT konsulent</h6>
+                                                <p class="card-text m-0">
+                                                    <ul>
+                                                        <li><b>Toll- og avgiftsdirektoratet</b>: Modernisere saksbehandlersystemet til java tykk klient ved hjelp av Genova og UML.</li>
+                                                        <li><b>Tomra Systems ASA</b>: Lage ett nytt web basert administrasjons grensesnitt for panteautomater. Hvor det ble brukt java, JSF, tomcat og Oracle database.</li>
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2002</span>
+                                            <span>August</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">Telenor AS</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">Senior utvikler</h6>
+                                                <p class="card-text m-0">Utvikling og forvaltning av en IP-basert kontaktsenterløsning. Java swing klient som ble installert på local pc. Har også hatt en del kundekontakt for å hjelpe til med tekniske utfordringer ute hos kunde.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">2000</span>
+                                            <span>Juni</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">Accenture ANS</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">IT konsulent</h6>
+                                                <p class="card-text m-0">
+                                                    <ul>
+                                                        <li><b>Postbanken</b>: Engasjert for å videreutvikle potsbankens nettbank løsning. Programmeringsspråk java. Lagde ett test verktøy for å sjekke om web service tjenester var oppe.</li>
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-meta">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                            <span class="fw-bold">1999</span>
+                                            <span>Mai</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-content timeline-indicator">
+                                        <div class="card border-0 shadow">
+                                            <div class="card-body p-xl-4">
+                                                <h5 class="card-title mb-2">Universitetet i Oslo, Institutt for informatikk</h5>
+                                                <h6 class="card-subtitle text-secondary mb-2">Forsker</h6>
+                                                <p class="card-text m-0">Utviklet en SCI nettverk simulator i Opnet, som ble godkjent og lagt inn i standard biblioteket til Opnet.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

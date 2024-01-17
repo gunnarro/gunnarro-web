@@ -1,49 +1,24 @@
 package com.gunnarro.web.config;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.thymeleaf.spring6.ISpringTemplateEngine;
 import org.thymeleaf.spring6.SpringTemplateEngine;
-import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @EnableWebMvc
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer, ApplicationContextAware {
+public class WebMvcConfig implements WebMvcConfigurer {
 
-    private ApplicationContext applicationContext;
-
-    // Java setter
+    // private ApplicationContext applicationContext;
 
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/resources/")
-                .addResourceLocations("classpath:/resources/static/css/")
-                .setCachePeriod(3600)
-                .resourceChain(true)
-                .addResolver(new PathResourceResolver());
-    }
-    @Bean
-    public ViewResolver htmlViewResolver() {
-        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-      //  resolver.setTemplateEngine(templateEngine(htmlTemplateResolver()));
-        resolver.setContentType("text/html");
-        resolver.setCharacterEncoding("UTF-8");
-        resolver.setViewNames(new String[]{"*.html"});
-        return resolver;
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/").setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver());
     }
 
     private ISpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
@@ -52,19 +27,6 @@ public class WebMvcConfig implements WebMvcConfigurer, ApplicationContextAware {
         return engine;
     }
 
-    private ITemplateResolver htmlTemplateResolver() {
-        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-        resolver.setApplicationContext(applicationContext);
-        resolver.setPrefix("/resources/templates/");
-        resolver.setCacheable(false);
-        resolver.setTemplateMode(TemplateMode.HTML);
-        return resolver;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
-    }
     /**
      * {@inheritDoc}
      */
@@ -95,4 +57,14 @@ public class WebMvcConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
    */
+
+    /**
+     * Serving a Resource Stored in the File System
+     * <img alt="image"  src="<c:url value="files/myImage.png" />">
+     *
+     @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
+     registry
+     .addResourceHandler("/files/**")
+     .addResourceLocations("file:/opt/files/");
+     }*/
 }

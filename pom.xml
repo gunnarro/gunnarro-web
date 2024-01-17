@@ -44,9 +44,10 @@
         <!-- spring versions -->
         <spring.boot.version>3.2.1</spring.boot.version>
         <!-- spring override library versions -->
-        <snakeyaml.version>2.0</snakeyaml.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
         <!-- div dependencies -->
-        <mariadb.version>2.6.0</mariadb.version>
+        <mariadb.version>3.3.2</mariadb.version>
+        <mariadb4j.version>3.0.1</mariadb4j.version>
         <version.jodatime>2.12.5</version.jodatime>
 
         <!-- Web dependencies -->
@@ -66,7 +67,7 @@
         <mvn-jacoco.version>0.8.11</mvn-jacoco.version>
         <mvn-release.version>3.0.0-M5</mvn-release.version>
         <mvn-site.version>3.12.0</mvn-site.version>
-        <mvn-jib-plugin.version>3.2.1</mvn-jib-plugin.version>
+        <mvn-jib-plugin.version>3.4.0</mvn-jib-plugin.version>
         <mvm-sonar-plugin>3.9.1.2184</mvm-sonar-plugin>
     </properties>
 
@@ -302,6 +303,7 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -345,12 +347,6 @@
         </dependency>
         -->
         <dependency>
-            <groupId>ch.vorburger.mariaDB4j</groupId>
-            <artifactId>mariaDB4j-springboot</artifactId>
-            <version>${mariadb.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <version>${mariadb.version}</version>
@@ -358,14 +354,20 @@
         </dependency>
         <dependency>
             <groupId>ch.vorburger.mariaDB4j</groupId>
+            <artifactId>mariaDB4j-springboot</artifactId>
+            <version>${mariadb4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.vorburger.mariaDB4j</groupId>
             <artifactId>mariaDB4j</artifactId>
-            <version>${mariadb.version}</version>
+            <version>${mariadb4j.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ch.vorburger.mariaDB4j</groupId>
             <artifactId>mariaDB4j-core</artifactId>
-            <version>${mariadb.version}</version>
+            <version>${mariadb4j.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
