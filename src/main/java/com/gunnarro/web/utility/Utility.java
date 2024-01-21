@@ -10,6 +10,8 @@ import org.springframework.util.ObjectUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -143,4 +145,16 @@ public class Utility {
         }
     }
 
+    public static String calculateDiffBetweenDates(LocalDate fromDate, LocalDate toDate) {
+        Period diff = Period.between(fromDate, toDate);
+        if (diff.getYears() > 0 && diff.getMonths() > 0) {
+            return String.format("%s år %s måneder", diff.getYears(), diff.getMonths());
+        } else if (diff.getYears() > 0 && diff.getMonths() == 0) {
+            return diff.getYears() + " år";
+        } else if (diff.getYears() == 0 && diff.getMonths() > 0) {
+            return diff.getMonths() + " måneder";
+        } else {
+            return diff.getDays() + " dager";
+        }
+    }
 }

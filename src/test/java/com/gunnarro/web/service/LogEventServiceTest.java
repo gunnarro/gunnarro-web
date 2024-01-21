@@ -18,6 +18,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+
 import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {TestMariDBDataSourceConfiguration.class, TestRepositoryConfiguration.class, LogEventServiceImpl.class, AuthenticationFacade.class, FileUploadServiceImpl.class})
@@ -81,5 +85,4 @@ class LogEventServiceTest extends DefaultTestConfig {
         Assertions.assertTrue(logEvent.getLogComments().get(0).getCreatedTime() > 0);
         Assertions.assertEquals("added comment 1", logEvent.getLogComments().get(0).getContent());
     }
-
 }

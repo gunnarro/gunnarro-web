@@ -1,36 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header-include"></head>
-<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<link href="/static/css/timeline-7.css" media="screen" rel="stylesheet" th:href="@{/static/css/timeline-7.css}"/>
-<style>
-    .div-fixed-size {
-        width: 200px;
-    }
-</style>
+<head>
+</head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<!-- left side-->
-<!--
-<div class="bg-primary fixed-top" id="leftSide">
-    <div class="leftside-brand bt-1">
-        <span class="d-block d-lg-none">Gunnar Rønneberg</span>
-        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../static/images/profile.jpg" alt="" /></span>
-    </div>
-    <div class="leftside-box bt-1">
-        <dl class="dl-horizontal">
-            <dt class="leftside-text"><span class="glyphicon glyphicon-earphone">Mobile</span></dt>
-            <dd class="leftside-text"><span class="">+47 45 46 55 00</span></dd>
-            <dt class="leftside-text"><span class="glyphicon glyphicon-envelope">Email</span></dt>
-            <dd class="leftside-text"><span class="">gunnar_ronneberg@yahoo.no</span></dd>
-        </dl>
-    </div>
-</div>
--->
-<!-- Page Content-->
-<div class="container-fluid p-1">
     <!-- Timeline 7 - Bootstrap Brain Component -->
-    <section class="bsb-timeline-7 bg-light py-3 py-md-5 py-xl-8">
+    <section th:fragment="cv-experience-section" id="experience" class="bsb-timeline-7 py-3 py-md-5 py-xl-8">
+        <div class="resume-section-content">
+            <h2 class="mb-3">Arbeidserfaring</h2>
+            <hr class="bg-primary"/>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-10 col-md-12 col-xl-10 col-xxl-9">
@@ -38,7 +15,7 @@
                         <li class="timeline-item">
                             <div class="timeline-body">
                                 <div class="timeline-meta">
-                                    <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                    <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                         <span class="fw-bold">2024</span>
                                         <span>Februar</span>
                                     </div>
@@ -46,8 +23,8 @@
                                 <div class="timeline-content timeline-indicator">
                                     <div class="card border-0 shadow">
                                         <div class="card-body p-xl-4">
-                                            <h5 class="card-title mb-2">gunnarro as</h5>
-                                            <h6 class="card-subtitle text-secondary mb-2">IT Konsulent</h6>
+                                            <h5 class="card-title mb-2">IT Konsulent</h5>
+                                            <h6 class="card-subtitle text-secondary mb-2">gunnarro as</h6>
                                             <p class="card-text m-0">
                                             <ul>
                                                 <li><b>gunnarro as</b>: Videreutvikle gunnarro as web applikasjon og microservice rammeverk</li>
@@ -61,7 +38,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2023</span>
                                             <span>Mai</span>
                                         </div>
@@ -83,7 +60,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2022</span>
                                             <span>Februar</span>
                                         </div>
@@ -105,7 +82,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2014</span>
                                             <span>August</span>
                                         </div>
@@ -123,7 +100,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2008</span>
                                             <span>Januar</span>
                                         </div>
@@ -142,7 +119,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2005</span>
                                             <span>Juni</span>
                                         </div>
@@ -166,7 +143,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2002</span>
                                             <span>August</span>
                                         </div>
@@ -185,7 +162,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">2000</span>
                                             <span>Juni</span>
                                         </div>
@@ -208,7 +185,7 @@
                             <li class="timeline-item">
                                 <div class="timeline-body">
                                     <div class="timeline-meta">
-                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center div-fixed-size">
+                                        <div class="d-inline-flex flex-column px-2 py-1 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 text-center timeline-meta-fixed-width">
                                             <span class="fw-bold">1999</span>
                                             <span>Mai</span>
                                         </div>
@@ -227,8 +204,8 @@
                         </ul>
                 </div>
             </div>
+            </div>
         </div>
     </section>
-</div>
 </body>
 </html>

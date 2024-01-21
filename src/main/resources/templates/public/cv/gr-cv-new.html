@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-include">
+</head>
+<!-- convert to pdf -->
+<!-- https://itextpdf.com/en/demos/convert-html-css-to-pdf-free-online -->
+<!-- must zip file:-->
+<!-- Page Content-->
+<!-- zip -r gr-resume-project.zip gr-cv-project.html -->
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- Page Content-->
+<div class="container-fluid p-1">
+    <!-- import header -->
+    <div th:replace="public/cv/cv-header :: cv-header-section"></div>
+    <!-- import skills-->
+    <div th:replace="public/cv/skills :: cv-skills-section"></div>
+    <!-- import experience-->
+    <div th:replace="public/cv/experience-timeline :: cv-experience-section"></div>
+    <!-- import education-->
+    <div th:replace="public/cv/education-timeline :: cv-education-section"></div>
+</div>
+</body>
+</html>

@@ -400,3 +400,6 @@ table.table tfoot tr {
 .fi-no {
     background-image: url("/static/svg/no.svg");
 }
+
+.address-font {
+}

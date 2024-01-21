@@ -32,3 +32,8 @@ docker container ls
 
 #### docker status
 docker ps -a
+
+## Resources
+https://bootsnipp.com/snippets/xrKXW
+
+https://bootstrapbrain.com/tutorial/bootstrap-timeline-example/
