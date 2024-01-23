@@ -1,5 +1,6 @@
 .timeline-meta-fixed-width {
     width: 200px;
+    background-color: #ddeeff;
 }
 
 .no-border {
@@ -47,13 +48,13 @@
 }
 
 .bsb-timeline-4 {
-	--bsb-tl-color: var(--bs-primary-bg-subtle);
-	--bsb-tl-circle-color: var(--bs-light);
+	--bsb-tl-color: var(--bs-blue);
+	--bsb-tl-circle-color: var(--bs-teal);
 	--bsb-tl-circle-border-color: var(--bs-primary);
-	--bsb-tl-circle-size: 16px;
-	--bsb-tl-circle-border-size: 2px;
+	--bsb-tl-indicator-color: var(--bs-teal);
+	--bsb-tl-circle-size: 20px;
 	--bsb-tl-circle-offset: 8px;
-	--bsb-tl-indicator-color: var(--bs-white)
+	--bsb-tl-circle-border-size: 2px
 }
 
 .bsb-timeline-4 .timeline {

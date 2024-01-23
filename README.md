@@ -37,3 +37,9 @@ docker ps -a
 https://bootsnipp.com/snippets/xrKXW
 
 https://bootstrapbrain.com/tutorial/bootstrap-timeline-example/
+
+<!-- convert to pdf -->
+<!-- https://itextpdf.com/en/demos/convert-html-css-to-pdf-free-online -->
+<!-- must zip file:-->
+<!-- Page Content-->
+<!-- zip -r gr-resume-project.zip gr-cv-project.html -->
