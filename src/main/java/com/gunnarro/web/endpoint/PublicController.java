@@ -32,7 +32,7 @@ public class PublicController {
 
     @GetMapping(PUBLIC_URI + "/cv")
     public String cv() {
-        return createUri("/cv/gr-cv-new");
+        return createUri("/cv/gr-cv");
     }
 
     @GetMapping(PUBLIC_URI + "/employees")
@@ -47,7 +47,7 @@ public class PublicController {
 
     @GetMapping(PUBLIC_URI + "/cv/projects")
     public String cvProjects() {
-        return createUri("/cv/gr-cv-project-new");
+        return createUri("/cv/gr-cv-project");
     }
 
     @GetMapping(PUBLIC_URI + "/cv/pdf")
