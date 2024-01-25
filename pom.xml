@@ -60,7 +60,7 @@
         -->
         <!-- maven plugins -->
         <spotbugs-maven-plugin.version>4.8.3.0</spotbugs-maven-plugin.version>
-        <azure-webapp-maven-plugin.version>2.8.0</azure-webapp-maven-plugin.version>
+        <azure-spring-apps-maven-plugin.version>1.19.0</azure-spring-apps-maven-plugin.version>
         <mvn-compiler.version>3.12.1</mvn-compiler.version>
         <mvn-enforcer.version>3.4.1</mvn-enforcer.version>
         <mvn-surfire.version>3.2.5</mvn-surfire.version>
@@ -469,35 +469,25 @@
                         <!-- this plugin requires azure cli installed -->
                         <!-- mvn package azure-webapp:deploy -DskipTests -P deploy-azure -->
                         <groupId>com.microsoft.azure</groupId>
-                        <artifactId>azure-webapp-maven-plugin</artifactId>
-                        <version>${azure-webapp-maven-plugin.version}</version>
+                        <artifactId>azure-spring-apps-maven-plugin</artifactId>
+                        <version>${azure-spring-apps-maven-plugin.version}</version>
                         <configuration>
-                            <subscriptionId>d21ecdd9-09c2-465d-9b87-7311465d683a</subscriptionId>
+                            <subscriptionId>${AZURE_SUBSCRIPTION_ID}</subscriptionId>
                             <resourceGroup>gunnarro-web-resource-group</resourceGroup>
                             <appName>${web.app.name}</appName>
-                            <pricingTier>P1v2</pricingTier>
-                            <region>westeurope</region>
-                            <runtime>
-                                <os>linux</os>
-                                <webContainer>Java SE</webContainer>
-                                <javaVersion>Java 11</javaVersion>
-                            </runtime>
-                            <!-- Begin of App Settings  -->
-                            <appSettings>
-                                <property>
-                                    <name>JAVA_OPTS</name>
-                                    <value>-Dserver.port=80</value>
-                                </property>
-                                <property>
-                                    <name>JAVA_OPTS</name>
-                                    <value>-Xmx512m -Xms512m</value>
-                                </property>
-                            </appSettings>
+                            <clusterName>gunnarro-web</clusterName>
+                            <isPublic>true</isPublic>
                             <!-- End of App Settings  -->
                             <deployment>
+                                <cpu>1</cpu>
+                                <memoryInGB>1</memoryInGB>
+                                <instanceCount>1</instanceCount>
+                                <runtimeVersion>Java 21</runtimeVersion>
                                 <resources>
                                     <resource>
-                                        <type>jar</type>
+                                        <filtering/>
+                                        <mergeId/>
+                                        <targetPath/>
                                         <directory>${project.basedir}/target</directory>
                                         <includes>
                                             <include>*.jar</include>
