@@ -1,14 +1,261 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!-- only for local testing
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link href="/static/css/timeline-4-custom.css" media="screen" rel="stylesheet" th:href="@{/static/css/timeline-4-custom.css}"/>
-    -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <!-- for search engines -->
+    <meta content="gunnarro, java consultant, it consulting, spring, java" name="Description">
+
+    <title>gunnarro:as</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <link href="/static/css/gunnarro.css" rel="stylesheet">
+    <link href="/static/css/timeline-4-custom.css" media="screen" rel="stylesheet"/>
+    <!-- link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/tutorials/timelines/timeline-4/assets/css/timeline-4.css" -->
+    <link href="/static/css/background-img.css" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q3VH21R6R0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q3VH21R6R0');
+    </script>
+    <style>
+        .timeline-meta-fixed-width {
+       width: 200px;
+       background-color: #ddeeff;
+   }
+
+   .no-border {
+       border: none;
+   }
+
+   .py-8 {
+       padding-bottom: 4.5rem !important;
+       padding-top: 4.5rem !important
+   }
+
+   @media(min-width:576px) {
+       .py-sm-8 {
+           padding-bottom: 4.5rem !important;
+           padding-top: 4.5rem !important
+       }
+   }
+
+   @media(min-width:768px) {
+       .py-md-8 {
+           padding-bottom: 4.5rem !important;
+           padding-top: 4.5rem !important
+       }
+   }
+
+   @media(min-width:992px) {
+       .py-lg-8 {
+           padding-bottom: 4.5rem !important;
+           padding-top: 4.5rem !important
+       }
+   }
+
+   @media(min-width:1200px) {
+       .py-xl-8 {
+           padding-bottom: 4.5rem !important;
+           padding-top: 4.5rem !important
+       }
+   }
+
+   @media(min-width:1400px) {
+       .py-xxl-8 {
+           padding-bottom: 4.5rem !important;
+           padding-top: 4.5rem !important
+       }
+   }
+
+   .bsb-timeline-4 {
+       --bsb-tl-color: var(--bs-blue);
+       --bsb-tl-circle-color: var(--bs-teal);
+       --bsb-tl-circle-border-color: var(--bs-primary);
+       --bsb-tl-indicator-color: var(--bs-teal);
+       --bsb-tl-circle-size: 20px;
+       --bsb-tl-circle-offset: 8px;
+       --bsb-tl-circle-border-size: 2px
+   }
+
+   .bsb-timeline-4 .timeline {
+       list-style: none;
+       margin: 0;
+       padding: 0;
+       position: relative
+   }
+
+   .bsb-timeline-4 .timeline:after {
+       background-color: var(--bsb-tl-color);
+       bottom: 0;
+       content: "";
+       left: 0;
+       margin-left: -1px;
+       position: absolute;
+       top: 0;
+       width: 2px
+   }
+
+   @media(min-width:768px) {
+       .bsb-timeline-4 .timeline:after {
+           left: 50%
+       }
+   }
+
+   .bsb-timeline-4 .timeline>.timeline-item {
+       margin: 0;
+       padding: 0;
+       position: relative
+   }
+
+   .bsb-timeline-4 .timeline>.timeline-item:after {
+       background: var(--bsb-tl-circle-color);
+       border: var(--bsb-tl-circle-border-size) solid var(--bsb-tl-circle-border-color);
+       border-radius: 50%;
+       content: "";
+       height: var(--bsb-tl-circle-size);
+       left: calc(var(--bsb-tl-circle-offset)*-1);
+       position: absolute;
+       top: calc(50% - var(--bsb-tl-circle-offset));
+       width: var(--bsb-tl-circle-size);
+       z-index: 1
+   }
+
+   .bsb-timeline-4 .timeline>.timeline-item .timeline-body {
+       margin: 0;
+       padding: 0;
+       position: relative
+   }
+
+   .bsb-timeline-4 .timeline>.timeline-item .timeline-meta {
+       padding: 2.5rem 0 1rem 2.5rem
+   }
+
+   .bsb-timeline-4 .timeline>.timeline-item .timeline-content {
+       padding: 0 0 2.5rem 2.5rem;
+       position: relative
+   }
+
+   .timeline-content-no-padding-top {
+       padding: 0 2.5rem 0 2.5rem !important;
+       position: relative
+   }
+
+   .timeline-content-no-padding-bottom {
+       padding: 0 2.5rem 0 2.5rem !important;
+       position: relative
+   }
+
+   @media(min-width:768px) {
+       .bsb-timeline-4 .timeline>.timeline-item {
+           width: 50%
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item .timeline-meta {
+           margin-bottom: 0;
+           position: absolute;
+           top: calc(50% - 17px);
+           width: 100%;
+           z-index: 1
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item .timeline-content {
+           padding: 2.5rem
+       }
+
+       .timeline-content-no-padding-top {
+           padding: 0 2.5rem 0 2.5rem !important;
+           position: relative
+       }
+
+       .timeline-content-no-padding-bottom {
+               padding: 0 2.5rem 0 2.5rem !important;
+               position: relative
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item .timeline-indicator {
+           position: relative
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item .timeline-indicator:after {
+           border-width: 1px;
+           border: 10px solid var(--bsb-tl-indicator-color);
+           border-color: transparent var(--bsb-tl-indicator-color) transparent transparent;
+           border-left-width: 0;
+           content: "";
+           left: calc(2.5rem - 10px);
+           position: absolute;
+           top: calc(50% - var(--bsb-tl-circle-offset));
+           z-index: 2
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item.left {
+           left: 0
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item.left:after {
+           left: auto;
+           right: calc(var(--bsb-tl-circle-offset)*-1)
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item.left .timeline-meta {
+           padding: 0 0 0 2.5rem;
+           right: -100%
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item.left .timeline-indicator:after {
+           border-width: 1px;
+           border: 10px solid var(--bsb-tl-indicator-color);
+           border-color: transparent transparent transparent var(--bsb-tl-indicator-color);
+           border-right-width: 0;
+           left: auto;
+           right: calc(2.5rem - 10px)
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item.right {
+           left: 50%
+       }
+
+       .bsb-timeline-4 .timeline>.timeline-item.right .timeline-meta {
+           display: flex;
+           justify-content: flex-end;
+           left: -100%;
+           padding: 0 2.5rem 0 0
+       }
+   }
+    </style>
 </head>
 <body>
-
-<section th:fragment="projects-section" id="projects" class="bsb-timeline-4 p-1">
+<!-- Page Content-->
+<div class="container-fluid p-1">
+    <!-- import header -->
+    <section id="cv-header" class="resume-section bg-primary">
+        <div class="resume-section-content p-1">
+            <div align="right">
+                <h6 class="px-2">opprettet: 24.01.2024</h6>
+            </div>
+            <div class="d-flex flex-column flex-md-row">
+                <div align="center" class="flex-grow-1">
+                    <h1 class="mb-1">Gunnar Rønneberg</h1>
+                    <h6 class="mb-2">Stavangergata 35, 0467 Oslo | +47 45465500 | gunnar_ronneberg@yahoo.no | født: 11.04.66</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- import projects-->
+<section id="projects" class="bsb-timeline-4 p-1">
     <div class="resume-section-content">
         <h2 class="mb-3">Prosjekter</h2>
         <hr class="bg-primary"/>
@@ -355,5 +602,6 @@
         </div>
     </div>
 </section>
+</div>
 </body>
 </html>
