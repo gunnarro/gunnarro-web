@@ -42,7 +42,7 @@
         <!-- latest java LTS version -->
         <java.version>17</java.version>
         <!-- spring versions -->
-        <spring.boot.version>3.2.1</spring.boot.version>
+        <spring.boot.version>3.2.2</spring.boot.version>
         <!-- spring override library versions -->
         <snakeyaml.version>2.2</snakeyaml.version>
         <!-- div dependencies -->
