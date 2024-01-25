@@ -3,6 +3,7 @@ package com.gunnarro.web.endpoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -31,8 +32,8 @@ public class PublicController {
     }
 
     @GetMapping(PUBLIC_URI + "/cv")
-    public String cv() {
-        return createUri("/cv/gr-cv");
+    public String cv(@RequestParam(name = "id") String id) {
+        return createUri(String.format("/cv/%s/cv", id));
     }
 
     @GetMapping(PUBLIC_URI + "/employees")
@@ -46,13 +47,14 @@ public class PublicController {
     }
 
     @GetMapping(PUBLIC_URI + "/cv/projects")
-    public String cvProjects() {
-        return createUri("/cv/gr-cv-project");
+    public String cvProjects(@RequestParam(name = "id") String id) {
+        return createUri(String.format("/cv/%s/cv-project", id));
     }
 
     @GetMapping(PUBLIC_URI + "/cv/pdf")
-    public String cvPdf() {
-        return createUri("/cv/gr-cv-pdf");
+    public String cvPdf(@RequestParam(name = "id") String id) {
+        // check input parameter
+        return createUri(String.format("/cv/%s/cv.pdf", id));
     }
 
     @GetMapping(PUBLIC_URI + "/releasenotes")

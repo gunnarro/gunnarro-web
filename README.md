@@ -42,4 +42,4 @@ https://bootstrapbrain.com/tutorial/bootstrap-timeline-example/
 <!-- https://itextpdf.com/en/demos/convert-html-css-to-pdf-free-online -->
 <!-- must zip file:-->
 <!-- Page Content-->
-<!-- zip -r gr-resume-project.zip gr-cv-project.html -->
+<!-- zip -r gr-resume-project.zip cv-project.html -->

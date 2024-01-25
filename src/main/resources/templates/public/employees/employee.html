@@ -16,8 +16,8 @@
                         <h6 class="card-title" th:text="#{page.employee.role.ceo}"></h6>
                         <p class="card-text"></p>
                             <ul>
-                                <li><a th:href="@{/public/cv}"><span th:text="#{page.employee.cv}"></span></a></li>
-                                <li><a th:href="@{/public/cv/projects}"><span th:text="#{page.employee.projects}"></span></a></li>
+                                <li><a th:href="@{/public/cv(id=guro)}"><span th:text="#{page.employee.cv}"></span></a></li>
+                                <li><a th:href="@{/public/cv/projects(id=guro)}"><span th:text="#{page.employee.projects}"></span></a></li>
                             </ul>
                         </p>
                     </div>
