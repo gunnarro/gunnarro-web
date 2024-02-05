@@ -48,7 +48,7 @@
         <!-- div dependencies -->
         <mariadb.version>3.3.2</mariadb.version>
         <mariadb4j.version>3.0.1</mariadb4j.version>
-        <version.jodatime>2.12.5</version.jodatime>
+        <version.jodatime>2.12.7</version.jodatime>
 
         <!-- Web dependencies -->
         <version.thymeleaf-extras>3.1.2.RELEASE</version.thymeleaf-extras>
