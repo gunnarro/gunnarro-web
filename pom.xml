@@ -59,7 +59,7 @@
         <webjars-popper.version>1.16.1</webjars-popper.version>
         -->
         <!-- maven plugins -->
-        <spotbugs-maven-plugin.version>4.8.3.0</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.8.3.1</spotbugs-maven-plugin.version>
         <azure-spring-apps-maven-plugin.version>1.19.0</azure-spring-apps-maven-plugin.version>
         <mvn-compiler.version>3.12.1</mvn-compiler.version>
         <mvn-enforcer.version>3.4.1</mvn-enforcer.version>
