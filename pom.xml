@@ -67,7 +67,7 @@
         <mvn-jacoco.version>0.8.11</mvn-jacoco.version>
         <mvn-release.version>3.0.1</mvn-release.version>
         <mvn-site.version>3.12.1</mvn-site.version>
-        <mvn-jib-plugin.version>3.4.0</mvn-jib-plugin.version>
+        <mvn-jib-plugin.version>3.4.1</mvn-jib-plugin.version>
         <mvm-sonar-plugin>3.10.0.2594</mvm-sonar-plugin>
     </properties>
 
