@@ -42,12 +42,12 @@
         <!-- latest java LTS version -->
         <java.version>21</java.version>
         <!-- spring versions -->
-        <spring.boot.version>3.2.2</spring.boot.version>
+        <spring.boot.version>3.2.12</spring.boot.version>
         <!-- spring override library versions -->
         <snakeyaml.version>2.2</snakeyaml.version>
         <!-- div dependencies -->
-        <mariadb.version>3.3.2</mariadb.version>
-        <mariadb4j.version>3.0.1</mariadb4j.version>
+        <mariadb.version>3.5.5</mariadb.version>
+        <mariadb4j.version>3.2.0</mariadb4j.version>
         <version.jodatime>2.12.5</version.jodatime>
 
         <!-- Web dependencies -->
